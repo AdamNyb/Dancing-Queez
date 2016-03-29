@@ -1,1 +1,1 @@
-# Dancing-Queez
+# Dancing Queez
