@@ -43,4 +43,4 @@ quizApp.factory('Quiz', function ($resource){
 
 
 
-};
+});
