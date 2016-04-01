@@ -26,17 +26,23 @@ body {
 	font-size: 40%;
 }
 
+
+
 .btn-primary {
 	background: #FFB358;
 	border-color: #FF8B00;
 	color: #000;
 }
 
+
 .btn-primary:hover {
 	background: #FF9619;
 	color: #000;
 	border-color: #FF8B00;
+
+
 }
+
 
 h2 { 
 	font-weight: bold;
@@ -54,4 +60,46 @@ h4 {
 h5 {
 	font-weight: bold;
 	font-size: 110%;
+}
+/*START SCREEN*/
+.banner{
+	padding-top: 12%;
+	background-color: #F50057;
+}
+.goButton{
+	margin-left: 35%;
+	width: 30%;
+	height: 10%;
+	margin-top: 20px;
+	border: groove;
+	border-radius: 30px;
+	background-color: #F50057;
+	
+
+}
+
+.playlistInput{
+	width: 50%;
+	height: 60px;
+	margin-left: 23.5%;
+	margin-top: 20px;
+	
+}
+
+.startIcon{
+	margin-top:25%;
+	margin-left:25%;
+
+
+}
+.startText {
+	font-size: 60px;
+	font-family: helvetica;
+}
+
+#welcome {
+	background-color: none;
+	height: 100%;
+	padding-top: 15%;
+
 }
