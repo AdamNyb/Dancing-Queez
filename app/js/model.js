@@ -2,7 +2,7 @@ quizApp.factory('Quiz', function ($resource){
 
 	this.currentScore = 0;
 
-	this.Playlist = $resource('https://api.spotify.com')
+	this.Playlist = $resource('https://api.spotify.com/v1/search?type=playlist');
 
 	this.playSong = function(trackID){
 		//spelar upp 30 sekunder från låt
