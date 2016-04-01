@@ -15,11 +15,12 @@ body {
 	margin: 0;
 }
 
-
-#header {
-	background: #ddd;
+.banner{
+	padding-top: 12%;
+	background-color: #F50057;
 	text-align: center;
 	padding: 5px 10px;
+	font-size: 130%;
 }
 
 #header small {
@@ -60,12 +61,9 @@ h5 {
 	font-weight: bold;
 	font-size: 110%;
 }
-<<<<<<< HEAD
+
 /*START SCREEN*/
-.banner{
-	padding-top: 12%;
-	background-color: #F50057;
-}
+
 .goButton{
 	margin-left: 35%;
 	width: 30%;
