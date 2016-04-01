@@ -18,7 +18,8 @@ body {
 
 #header {
 	background: #ddd;
-	padding: 10px 30px;
+	text-align: center;
+	padding: 5px 10px;
 }
 
 #header small {
@@ -44,8 +45,6 @@ h2 {
 }
 
 h4 {
-	border-bottom: 1px solid black;
-	padding-bottom: 10px;
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: 85%;
@@ -54,4 +53,16 @@ h4 {
 h5 {
 	font-weight: bold;
 	font-size: 110%;
+}
+
+/*
+*	gameView specific ===========================
+*/
+
+.answer-container {
+	margin: 30px 10px 10px;
+	position: relative;
+	width: 140px;
+	display: inline-block;
+	vertical-align: top;
 }
