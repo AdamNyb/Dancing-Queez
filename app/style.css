@@ -18,7 +18,8 @@ body {
 
 #header {
 	background: #ddd;
-	padding: 10px 30px;
+	text-align: center;
+	padding: 5px 10px;
 }
 
 #header small {
@@ -50,8 +51,6 @@ h2 {
 }
 
 h4 {
-	border-bottom: 1px solid black;
-	padding-bottom: 10px;
 	text-transform: uppercase;
 	font-weight: bold;
 	font-size: 85%;
@@ -61,6 +60,7 @@ h5 {
 	font-weight: bold;
 	font-size: 110%;
 }
+<<<<<<< HEAD
 /*START SCREEN*/
 .banner{
 	padding-top: 12%;
@@ -102,4 +102,28 @@ h5 {
 	height: 100%;
 	padding-top: 15%;
 
+=======
+
+/*
+*	gameView specific ===========================
+*/
+
+
+
+.answer-container {
+	margin: 20px 5px 0px;
+	background-color: #fff;
+	display: inline-block;
+	padding: 20px 50px;
+	border: 1px solid black;
+
+
+
+}
+
+
+.answer-text {
+	font-weight: normal;
+	text-align: center;
+>>>>>>> 06f9ed26f4ed7b9e3d05c806e5ead1c0043a712e
 }
