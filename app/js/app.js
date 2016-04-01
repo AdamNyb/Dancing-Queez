@@ -4,7 +4,8 @@ quizApp.config(['$routeProvider',
 	function($routeProvider){
 		$routeProvider.
 			when('/home', {
-				templateUrl: 'partials/home.html'
+				templateUrl: 'partials/home.html',
+				controller: "TestCtrl"
 			}).
 			otherwise({
 				redirectTo: '/home'
