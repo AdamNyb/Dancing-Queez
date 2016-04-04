@@ -106,22 +106,55 @@ h5 {
 *	gameView specific ===========================
 */
 
+.game-container {
+	background: linear-gradient(#D81B60, #F48FB1); /* Standard syntax */
+}
 
+.header {
+	color: white;
+	text-align: center;
+	font-size: 200%
+}
+
+.mini-header {
+	font-weight: bold;
+	font-family: helvetica;
+	margin-top: 5px;
+	font-style: italic;
+
+}
+
+.icon-container {
+	position: center;
+	margin: 20px 20px 0px;
+}
+
+.question-icon img {
+	max-width: 30%;
+	max-height: 30%;
+	margin: 30px;
+}
+
+.text-container {
+	font-weight: bold;
+	font-family: helvetica;
+	margin-top: 10px;
+}
 
 .answer-container {
 	margin: 20px 5px 0px;
-	background-color: #fff;
+	background-color: #FCE4EC;
 	display: inline-block;
 	padding: 20px 50px;
 	border: 1px solid black;
-
+	border-radius: 5px;
 
 
 }
 
-
 .answer-text {
 	font-weight: normal;
 	text-align: center;
->>>>>>> 06f9ed26f4ed7b9e3d05c806e5ead1c0043a712e
+	width: 90%;
+
 }
