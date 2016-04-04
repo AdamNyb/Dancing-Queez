@@ -25,7 +25,7 @@
 					Playlist: Smooth Rock
 				</div>
 				<div align="left">
-					<div class="glyphicon glyphicon-volume-up" size="">
+					<div class="glyphicon glyphicon-volume-up">
 					</div>
 				</div>
 				
@@ -70,7 +70,59 @@
 						Question 1/20
 					</div>
 				</div>
+				<div class="row notes">
+					<div class="hr" id="here">
+						<!--
+						<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+						width="30px" height="30px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve" class="kiwi">
+						<path d="M272,48h-32v304.594C223,342.375,200.688,336,176,336c-53,0-96,28.625-96,64s43,64,96,64s96-28.625,96-64V144
+						c80-13,128,80,160,128C412,48,272,48,272,48z"/>
+					</svg>-->
+					</div>
+					<div class="hr">
+					</div>
+					<div class="hr">
+					</div>
+					<div class="hr">
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script>
+		var width="550px";
+		var height = "83px";
+
+		var noteWidth = "30px";
+		var noteHeight = "30px";
+
+		var data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+
+		var svg = d3.select("#here").append("svg")
+    		.attr("width", width)
+    		.attr("height", height)
+    		.attr("class", "note");
+
+    		data[0]
+    		1
+
+		var note = svg.selectAll(".note")
+		      	.data(data)
+		    .enter().append("svg")
+		    	.attr("width", noteWidth)
+    			.attr("height", noteHeight)
+		      	.attr("class", "note")
+		      	.attr("x", function(d,i) { return  i*25; }) 
+		      	.attr("y", function(d,i) { return  i*2; })
+		      	.attr("viewBox", "0 0 512 512")
+		      	.attr("enable-background", "new 0 0 512 512");
+
+		note.append("path")
+		    .attr("d", "M272,48h-32v304.594C223,342.375,200.688,336,176,336c-53,0-96,28.625-96,64s43,64,96,64s96-28.625,96-64V144c80-13,128,80,160,128C412,48,272,48,272,48z")
+
+
+
+	</script>
+
 </html>
