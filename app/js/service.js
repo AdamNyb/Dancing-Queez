@@ -22,30 +22,6 @@ quizApp.factory('Quiz', function ($resource){
         },
     });
 
-
-//	https://open.spotify.com/user/113325595/playlist/5U6ibJ4AW3keswEmMhhtNP
-
-	/*this.Playlist = function (){
-		$.ajax({
-    		url: "https://api.spotify.com/v1/users/113325595/playlists/5U6ibJ4AW3keswEmMhhtNP",// + $("#username").val() + "/playlists",
-    		headers: {
-        		Authorization: "Bearer BQAManYKGY6WrGLKoo94Sb8H_JT_m88Ur6xAR-e-vRiE-r1U4OyGNRJddLDCdrc0CsHn8wTsx6Wq-P5sSTjoR81wAO2dBxZTuErwgPbOKhG4W3QhdIsOnIGaCJxM_5xmQVxjkO7dV2z3iiN3NopcnWgNXKKdlM3229XWHDfTYpKFprzsW_I"
-       			//Host: "api.spotify.com"
-    		},
-    		accepts: "application/json",
-   			type: "GET",
-    		success: function (data) {    
-    			return data;        
-    		},
-		    error: function (data) {
-		        $("#playlists").append("<option>error</option>");
-		    }
-		});
-	};*/
-
-	//this.test();
-
-
 	this.playSong = function(trackID){
 		//spelar upp 30 sekunder från låt
 	};
@@ -80,13 +56,10 @@ quizApp.factory('Quiz', function ($resource){
 		var playlist_id = this.getPlaylistID(link);
 		var user_id = this.getUserID(link);
 
-		var playlist = this.Playlist.get({user_id: user_id, playlist_id: playlist_id/*, headers: {
-        		Authorization: "Bearer BQAManYKGY6WrGLKoo94Sb8H_JT_m88Ur6xAR-e-vRiE-r1U4OyGNRJddLDCdrc0CsHn8wTsx6Wq-P5sSTjoR81wAO2dBxZTuErwgPbOKhG4W3QhdIsOnIGaCJxM_5xmQVxjkO7dV2z3iiN3NopcnWgNXKKdlM3229XWHDfTYpKFprzsW_I"
-       			//Host: "api.spotify.com"
-    		}*/}, 
+		var playlist = this.Playlist.get({user_id: user_id, playlist_id: playlist_id}, 
 			function(data){
 				console.log('success');
-			//if success, data will be a JSON object
+				//if success, data will be a JSON object
 		}, function(error){
 			//if error
 			if (error.status == 429){
@@ -117,11 +90,29 @@ quizApp.factory('Quiz', function ($resource){
 		//om fler än 30 låtar --> randomize vilka som används
 	};
 
-	this.createQuestions = function(){
+	this.createQuestions = function(tracks){
 		//frågedatabas: låtnamn, artist, album
 		//slumpa frågesträngar
 		//3 frågor skapas för varje låt --> slumpa så att det endast finns
 		//		en fråga per låt
+
+		//data.tracks.items gives the list of tracks
+		console.log("HEJ tracks",tracks);
+
+		// questions database
+		var questionDB = ['What is the name of this song?', 'Who made this song?', 'On what album is this song featured?'];
+		// list of complete questions
+		var questions;
+		var len = track.length;
+		var maxQ;
+		if (len > 30 or len == 30) {
+			maxQ = 30;
+		} else if (len < 30) {
+			maxQ = len;
+		}
+		for (var i = 0; i < maxQ; i++){
+			// questionArray [correctAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3, questionStr, chosenAnswer]
+		}
 	};
 
 	this.setScore = function(currentScore){
