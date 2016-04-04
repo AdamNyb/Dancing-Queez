@@ -1,14 +1,11 @@
 quizApp.factory('Quiz', function ($resource){
 
 	this.currentScore = 0;
+	this.playlist;
 
 	var client_id = 'a280b16e9b4446928ed426a402c6f67a';
 	var client_secret = '13d55b7e7b5545dbbeec042aff0c2907';
 
-	//BQAManYKGY6WrGLKoo94Sb8H_JT_m88Ur6xAR-e-vRiE-r1U4OyGNRJddLDCdrc0CsHn8wTsx6Wq-P5sSTjoR81wAO2dBxZTuErwgPbOKhG4W3QhdIsOnIGaCJxM_5xmQVxjkO7dV2z3iiN3NopcnWgNXKKdlM3229XWHDfTYpKFprzsW_I
-
-	//this.Playlist = $resource('https://api.spotify.com/v1/users/',{user_id},'/playlists/',{playlist_id});
-	//this.Playlist = $resource('https://api.spotify.com/v1/users/:user_id/playlists/:playlist_id');
 	this.Album = $resource('https://api.spotify.com/v1/albums/:id');
 
 	this.Playlist = $resource('https://api.spotify.com/v1/users/:user_id/playlists/:playlist_id',{},{
@@ -21,29 +18,6 @@ quizApp.factory('Quiz', function ($resource){
             } 
         },
     });
-
-
-//	https://open.spotify.com/user/113325595/playlist/5U6ibJ4AW3keswEmMhhtNP
-
-	/*this.Playlist = function (){
-		$.ajax({
-    		url: "https://api.spotify.com/v1/users/113325595/playlists/5U6ibJ4AW3keswEmMhhtNP",// + $("#username").val() + "/playlists",
-    		headers: {
-        		Authorization: "Bearer BQAManYKGY6WrGLKoo94Sb8H_JT_m88Ur6xAR-e-vRiE-r1U4OyGNRJddLDCdrc0CsHn8wTsx6Wq-P5sSTjoR81wAO2dBxZTuErwgPbOKhG4W3QhdIsOnIGaCJxM_5xmQVxjkO7dV2z3iiN3NopcnWgNXKKdlM3229XWHDfTYpKFprzsW_I"
-       			//Host: "api.spotify.com"
-    		},
-    		accepts: "application/json",
-   			type: "GET",
-    		success: function (data) {    
-    			return data;        
-    		},
-		    error: function (data) {
-		        $("#playlists").append("<option>error</option>");
-		    }
-		});
-	};*/
-
-	//this.test();
 
 
 	this.playSong = function(trackID){
@@ -80,12 +54,10 @@ quizApp.factory('Quiz', function ($resource){
 		var playlist_id = this.getPlaylistID(link);
 		var user_id = this.getUserID(link);
 
-		var playlist = this.Playlist.get({user_id: user_id, playlist_id: playlist_id/*, headers: {
-        		Authorization: "Bearer BQAManYKGY6WrGLKoo94Sb8H_JT_m88Ur6xAR-e-vRiE-r1U4OyGNRJddLDCdrc0CsHn8wTsx6Wq-P5sSTjoR81wAO2dBxZTuErwgPbOKhG4W3QhdIsOnIGaCJxM_5xmQVxjkO7dV2z3iiN3NopcnWgNXKKdlM3229XWHDfTYpKFprzsW_I"
-       			//Host: "api.spotify.com"
-    		}*/}, 
+		this.Playlist.get({user_id: user_id, playlist_id: playlist_id}, 
 			function(data){
 				console.log('success');
+				createGame(data.tracks.items); //needed to be able to return tracks
 			//if success, data will be a JSON object
 		}, function(error){
 			//if error
@@ -94,6 +66,7 @@ quizApp.factory('Quiz', function ($resource){
 			}
 			
 		});
+		return this.playlist; 
 	};
 
 	this.getPlaylistID = function(link) {
@@ -109,6 +82,25 @@ quizApp.factory('Quiz', function ($resource){
 		var user_id = linkList[len-3];
 		return user_id;
 	};
+
+	var createGame = function(tracks){ //tracks is an array of track objects
+		if (tracks.length > 20){
+			console.log(tracks);
+			var newTracks = [];
+			tracks = tracks[Math.floor(Math.random()*tracks.length)];
+			console.log(tracks);
+		}
+		if (tracks.track){
+			console.log('playing');
+			playSong(tracks.track.preview_url);
+			console.log('played');
+		}
+	}
+
+	var playSong = function(url){
+		var songAudio = new Audio(url).play();
+		console.log(url); 
+	}
 
 	this.getPlaylist('https://open.spotify.com/user/113325595/playlist/5U6ibJ4AW3keswEmMhhtNP');
 	//this.getAlbum('https://open.spotify.com/album/2eRL3OIp0Htj04g9k4FN1n');
@@ -130,6 +122,8 @@ quizApp.factory('Quiz', function ($resource){
 		}
 		return currentScore;
 	};
+
+	
 
 
 
