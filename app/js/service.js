@@ -8,20 +8,20 @@ quizApp.factory('Quiz', function ($resource){
 	//BQAManYKGY6WrGLKoo94Sb8H_JT_m88Ur6xAR-e-vRiE-r1U4OyGNRJddLDCdrc0CsHn8wTsx6Wq-P5sSTjoR81wAO2dBxZTuErwgPbOKhG4W3QhdIsOnIGaCJxM_5xmQVxjkO7dV2z3iiN3NopcnWgNXKKdlM3229XWHDfTYpKFprzsW_I
 
 	//this.Playlist = $resource('https://api.spotify.com/v1/users/',{user_id},'/playlists/',{playlist_id});
-	this.Playlist = $resource('https://api.spotify.com/v1/users/:user_id/playlists/:playlist_id');
+	//this.Playlist = $resource('https://api.spotify.com/v1/users/:user_id/playlists/:playlist_id');
 	this.Album = $resource('https://api.spotify.com/v1/albums/:id');
 
-	/*this.Playlist = $resource('https://api.spotify.com/v1/users:user_id/playlists/:playlist_id',{
+	this.Playlist = $resource('https://api.spotify.com/v1/users/:user_id/playlists/:playlist_id',{},{
         get:{
             method:"GET",
             isArray:false,
             headers:{
-            	        Authorization: "Bearer BQAManYKGY6WrGLKoo94Sb8H_JT_m88Ur6xAR-e-vRiE-r1U4OyGNRJddLDCdrc0CsHn8wTsx6Wq-P5sSTjoR81wAO2dBxZTuErwgPbOKhG4W3QhdIsOnIGaCJxM_5xmQVxjkO7dV2z3iiN3NopcnWgNXKKdlM3229XWHDfTYpKFprzsW_I"
+            	        Authorization: "Bearer BQDWz7SJn9Osm-BBPttb8R0dBt-Hu-8uX_Z--X4AdamRxSb0CDjhyOFBe6UrrdeHKc1jEk9p20MIqxdBqeZN0IN7RnqLBQDjtDA2_g0zZ6uXnOnUti2KYXn3KGugnhoATalWCm8uBxVsuT_nbQmSa_Sd9UKgBf0ewmuwUmhRaSIwYM7aOqE"
 
             } 
         },
     });
-*/
+
 
 //	https://open.spotify.com/user/113325595/playlist/5U6ibJ4AW3keswEmMhhtNP
 
@@ -80,10 +80,10 @@ quizApp.factory('Quiz', function ($resource){
 		var playlist_id = this.getPlaylistID(link);
 		var user_id = this.getUserID(link);
 
-		var playlist = this.Playlist.get({user_id: user_id, playlist_id: playlist_id, headers: {
+		var playlist = this.Playlist.get({user_id: user_id, playlist_id: playlist_id/*, headers: {
         		Authorization: "Bearer BQAManYKGY6WrGLKoo94Sb8H_JT_m88Ur6xAR-e-vRiE-r1U4OyGNRJddLDCdrc0CsHn8wTsx6Wq-P5sSTjoR81wAO2dBxZTuErwgPbOKhG4W3QhdIsOnIGaCJxM_5xmQVxjkO7dV2z3iiN3NopcnWgNXKKdlM3229XWHDfTYpKFprzsW_I"
        			//Host: "api.spotify.com"
-    		}}, 
+    		}*/}, 
 			function(data){
 				console.log('success');
 			//if success, data will be a JSON object
