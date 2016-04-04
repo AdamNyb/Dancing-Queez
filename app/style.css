@@ -19,7 +19,7 @@ body {
 	padding-top: 12%;
 	background-color: #F50057;
 	text-align: center;
-	padding: 5px 10px;
+	padding: 5px 10px;*/ 
 	font-size: 130%;
 }
 
@@ -65,11 +65,11 @@ h5 {
 /*START SCREEN*/
 
 .goButton{
-	margin-left: 35%;
-	width: 30%;
-	height: 10%;
-	margin-top: 20px;
-	border: groove;
+	margin-left: 19%;
+	width: 60%;
+	height: 3%;
+	margin-top: 20%;
+	
 	border-radius: 30px;
 	background-color: #F50057;
 	
@@ -77,28 +77,28 @@ h5 {
 }
 
 .playlistInput{
-	width: 50%;
-	height: 60px;
-	margin-left: 23.5%;
-	margin-top: 20px;
+	width: 65%;
+	height: 25px;
+	margin-left: 16%;
+	margin-top: 10px;
 	
 }
 
 .startIcon{
-	margin-top:25%;
-	margin-left:25%;
+	margin-top:10%;
+	margin-left:22%;
 
 
 }
 .startText {
-	font-size: 60px;
+	font-size: 20px;
 	font-family: helvetica;
 }
 
 #welcome {
 	background-color: none;
-	height: 100%;
-	padding-top: 15%;
+	
+	padding-top: 8%;
 
 }
 
