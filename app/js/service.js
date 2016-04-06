@@ -13,7 +13,7 @@ quizApp.factory('Quiz', function ($resource){
             method:"GET",
             isArray:false,
             headers:{
-            	        Authorization: "Bearer BQC4kfDVKG_eAkKHXHcjtK2U0tbt7B0DWmXPNshxbAraz4gPQHKWFBZp2spNLX98GMnZNX974THMITJ_zaLvMIyTBQiBTvSmwiEyVuSIKjMgTLIdGg011y_JZMDqy_P3iiM8lhsNHneJbvibtVorNPkq04W-k8m0DrS62g"
+            	        Authorization: "Bearer BQBfYLT2J6T3mctrHbKRoeKFo-CpjUPE2sC5uwUOS7BcvGo5CumfAxpekOxecnoZ6mhxOq_E20aVwGAVrJH6D7vV1OhvJd6qFxP4xwBTYWLD62PuOk0QRgOnyr2vye2uYsVGEpt5leVAVQWppeHo60qbzzxsR5hyr3If6w"
 
             } 
         },
@@ -106,7 +106,7 @@ quizApp.factory('Quiz', function ($resource){
 		}
 		// for each question, create a question
 		for (var i = 0; i < maxQ; i++){
-			currentTrack = tracks[i].track;
+			var currentTrack = tracks[i].track;
 			var question = [];
 			// question [correctAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3, questionStr, chosenAnswer]
 			//randomize a number between 0 and 2

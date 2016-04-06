@@ -7,19 +7,58 @@
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
+
       <!-- Bootstrap CSS -->
       <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
       <!--<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">-->
       <!-- Our stylesheet -->
       <link rel="stylesheet" href="../style.css">
+      <script src="https://cdn.rawgit.com/t4t5/sweetalert/master/dist/sweetalert.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/t4t5/sweetalert/master/dist/sweetalert.css">
   </head>
   
 <body>
-<div class="container-fluid wrapper">
-          <div class="row banner">
+<div class="container-fluid wrapper game-container">
+          <div class="row header">
             <h4>DANCING QUEEZ</h4>
         </div>
-	
+        <div class="col-md-12" align="center">
+        <div class="mini-header">
+        Playlist: Smooth Rock
+      </div>
+      <div class="icon-container row">
+        <div class="question-icon">
+          <img src="headphn.png"/>
+        </div>
+      </div>
+      </div>
+      <div class="results">
+        <svg class="dots" xmlns="http://www.w3.org/2000/svg">
+          <circle onclick="expand()"class="circles greenCircle" cx="35" cy="25" r="20"/>
+          <circle onclick="expand()" class="circles redCircle" cx="35" cy="80" r="20"/>
+          <circle onclick="expand()" class="circles greenCircle" cx="35" cy="135" r="20"/>
+          <circle onclick="expand()" class="circles greenCircle" cx="35" cy="190" r="20"/>
+          <circle onclick="expand()" class="circles redCircle" cx="35" cy="245" r="20"/>
+          <circle onclick="expand()" class="circles greenCircle" cx="105" cy="25" r="20"/>
+          <circle onclick="expand()" class="circles redCircle" cx="105" cy="80" r="20"/>
+          <circle onclick="expand()"class="circles redCircle" cx="105" cy="135" r="20"/>
+          <circle onclick="expand()" class="circles redCircle" cx="175" cy="25" r="20"/>
+          <circle onclick="expand()" class="circles redCircle" cx="245" cy="25" r="20"/>
+
+          <script>
+ 
+          function expand() {
+               sweetAlert({   title: "You were correct/wrong!",   text: "Your answer:... The correct answer...", confirmButtonColor: "#FF4081",
+                  imageUrl: "headphn.png" });
+              
+           }
+          </script>
+        </svg>
+      </div>
+
+
+
+      
 
 
 

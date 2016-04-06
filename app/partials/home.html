@@ -14,8 +14,8 @@
 	</head>
   
 <body>
-<div class="container-fluid wrapper">
-	        <div class="row banner">
+<div class="container-fluid wrapper game-container">
+	        <div class="row header">
 	        	<h4>DANCING QUEEZ</h4>
 	    	</div>
 	<div class="startIcon">
@@ -26,9 +26,9 @@
   	<div id="input">
   		<div class="startText"><center>Welcome!<br> Type in your Spotify-playlist</center></div>
   		<div>
-  			<input type="text" class="playlistInput" value="playlist">
+  			<input type="text" class="playlistInput" ng-model="playlistInput" value="playlist">
   		</div>
-  		<button type="button" class="btn goButton"><h2 style="color: white">GO!<h2></button>
+  		<a ng-href="/#/game" type="button" ng-click="getPlaylist(playlistInput)" class="btn goButton"><h2 style="color: white">GO!<h2></a>
   	</div>
   
  	

@@ -5,7 +5,11 @@ quizApp.config(['$routeProvider',
 		$routeProvider.
 			when('/home', {
 				templateUrl: 'partials/home.html',
-				controller: "TestCtrl"
+				controller: "GameCtrl"
+			}).
+			when('/game', {
+				templateUrl: 'partials/game.html',
+				controller: "GameCtrl"
 			}).
 			otherwise({
 				redirectTo: '/home'

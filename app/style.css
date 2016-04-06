@@ -219,3 +219,40 @@ h5 {
 	fill: black;
 }
 
+
+
+/*
+*	score specific ===========================
+*/
+.results{
+	
+	padding-top: 10px;
+	padding-left: 22px;
+	text-align: center;
+
+}
+
+.question-icon{
+	padding-bottom: 10px;
+}
+
+.dots{
+	height: 300px;
+	padding-top: 5px;
+	
+}
+
+.circles{
+	border:groove;
+	stroke: black;
+	
+}
+
+.greenCircle{
+	fill: green;
+}
+
+.redCircle{
+	fill:red;
+}
+
