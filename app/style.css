@@ -126,7 +126,6 @@ h5 {
 	font-family: helvetica;
 	margin-top: 5px;
 	font-style: italic;
-
 }
 
 .icon-container {
@@ -144,20 +143,6 @@ h5 {
 	font-weight: bold;
 	font-family: helvetica;
 	margin: 10px 20px;
-}
-
-.answer-container2 {
-	margin: 5% 2% 0%;
-	background-color: #FCE4EC;
-	display: inline-block;
-	padding-top: 2%;
-	border: 2px #880E4F;
-	border-radius: 5px;
-	height: 10vh;
-	width: 20vh;
-	text-align: center center;
-
-
 }
 
 .answer-container {
@@ -188,24 +173,19 @@ h5 {
 }
 
 .glyphicon.glyphicon-chevron-right {
-	font-size: 40px;
+	font-size: 35px;
 	color: black;
 	margin-right: 10px;
 	margin-top: 0;
 	text-align: right;
 }
 
-.glyphicon.glyphicon-music {
-	font-size: 40px;
-	color: black;
-	margin-left: 10px;
-	position: relative;
-	left: 20px;
+.right-align {
+	margin-left: 70%
 }
 
 .hr {
-	margin: 15px;
-    color: black;
+	margin-top: 15px;
     background: black; 
     width: 95%; 
     height: 2px;
@@ -229,7 +209,6 @@ h5 {
 	padding-top: 10px;
 	padding-left: 22px;
 	text-align: center;
-
 }
 
 .question-icon{
@@ -238,14 +217,12 @@ h5 {
 
 .dots{
 	height: 300px;
-	padding-top: 5px;
-	
+	padding-top: 5px;	
 }
 
 .circles{
 	border:groove;
-	stroke: black;
-	
+	stroke: black;	
 }
 
 .greenCircle{
