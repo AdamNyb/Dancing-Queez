@@ -184,6 +184,15 @@ h5 {
 	font-size: 40px;
 	color: black;
 	margin-left: 10px;
+	text-align: left;
+}
+
+.glyphicon.glyphicon-chevron-right {
+	font-size: 40px;
+	color: black;
+	margin-right: 10px;
+	margin-top: 0;
+	text-align: right;
 }
 
 .glyphicon.glyphicon-music {
@@ -207,6 +216,6 @@ h5 {
 }
 
 .note {
-	fill: green;
+	fill: black;
 }
 
