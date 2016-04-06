@@ -13,38 +13,18 @@ quizApp.factory('Quiz', function ($resource){
             method:"GET",
             isArray:false,
             headers:{
-            	        Authorization: "Bearer BQBfYLT2J6T3mctrHbKRoeKFo-CpjUPE2sC5uwUOS7BcvGo5CumfAxpekOxecnoZ6mhxOq_E20aVwGAVrJH6D7vV1OhvJd6qFxP4xwBTYWLD62PuOk0QRgOnyr2vye2uYsVGEpt5leVAVQWppeHo60qbzzxsR5hyr3If6w"
+            	        Authorization: "Bearer BQAYNg84XT4W_9ePyx29FtGq7NBWY7kymcEzdv5Xs-YHIF6DGSbmL37YOJA_V9aRhF5iskDaTCHUINefQaGzzqvwViHkwCC84HMZGX9oDITp5DkOgY1gycdxLNU9iCcWbzgqlI4l2VpMqc-Y7tMtsYvGpUyxpDEXDik_fxVYk4uoXly0X0s"
 
             } 
         },
     });
 
-/*
-	this.getAlbum = function (link){
-		var album_id = this.getAlbumID(link);
-
-		var playlist = this.Album.get({id: album_id}, 
-			function(data){
-				console.log('success');
-			//if success, data will be a JSON object
-		}, function(error){
-			//if error
-			if (error.status == 429){
-				alert(error.message);
-			}
-			
-		});
-
-	};
-
-	this.getAlbumID = function (link){
-		var linkList = link.split("/");
-		var len = linkList.length;
-		var album_id = linkList[len-1];
-		return album_id;
-	};
-
-	*/
+	this.savePlaylist = function (playlist_object){
+		this.playlist = [];
+		this.playlist = playlist_object;
+		console.log(this.playlist);
+		return this.playlist;
+	}
 
 	//fallback if the given playlist has a lot of artists/albums with the same name
 	this.artistList = [];
