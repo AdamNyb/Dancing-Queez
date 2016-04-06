@@ -22,20 +22,23 @@
 			<div class="col-md-12" align="center" id="gameView">
 
 				<div class="mini-header">
-					Playlist: Smooth Rock
+					Playlist: {{playlistName()}}
 				</div>
-				<div align="left">
-					<div class="glyphicon glyphicon-volume-up">
-					</div>
+				<div class="row">
+						<div align="left" class="glyphicon glyphicon-volume-up">
+						</div>
+						<div class="glyphicon glyphicon-chevron-right right-align">
+						</div>
 				</div>
 				
 				<div class="icon-container row">
 					<div class="question-icon">
-						<img src="headphn.png"/>
+						<img src="../images/headphn.png"/>
 					</div>
 				</div>
 				<div class="row">
 					<div class="text-container">
+						{{questions()}}
 						What's the title of this song?
 					</div>
 				</div>
@@ -91,13 +94,14 @@
 	</body>
 	
 	<script>
-		var width="550px";
+		var width="330px";
 		var height = "83px";
 
 		var noteWidth = "30px";
 		var noteHeight = "30px";
 
-		var data = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+		var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+		//[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
 		var svg = d3.select("#here").append("svg")
     		.attr("width", width)
@@ -105,7 +109,7 @@
     		.attr("class", "note");
 
     		data[0]
-    		1
+
 
 		var note = svg.selectAll(".note")
 		      	.data(data)
@@ -113,15 +117,13 @@
 		    	.attr("width", noteWidth)
     			.attr("height", noteHeight)
 		      	.attr("class", "note")
-		      	.attr("x", function(d,i) { return  i*25; }) 
+		      	.attr("x", function(d,i) { return  i*30; }) 
 		      	.attr("y", function(d,i) { return  i*2; })
 		      	.attr("viewBox", "0 0 512 512")
 		      	.attr("enable-background", "new 0 0 512 512");
 
 		note.append("path")
 		    .attr("d", "M272,48h-32v304.594C223,342.375,200.688,336,176,336c-53,0-96,28.625-96,64s43,64,96,64s96-28.625,96-64V144c80-13,128,80,160,128C412,48,272,48,272,48z")
-
-
 
 	</script>
 
