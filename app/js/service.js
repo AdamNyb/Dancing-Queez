@@ -13,7 +13,7 @@ quizApp.factory('Quiz', function ($resource){
             method:"GET",
             isArray:false,
             headers:{
-            	        Authorization: "Bearer BQAYNg84XT4W_9ePyx29FtGq7NBWY7kymcEzdv5Xs-YHIF6DGSbmL37YOJA_V9aRhF5iskDaTCHUINefQaGzzqvwViHkwCC84HMZGX9oDITp5DkOgY1gycdxLNU9iCcWbzgqlI4l2VpMqc-Y7tMtsYvGpUyxpDEXDik_fxVYk4uoXly0X0s"
+            	        Authorization: "Bearer BQB0MAi9epqBZ7lE2MRJJvVEUrCGi3yYUBOjhmS7vyRRmFzSXERq32vv8riovptWsO8wkY9aBry7a84OGZkgU21TWBUSb-JIn4hv2Gu4d0G8YznYP41krCo7lNv48teY7d1bMxLfU3lEIvx89iSYWr0r062ic4zTZVrMIwTY0PFiBePWZ8o"
 
             } 
         },
@@ -69,6 +69,7 @@ quizApp.factory('Quiz', function ($resource){
 		//console.log("HEJ tracks",tracks);
 
 		// these should probably not be here...
+		console.log(tracks);
 		this.createArtistList(tracks);
 		this.createAlbumList(tracks);
 

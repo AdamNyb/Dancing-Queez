@@ -28,6 +28,7 @@ quizApp.controller('HomeCtrl', function ($scope, Quiz) {
 		Quiz.savePlaylist(data);
 	}
 
+	
 	/*$scope.createQuestions = function(tracks) {
 		//console.log("This is my tracks",tracks);
 		$scope.questions = Quiz.createQuestions(tracks);
