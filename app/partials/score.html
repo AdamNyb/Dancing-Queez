@@ -38,42 +38,96 @@
         <script src="http://d3js.org/d3.v3.min.js"></script>
   <script>
 
-    var expand = function() {
+  var expand = function() {
                sweetAlert({   title: "You were correct/wrong!",   text: "Your answer:... The correct answer...", confirmButtonColor: "#FF4081",
                   imageUrl: "headphn.png" });
               
            }
 
-    var width="280px";
-    var height = "300px";
-    var markWidth="100px";
-    var markHeight = "100px";
+    var width="270px";
+    var height = "320px";
+   
+  
 
-    var data = [1, 0, 1, 1]
+    var data = [{correct:1}, {correct:0}, {correct:1},{correct:1},{correct:0},{correct:1}, {correct:0}, {correct:1},{correct:1},{correct:0},{correct:1}, {correct:0}, {correct:1},{correct:1},{correct:0},{correct:1}, {correct:0}, {correct:1},{correct:1},{correct:0}]
 
     var svg = d3.select("#results").append("svg")
         .attr("width", width)
         .attr("height", height)
         .attr("class", "mark");
+
         
 
     var mark = svg.selectAll(".mark")
             .data(data)
         .enter().append("svg")
-          .attr("width", markWidth)
-          .attr("height", markHeight)
-            .attr("class", "mark")
-            .attr("x", function(d,i) { return  i*75; }) 
-            .attr("y", function(d,i) { return  i; })
-            .attr("viewBox", "0 0 400 400")
-            .attr("enable-background", "new 0 0 512 512");
+        
+            .attr("class", "marks")
+            .attr("x", function(d,i) { return  ((i%4))*70; }) 
+           
+            .attr("y", function(d,i) { 
+              if (i<4){return -20;}
+              else if(3<i && i<8) {return  40;} 
+              else if(7<i && i<12) {return  100;} 
+              else if(11<i && i<16) {return  160;}
+              else if(15<i && i<20) {return  220;}})
+           
+            .attr("enable-background", "new 0 0 512 512")
+            //.attr("correct", function(d){return d;});
 
-    mark.append("path")
-        .attr("d", "M146.537,1.047c-1.396-1.396-3.681-1.396-5.077,0L89.658,52.849c-1.396,1.396-3.681,1.396-5.077,0L32.78,1.047  c-1.396-1.396-3.681-1.396-5.077,0L1.047,27.702c-1.396,1.396-1.396,3.681,0,5.077l51.802,51.802c1.396,1.396,1.396,3.681,0,5.077  L1.047,141.46c-1.396,1.396-1.396,3.681,0,5.077l26.655,26.655c1.396,1.396,3.681,1.396,5.077,0l51.802-51.802  c1.396-1.396,3.681-1.396,5.077,0l51.801,51.801c1.396,1.396,3.681,1.396,5.077,0l26.655-26.655c1.396-1.396,1.396-3.681,0-5.077  l-51.801-51.801c-1.396-1.396-1.396-3.681,0-5.077l51.801-51.801c1.396-1.396,1.396-3.681,0-5.077L146.537,1.047z")
 
-    mark.on({
-        "click": expand,
+    var marks = d3.selectAll(".marks")
+      //alter size depending on correct or wrong mark
+
+    .attr("fill", function(d){
+         
+          if(d.correct == 0)
+            {return "red"}
+
+          else{
+            return "#91DC5A"
+          }
+
+        })
+
+      .attr("viewBox", function(d){
+         
+          if(d.correct == 0)
+            {return "0 0 1120 980"}
+
+          else{
+            return "0 0 1120 980"
+          }
+
+        })
+
+      
+
+      .append("path")
+        .attr("d", function(d) {
+          //if wrong answer give it an X-symbol
+          if(d.correct == 0)
+            { return "M146.537,1.047c-1.396-1.396-3.681-1.396-5.077,0L89.658,52.849c-1.396,1.396-3.681,1.396-5.077,0L32.78,1.047  c-1.396-1.396-3.681-1.396-5.077,0L1.047,27.702c-1.396,1.396-1.396,3.681,0,5.077l51.802,51.802c1.396,1.396,1.396,3.681,0,5.077  L1.047,141.46c-1.396,1.396-1.396,3.681,0,5.077l26.655,26.655c1.396,1.396,3.681,1.396,5.077,0l51.802-51.802  c1.396-1.396,3.681-1.396,5.077,0l51.801,51.801c1.396,1.396,3.681,1.396,5.077,0l26.655-26.655c1.396-1.396,1.396-3.681,0-5.077  l-51.801-51.801c-1.396-1.396-1.396-3.681,0-5.077l51.801-51.801c1.396-1.396,1.396-3.681,0-5.077L146.537,1.047z"}
+          
+          //else it is a correct answer give it a correct-symbol
+          else
+            {return "M95.833,0C42.991,0,0,42.99,0,95.833s42.991,95.834,95.833,95.834s95.833-42.991,95.833-95.834S148.676,0,95.833,0z   M150.862,79.646l-60.207,60.207c-2.56,2.56-5.963,3.969-9.583,3.969c-3.62,0-7.023-1.409-9.583-3.969l-30.685-30.685  c-2.56-2.56-3.97-5.963-3.97-9.583c0-3.621,1.41-7.024,3.97-9.584c2.559-2.56,5.962-3.97,9.583-3.97c3.62,0,7.024,1.41,9.583,3.971  l21.101,21.1l50.623-50.623c2.56-2.56,5.963-3.969,9.583-3.969c3.62,0,7.023,1.409,9.583,3.969  C156.146,65.765,156.146,74.362,150.862,79.646z"}
+        })
+
+          
+      
+
+          //else{
+            //return
+          //}
+
+      mark.on({
+          "click": expand,
             })
+
+    
+    
+    
 
     // Path for checkbox"M472.003,58.36l-13.132-11.282c-21.798-18.732-54.554-16.644-73.799,4.697L165.39,295.359l-66.312-57.112   c-21.775-18.753-54.536-16.707-73.804,4.611l-11.611,12.848c-9.416,10.413-14.305,24.149-13.595,38.18   c0.717,14.023,6.973,27.188,17.402,36.6l121.553,111.311c10.524,9.883,24.628,15.037,39.044,14.272   c14.416-0.763,27.894-7.386,37.311-18.329l262.245-304.71c9.162-10.646,13.717-24.494,12.661-38.496   C489.229,80.522,482.655,67.512,472.003,58.36z"
 

@@ -5,7 +5,7 @@ body {
 	height: 100%;
 	}
 
-.wrapper {
+.wrapper, html, body {
 	margin: 0;
 	padding:0;
 	width: 100%;
@@ -73,7 +73,8 @@ h5 {
 	border-radius: 30px;
 	background-color: #F50057;
 	
-
+	color: white;
+	font-size: 30px;
 }
 
 .playlistInput{
@@ -238,6 +239,7 @@ h5 {
 }
 
 #results{
-	padding-left:20px;
+	text-align: center;
+	padding-left:10%;
 	padding-right:20px;
 }
