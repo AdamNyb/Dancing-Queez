@@ -6,5 +6,6 @@ This project contains the startup code for HTML version of the Interaction Progr
 
 Structure
 ================================================
-playlist
-  an object created from what you input in the home.html which is then saved, via homeCtrl.js, in the service as this.playlist (can be accessed by using Quiz.playlist in controllers)
+1. playlist
+--------
+..*an object created from what you input in the home.html which is then saved, via homeCtrl.js, in the service as this.playlist (can be accessed by using Quiz.playlist in controllers)
