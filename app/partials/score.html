@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GAME VIEW</title>
+    <title>SCORE VIEW</title>
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,8 +32,61 @@
         </div>
       </div>
       </div>
-      <div class="results">
-        <svg class="dots" xmlns="http://www.w3.org/2000/svg">
+      <div id="results">
+
+      </div>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script>
+
+    var expand = function() {
+               sweetAlert({   title: "You were correct/wrong!",   text: "Your answer:... The correct answer...", confirmButtonColor: "#FF4081",
+                  imageUrl: "headphn.png" });
+              
+           }
+
+    var width="280px";
+    var height = "300px";
+    var markWidth="100px";
+    var markHeight = "100px";
+
+    var data = [1, 0, 1, 1]
+
+    var svg = d3.select("#results").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .attr("class", "mark");
+        
+
+    var mark = svg.selectAll(".mark")
+            .data(data)
+        .enter().append("svg")
+          .attr("width", markWidth)
+          .attr("height", markHeight)
+            .attr("class", "mark")
+            .attr("x", function(d,i) { return  i*75; }) 
+            .attr("y", function(d,i) { return  i; })
+            .attr("viewBox", "0 0 400 400")
+            .attr("enable-background", "new 0 0 512 512");
+
+    mark.append("path")
+        .attr("d", "M146.537,1.047c-1.396-1.396-3.681-1.396-5.077,0L89.658,52.849c-1.396,1.396-3.681,1.396-5.077,0L32.78,1.047  c-1.396-1.396-3.681-1.396-5.077,0L1.047,27.702c-1.396,1.396-1.396,3.681,0,5.077l51.802,51.802c1.396,1.396,1.396,3.681,0,5.077  L1.047,141.46c-1.396,1.396-1.396,3.681,0,5.077l26.655,26.655c1.396,1.396,3.681,1.396,5.077,0l51.802-51.802  c1.396-1.396,3.681-1.396,5.077,0l51.801,51.801c1.396,1.396,3.681,1.396,5.077,0l26.655-26.655c1.396-1.396,1.396-3.681,0-5.077  l-51.801-51.801c-1.396-1.396-1.396-3.681,0-5.077l51.801-51.801c1.396-1.396,1.396-3.681,0-5.077L146.537,1.047z")
+
+    mark.on({
+        "click": expand,
+            })
+
+    // Path for checkbox"M472.003,58.36l-13.132-11.282c-21.798-18.732-54.554-16.644-73.799,4.697L165.39,295.359l-66.312-57.112   c-21.775-18.753-54.536-16.707-73.804,4.611l-11.611,12.848c-9.416,10.413-14.305,24.149-13.595,38.18   c0.717,14.023,6.973,27.188,17.402,36.6l121.553,111.311c10.524,9.883,24.628,15.037,39.044,14.272   c14.416-0.763,27.894-7.386,37.311-18.329l262.245-304.71c9.162-10.646,13.717-24.494,12.661-38.496   C489.229,80.522,482.655,67.512,472.003,58.36z"
+
+  </script>
+
+        <!-- <svg id="Capa_1" x="100px" y="100px" viewBox="0 0 23.331 23.331" width="50px" height="50px">
+          <g>
+            <path d="M16.043,11.667L22.609,5.1c0.963-0.963,0.963-2.539,0-3.502l-0.875-0.875   c-0.963-0.964-2.539-0.964-3.502,0L11.666,7.29L5.099,0.723c-0.962-0.963-2.538-0.963-3.501,0L0.722,1.598   c-0.962,0.963-0.962,2.539,0,3.502l6.566,6.566l-6.566,6.567c-0.962,0.963-0.962,2.539,0,3.501l0.876,0.875   c0.963,0.963,2.539,0.963,3.501,0l6.567-6.565l6.566,6.565c0.963,0.963,2.539,0.963,3.502,0l0.875-0.875   c0.963-0.963,0.963-2.539,0-3.501L16.043,11.667z" fill="#D80027"/>
+          </g>
+
+        </svg> -->
+
+        <!-- CIRCLES <svg class="dots" xmlns="http://www.w3.org/2000/svg">
           <circle onclick="expand()"class="circles greenCircle" cx="35" cy="25" r="20"/>
           <circle onclick="expand()" class="circles redCircle" cx="35" cy="80" r="20"/>
           <circle onclick="expand()" class="circles greenCircle" cx="35" cy="135" r="20"/>
@@ -43,15 +96,11 @@
           <circle onclick="expand()" class="circles redCircle" cx="105" cy="80" r="20"/>
           <circle onclick="expand()"class="circles redCircle" cx="105" cy="135" r="20"/>
           <circle onclick="expand()" class="circles redCircle" cx="175" cy="25" r="20"/>
-          <circle onclick="expand()" class="circles redCircle" cx="245" cy="25" r="20"/>
+          <circle onclick="expand()" class="circles redCircle" cx="245" cy="25" r="20"/> -->
 
           <script>
  
-          function expand() {
-               sweetAlert({   title: "You were correct/wrong!",   text: "Your answer:... The correct answer...", confirmButtonColor: "#FF4081",
-                  imageUrl: "headphn.png" });
-              
-           }
+          
           </script>
         </svg>
       </div>
