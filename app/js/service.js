@@ -255,6 +255,18 @@ quizApp.factory('Quiz', function ($resource){
 		console.log(url); 
 	}
 
+	this.playAnswer = function(answer){ //answer är antingen 'correctAnswer', 'wrongAnswer1', 'wrongAnswer2' eller 'wrongAnswer3'
+		var answerAudio = function(answer){
+			if (answer == 'correctAnswer'){
+				return new Audio(insertljudfilhere).play();
+			};
+			else {
+				return new Audio(insertFelLjudFilHere).play();
+			};
+		};
+	};
+
+
 	//this.getPlaylist('https://open.spotify.com/user/113325595/playlist/5U6ibJ4AW3keswEmMhhtNP');
 	//this.getAlbum('https://open.spotify.com/album/2eRL3OIp0Htj04g9k4FN1n');
 
