@@ -83,7 +83,9 @@ quizApp.factory('Quiz', function ($resource){
 			var len = tracks.length;
 			// sets our max number of questions
 			var maxQ;
-			if (len > 20 || len == 20) {
+			if (len > 20) {
+				maxQ = 20;
+			} else if (len == 20) {
 				maxQ = 20;
 			} else if (len < 20) {
 				maxQ = len;
@@ -136,6 +138,29 @@ quizApp.factory('Quiz', function ($resource){
 		}
 		//return this.questionList;
 	};
+
+	this.randomizeSongs = function(){
+		//om fler än 20 låtar --> randomize vilka som används
+	};
+
+	this.shuffleArray = function(array) {
+		var currentIndex = array.length, temporaryValue, randomIndex;
+
+		// While there remain elements to shuffle...
+		while (0 !== currentIndex) {
+
+			// Pick a remaining element...
+			randomIndex = Math.floor(Math.random() * currentIndex);
+			currentIndex -= 1;
+
+			// And swap it with the current element.
+			temporaryValue = array[currentIndex];
+			array[currentIndex] = array[randomIndex];
+			array[randomIndex] = temporaryValue;
+	}
+
+	return array;
+	}
 
 
 	this.randomAnswer = function(tracks, maxQ, type, correctAnswer, wrongAnswer1, wrongAnswer2) {
@@ -233,16 +258,14 @@ quizApp.factory('Quiz', function ($resource){
 	//this.getPlaylist('https://open.spotify.com/user/113325595/playlist/5U6ibJ4AW3keswEmMhhtNP');
 	//this.getAlbum('https://open.spotify.com/album/2eRL3OIp0Htj04g9k4FN1n');
 
-	this.randomizeSongs = function(){
-		//om fler än 30 låtar --> randomize vilka som används
-	};
+	
 
 	
 
 
-	this.setScore = function(currentScore){
+	this.setScore = function(){
 		if (chosenAnswer == question.rightAnswer){
-			currentScore = currentScore + 1;
+			this.currentScore = this.currentScore + 1;
 		}
 		return currentScore;
 	};
