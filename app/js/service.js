@@ -259,7 +259,7 @@ quizApp.factory('Quiz', function ($resource){
 		var answerAudio = function(answer){
 			if (answer == 'correctAnswer'){
 				return new Audio(insertljudfilhere).play();
-			};
+			}
 			else {
 				return new Audio(insertFelLjudFilHere).play();
 			};
