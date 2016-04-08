@@ -27,3 +27,4 @@ Structure
 
 }
 ```
+  * a question is reached from the view with ' {{question()}} '
