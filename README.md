@@ -16,12 +16,14 @@ Structure
 ```javascript
 {
   questionType: /*either 'track', 'album' or 'artist' (type string)*/,
-  questionString: /*randomly generated and asks for the right track/album/artist (type string)*/,
-  rightAnswer: /*generated using questionstype and the current index's track (type string)*/,
+  questionStr: /*randomly generated and asks for the right track/album/artist (type string)*/,
+  correctAnswer: /*generated using questionstype and the current index's track (type string)*/,
   wrongAnswer1: /*generated using questiontype and another index's track (type string)*/,
   wrongAnswer2: /*same as wrongAnswer1*/,
   wrongAnswer3: /*same as wrongAnswer1*/,
+  answered: /* boolean (true/false) if the questions has been answered or not*/,
   chosenAnswer: /*'' until one is clicked,then between says either 'rightAnswer' or 'wrongAnswer1/2/3' (type string)*/;
   id: /*from 1-20 (type number)*/;
+
 }
 ```
