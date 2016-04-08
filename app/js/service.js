@@ -91,7 +91,7 @@ quizApp.factory('Quiz', function ($resource){
 				maxQ = len;
 			}
 			// for each question, create a question
-			for (var i = 0; i < maxQ; i++){
+			for (var i = 1; i < maxQ + 1; i++){
 				var currentTrack = tracks[i].track;
 				var question = {
 					questionStr: null,
