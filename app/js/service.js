@@ -3,6 +3,7 @@ quizApp.factory('Quiz', function ($resource){
 	this.currentScore = 0;
 	this.playlist;
 	this.questionList = [];
+	this.currentQuestionID = 0;
 
 	var client_id = 'a280b16e9b4446928ed426a402c6f67a';
 	var client_secret = '13d55b7e7b5545dbbeec042aff0c2907';
@@ -14,7 +15,7 @@ quizApp.factory('Quiz', function ($resource){
             method:"GET",
             isArray:false,
             headers:{
-            	        Authorization: "Bearer BQC3MpeT0sOrtAs1Sp5WdtTZ8uQZLkeluoGlkoKkz6ZWT_-kkb7pRolEtQ-EdHIGLhRO15zjsU9sNK8UAk1QEkmSgXrb0AgZbEZpBbqdQfHgSiHWiKWCWfRUfmUrKSb9_nWGV3T4DrJgZRAIsag0_pfzsavJo7PWmlng8g"
+            	        Authorization: "Bearer BQAIlhiL1v4wJNgQhvloNAUld75LKaYMA7fWlt0_4bjcqZbP9gMAUpJPusiCZjEULh_KlyFfm7q4wlR6YOqTrT3He_0HS1865Y4ICZSrdeQbXnIxwW04Bk_i989Uhe4MRjWI68j-oQoLVnxx6le3ZW9tNJkcaJp9qt6hOQ"
 
             } 
         },
@@ -70,10 +71,10 @@ quizApp.factory('Quiz', function ($resource){
 
 		// these should probably not be here...
 		//console.log(tracks);
-		this.createArtistList(tracks);
-		this.createAlbumList(tracks);
-
 		if (this.questionList.length == 0) {
+			this.createArtistList(tracks);
+			this.createAlbumList(tracks);
+
 
 			// questions database
 			var questionDB = ['What is the name of this song?', 'Who made this song?', 'On what album is this song featured?'];
@@ -131,7 +132,7 @@ quizApp.factory('Quiz', function ($resource){
 			}
 			//console.log("These are our questions:",this.questionList);
 		}
-		return this.questionList;
+		//return this.questionList;
 	};
 
 
