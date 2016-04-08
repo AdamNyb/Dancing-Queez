@@ -27,3 +27,5 @@ Structure
 
 }
 ```
+  * a question is reached from the view with ' {{question()}} '
+  * a question's attributes are reached from the view with ' {{question().questionStr}} '
