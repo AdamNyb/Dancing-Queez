@@ -1,8 +1,9 @@
 html { width: 100%; height: 100%;}
 body { 
-	background: #eee;
+	background: linear-gradient(#D81B60, #F48FB1);
 	width: 100%;
 	height: 100%;
+	
 	}
 
 .wrapper, html, body {
@@ -107,14 +108,16 @@ h5 {
 *	gameView specific ===========================
 */
 
-.game-container {
+/*.game-container {
 	background: linear-gradient(#D81B60, #F48FB1); /* Standard syntax */
 	/*background: linear-gradient(#00897B, #80CBC4); /* Standard syntax */
 	/*background: linear-gradient(#0097A7, #B2EBF2); /* Standard syntax */
 	/*background: linear-gradient(#455A64, #CFD8DC); /* Standard syntax */
-	/*background: linear-gradient(#D32F2F, #FFCDD2); /* Standard syntax */
+	/*background: linear-gradient(#D32F2F, #FFCDD2); /* Standard syntax 
+	height: 100%;
+	width: 100%;
 
-}
+}*/
 
 .header {
 	color: white;
@@ -193,7 +196,7 @@ h5 {
 }
 
 .notes {
-	margin-top: 40px;
+	margin-top: 0px;
 }
 
 .note {
