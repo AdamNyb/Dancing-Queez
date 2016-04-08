@@ -8,14 +8,16 @@ quizApp.controller('GameCtrl', function ($scope, Quiz) {
 
 
 
-	$scope.createQuestions = function() {
-		//if (Quiz.playlist){
-		console.log(Quiz.playlist);
-		return Quiz.createQuestions(Quiz.playlist.tracks.items);// };//tracks
+	var createQuestions = function() {
+		if (Quiz.playlist){
+			return Quiz.createQuestions(Quiz.playlist.tracks.items);//tracks
+		}
 		//console.log("These are our questions!",$scope.questions);
 	}
 
 	$scope.questions = function(){
-		return $scope.createQuestions()};
+		return createQuestions();
+	};
 
+	//$scope.questions = createQuestions();
 });

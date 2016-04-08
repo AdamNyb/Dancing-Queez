@@ -6,11 +6,12 @@ quizApp.controller('TestCtrl', function ($scope, Quiz) {
 
 	$scope.test();
 
-	$scope.getPlaylist = function() {
+	$scope.getPlaylist = function(link) {
 		// gets the playlist
 		//console.log("YO");
 		// bad playlist https://open.spotify.com/user/113325595/playlist/5U6ibJ4AW3keswEmMhhtNP
-		$scope.tracks = Quiz.getPlaylist('https://open.spotify.com/user/hhawthorn/playlist/1Hue9EGWG1xl9UPcgji9vX', function(data){
+		// 'https://open.spotify.com/user/hhawthorn/playlist/1Hue9EGWG1xl9UPcgji9vX'
+		$scope.tracks = Quiz.getPlaylist(link, function(data){
 		//$scope.tracks = Quiz.getPlaylist('https://open.spotify.com/user/113325595/playlist/5U6ibJ4AW3keswEmMhhtNP', function(data){
 			//console.log("hey");
 			//console.log("YOYO",data.tracks.items);
@@ -20,7 +21,7 @@ quizApp.controller('TestCtrl', function ($scope, Quiz) {
 	}
 
 
-	$scope.getPlaylist();
+	//$scope.getPlaylist();
 
 	$scope.createQuestions = function(tracks) {
 		//console.log("This is my tracks",tracks);
