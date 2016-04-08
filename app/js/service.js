@@ -2,6 +2,7 @@ quizApp.factory('Quiz', function ($resource){
 
 	this.currentScore = 0;
 	this.playlist;
+	this.questionList = [];
 
 	var client_id = 'a280b16e9b4446928ed426a402c6f67a';
 	var client_secret = '13d55b7e7b5545dbbeec042aff0c2907';
@@ -13,7 +14,7 @@ quizApp.factory('Quiz', function ($resource){
             method:"GET",
             isArray:false,
             headers:{
-            	        Authorization: "Bearer BQB0MAi9epqBZ7lE2MRJJvVEUrCGi3yYUBOjhmS7vyRRmFzSXERq32vv8riovptWsO8wkY9aBry7a84OGZkgU21TWBUSb-JIn4hv2Gu4d0G8YznYP41krCo7lNv48teY7d1bMxLfU3lEIvx89iSYWr0r062ic4zTZVrMIwTY0PFiBePWZ8o"
+            	        Authorization: "Bearer BQC3MpeT0sOrtAs1Sp5WdtTZ8uQZLkeluoGlkoKkz6ZWT_-kkb7pRolEtQ-EdHIGLhRO15zjsU9sNK8UAk1QEkmSgXrb0AgZbEZpBbqdQfHgSiHWiKWCWfRUfmUrKSb9_nWGV3T4DrJgZRAIsag0_pfzsavJo7PWmlng8g"
 
             } 
         },
@@ -22,7 +23,6 @@ quizApp.factory('Quiz', function ($resource){
 	this.savePlaylist = function (playlist_object){
 		this.playlist = [];
 		this.playlist = playlist_object;
-		console.log(this.playlist);
 		return this.playlist;
 	}
 
@@ -69,56 +69,69 @@ quizApp.factory('Quiz', function ($resource){
 		//console.log("HEJ tracks",tracks);
 
 		// these should probably not be here...
-		console.log(tracks);
+		//console.log(tracks);
 		this.createArtistList(tracks);
 		this.createAlbumList(tracks);
 
-		// questions database
-		var questionDB = ['What is the name of this song?', 'Who made this song?', 'On what album is this song featured?'];
-		// list of complete questions
-		var questionList = [];
-		var len = tracks.length;
-		// sets our max number of questions
-		var maxQ;
-		if (len > 20 || len == 20) {
-			maxQ = 20;
-		} else if (len < 20) {
-			maxQ = len;
-		}
-		// for each question, create a question
-		for (var i = 0; i < maxQ; i++){
-			var currentTrack = tracks[i].track;
-			var question = [];
-			// question [correctAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3, questionStr, chosenAnswer]
-			//randomize a number between 0 and 2
-			var max = 2;
-			var min = 0;
-			var num = this.randomizeNumber(min,max);
+		if (this.questionList.length == 0) {
 
-			if (num == 0) {
-				// the question is about the song name
-				var correctAnswer = String(currentTrack.name);
-				var type = 'song';
-			} else if (num == 1) {
-				// the question is about the artist name
-				var correctAnswer = String(currentTrack.artists[0].name);
-				var type = 'artist';
-			} else if (num == 2) {
-				// the question is about the album
-				var correctAnswer = String(currentTrack.album.name);
-				var type = 'album';
+			// questions database
+			var questionDB = ['What is the name of this song?', 'Who made this song?', 'On what album is this song featured?'];
+			// list of complete questions
+			//var questionList = [];
+			var len = tracks.length;
+			// sets our max number of questions
+			var maxQ;
+			if (len > 20 || len == 20) {
+				maxQ = 20;
+			} else if (len < 20) {
+				maxQ = len;
 			}
-			// generates wrongs answers + question
-			var wrongAnswer1 = this.randomAnswer(tracks, maxQ, type, correctAnswer);
-			var wrongAnswer2 = this.randomAnswer(tracks, maxQ, type, correctAnswer, wrongAnswer1);
-			var wrongAnswer3 = this.randomAnswer(tracks, maxQ, type, correctAnswer, wrongAnswer1, wrongAnswer2);
-			question = [correctAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3, questionDB[num], null];
+			// for each question, create a question
+			for (var i = 0; i < maxQ; i++){
+				var currentTrack = tracks[i].track;
+				var question = {
+					questionStr: null,
+					correctAnswer: null,
+					wrongAnswer1: null,
+					wrongAnswer2: null,
+					wrongAnswer3: null,
+					answered: false,
+					chosenAnswer: null,
+					questionType: null,
+					id: i
+				};
+				// question [correctAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3, questionStr, chosenAnswer]
+				//randomize a number between 0 and 2
+				var max = 2;
+				var min = 0;
+				var num = this.randomizeNumber(min,max);
 
-			// pushes the question into the questions list
-			questionList.push(question);
+				if (num == 0) {
+					// the question is about the song name
+					question.correctAnswer = String(currentTrack.name);
+					question.questionType = 'song';
+				} else if (num == 1) {
+					// the question is about the artist name
+					question.correctAnswer = String(currentTrack.artists[0].name);
+					question.questionType = 'artist';
+				} else if (num == 2) {
+					// the question is about the album
+					question.correctAnswer = String(currentTrack.album.name);
+					question.questionType = 'album';
+				}
+				// generates wrongs answers + question
+				question.questionStr = questionDB[num];
+				question.wrongAnswer1 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer);
+				question.wrongAnswer2 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, question.wrongAnswer1);
+				question.wrongAnswer3 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, question.wrongAnswer1, question.wrongAnswer2);
+
+				// pushes the question into the questions list
+				this.questionList.push(question);
+			}
+			//console.log("These are our questions:",this.questionList);
 		}
-		//console.log(questionList);
-		return questionList;
+		return this.questionList;
 	};
 
 
@@ -129,7 +142,6 @@ quizApp.factory('Quiz', function ($resource){
 		var min = 0;
 		var num;
 		var randomAnswer;
-
 		var continueLoop = true;
 		
 		while (continueLoop == true) {
