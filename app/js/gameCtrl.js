@@ -24,4 +24,8 @@ quizApp.controller('GameCtrl', function ($scope, Quiz) {
 		Quiz.currentQuestionID = Quiz.currentQuestionID + 1;
 	}
 
+	$scope.playSong = function(){
+		Quiz.playSong(Quiz.question().previewUrl);
+	}
+
 });
