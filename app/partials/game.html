@@ -16,7 +16,7 @@
 	</head>
 	<body>
 		<div class="container-fluid wrapper game-container">
-	        <div class="row banner">
+	        <div class="row header">
 	        	<h4>DANCING QUEEZ</h4>
 	    	</div>
 			<div class="col-md-12" align="center" id="gameView">
@@ -26,10 +26,10 @@
 					
 				</div>
 				<div class="row">
-						<div class="glyphicon glyphicon-volume-up">
-						</div>
-						<!--<div class="glyphicon glyphicon-chevron-right right-align">
-						</div>-->
+					<div class="glyphicon glyphicon-volume-up">
+					</div>
+					<div class="glyphicon glyphicon-chevron-right right-align">
+					</div>
 				</div>
 				
 				<div class="icon-container row">
@@ -39,39 +39,38 @@
 				</div>
 				<div class="row">
 					<div class="text-container">
-						{{question()}}
-						What's the title of this song?
+						{{question().questionStr}}
 					</div>
 				</div>
 				
 				<div class="row ">
 					<div class="answer-container">
 						<div class="answer-text">
-							ANSWER #1
+							{{question().correctAnswer}}
 						</div>
 					</div>
 					<div class="answer-container">
 						<div class="answer-text">
-							ANSWER #2
+							{{question().wrongAnswer1}}
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="answer-container">
 						<div class="answer-text">
-							ANSWER #3
+							{{question().wrongAnswer2}}
 						</div>
 					</div>
 					<div class="answer-container">
 						<div class="answer-text">
-							ANSWER #4
+							{{question().wrongAnswer3}}
 						</div>
 					</div>
 				</div>
 			
 				<div class="row text-container">
 					<div class="row">
-						Question 1/20
+						Question {{question().id}}/20
 					</div>
 				</div>
 				<div class="row notes">
