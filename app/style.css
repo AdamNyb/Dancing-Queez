@@ -216,28 +216,6 @@ h5 {
 	padding-bottom: 10px;
 }
 
-.dots{
-	height: 300px;
-	padding-top: 5px;	
-}
-
-.circles{
-	border:groove;
-	stroke: black;	
-}
-
-.greenCircle{
-	fill: green;
-}
-
-.redCircle{
-	fill:red;
-}
-
-.mark{
-	fill:red;
-}
-
 #results{
 	text-align: center;
 	padding-left:10%;
