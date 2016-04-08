@@ -18,7 +18,8 @@ body {
 
 .banner{
 	padding-top: 12%;
-	background-color: #F50057;
+	background: linear-gradient(#D81B60, #F48FB1); /* Standard syntax */
+	/*background-color: #F50057;*/
 	text-align: center;
 	padding: 5px 10px;*/ 
 	font-size: 130%;

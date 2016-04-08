@@ -6,18 +6,22 @@ quizApp.controller('GameCtrl', function ($scope, Quiz) {
 		}
 	};
 
-
-
-	var createQuestions = function() {
+	$scope.createQuestions = function() {
 		if (Quiz.playlist){
 			return Quiz.createQuestions(Quiz.playlist.tracks.items);//tracks
 		}
-		//console.log("These are our questions!",$scope.questions);
 	}
 
-	$scope.questions = function(){
-		return createQuestions();
-	};
+	$scope.question = function() {
+		// is called by view, creates all questions (only the first time)
+		// and returns the current question
+		$scope.createQuestions();
+		return Quiz.questionList[Quiz.currentQuestionID];
+	}
 
-	//$scope.questions = createQuestions();
+	$scope.nextQuestionButton = function() {
+		// should be linked to the button for next question
+		Quiz.currentQuestionID = Quiz.currentQuestionID + 1;
+	}
+
 });
