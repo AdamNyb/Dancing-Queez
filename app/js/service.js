@@ -100,6 +100,7 @@ quizApp.factory('Quiz', function ($resource){
 					answered: false,
 					chosenAnswer: null,
 					questionType: null,
+					previewUrl: null,
 					id: i
 				};
 				// question [correctAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3, questionStr, chosenAnswer]
@@ -123,6 +124,7 @@ quizApp.factory('Quiz', function ($resource){
 				}
 				// generates wrongs answers + question
 				question.questionStr = questionDB[num];
+				question.previewUrl = String(currentTrack.url);
 				question.wrongAnswer1 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer);
 				question.wrongAnswer2 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, question.wrongAnswer1);
 				question.wrongAnswer3 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, question.wrongAnswer1, question.wrongAnswer2);
