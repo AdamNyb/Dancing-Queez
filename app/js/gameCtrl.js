@@ -1,4 +1,6 @@
-quizApp.controller('GameCtrl', function ($scope, Quiz) {
+quizApp.controller('GameCtrl', function ($scope, $routeParams, Quiz) {
+
+	
 
 	$scope.playlistName = function(){ //playlistens namn
 		if(Quiz.playlist){
@@ -24,8 +26,9 @@ quizApp.controller('GameCtrl', function ($scope, Quiz) {
 		console.log("YO")
 		Quiz.currentQuestionID = Quiz.currentQuestionID + 1;
 		//console.log(Quiz.currentQuestionID);
-		if(Quiz.currentQuestionID === 20) {
-			//Open score page
+		if(Quiz.currentQuestionID === 3) {
+			//hide button
+			//butt.html('');
 		}
 
 	}
