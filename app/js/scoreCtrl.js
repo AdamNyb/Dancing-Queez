@@ -10,6 +10,12 @@ quizApp.controller('ScoreCtrl', function ($scope, Quiz) {
 		}
 	};
 
+	$scope.getScore = function(){ //playlistens namn
+		if(Quiz.getScore()){
+			return Quiz.getScore();
+		}
+	};
+
 	$scope.reset = function(){
 		Quiz.resetGame();
 
