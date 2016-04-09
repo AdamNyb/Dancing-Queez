@@ -50,10 +50,10 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 		//sends data to scoreboard, stops user from answering more than once.
 		//$scope.correctAnswer();
 		$scope.hideForward=false //hides forward button
+		var currentQuestion = Quiz.questionList[Quiz.currentQuestionPosition];
+			var currentQuestionID = currentQuestion.id;
 		
 		if (currentQuestion.answered === false) {
-			var currentQuestion = Quiz.questionList[Quiz.currentQuestionPosition];
-			var currentQuestionID = currentQuestion.id;
 			var altID = "alt" + alt;
 			var divID = document.getElementById(altID);
 			
