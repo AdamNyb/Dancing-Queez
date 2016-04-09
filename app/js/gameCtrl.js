@@ -1,7 +1,7 @@
 quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) {
 
 	
-
+	$scope.hideForward=true
 	$scope.playlistName = function(){ //playlistens namn
 		if(Quiz.playlist){
 			return Quiz.playlist.name;
@@ -30,22 +30,19 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 		} else {
 			Quiz.currentQuestionPosition = Quiz.currentQuestionPosition + 1;
 			//console.log(Quiz.currentQuestionID);
-			if(Quiz.currentQuestionPosition === 3) {
-				//hide button
-				//butt.html('');
-			}
+			
 		}
 
-
+		$scope.hideForward=true
 	}
-
+	
 	$scope.validateAnswer = function(divObj) {
 		console.log("YES");
-
-		$scope.hideMe = function(){
+		$scope.hideForward=false
+		
     		console.log('hide the button');
-    		$scope.hide();
-  		}
+    		
+  		
 		
 		//göm forward
 		//rätt svaret ska lysa grönt direkt
@@ -54,6 +51,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 		//sätt divar till unclickable
 		//divObj.style.background="#EF5350";
 	}
+
 
 
 
