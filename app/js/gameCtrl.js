@@ -87,6 +87,11 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 		//}
 	}
 
+	$scope.numberOfQuestions = function() {
+		console.log(Quiz.questionList.length);
+		return Quiz.questionList.length;
+	}
+
 
 
 
