@@ -41,7 +41,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 		var id = ["alt1", "alt2", "alt3", "alt4"];
 		for (i in id) {
 			div = document.getElementById(id[i]);
-			div.style.background="#FCE4EC";
+			div.style.background="#D81B60";
 		}
 	}
 
@@ -58,7 +58,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 			if (alternative !== currentQuestion.correctAnswer) {
 				console.log("YES")
 				//fel svar blir rött när en klickar på det
-				divID.style.background="#EF5350";
+				divID.style.background="#37474f";
 			}
 			else {
 				//rätt svar blir grönt när en klickar på det

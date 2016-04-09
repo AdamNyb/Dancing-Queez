@@ -16,7 +16,7 @@ quizApp.factory('Quiz', function ($resource){
             method:"GET",
             isArray:false,
             headers:{
-            	        Authorization: "Bearer BQBdc10jc7hm3l2cqa6ijIBxSlpk_Q4Pgzv4Fz_TQqeeBzqTlbNqEUMkl0-85SSUTkvkctEIDiaIIlv6MNmxoNf92GEP2TwL3k-PoqJftW-XW9XaikR6j9fvTZ2xKQtW-uW-IdygWQQqFGIbc3qYYgYuZBoX-CSFn2J0oQ"
+            	        Authorization: "Bearer BQBMyb9OpTTjy7YGH_bPIAz98HjSHVObvPPr6OrZbqwuIzeE4_7dQrU4hJkghkS2qrJh7tx3TtTkiawqCtbOeDUOQ8lvBMawJomoJkCg1vr7QvUfJL6aMte49Tc8sksF7svc2lK9rebOuF07U9r5UQdZiw-BSpVBlFuKVoFup9bLRFrpNw"
 
             } 
         },
