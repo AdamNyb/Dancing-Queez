@@ -58,7 +58,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 			if (alternative !== currentQuestion.correctAnswer) {
 				console.log("YES")
 				//fel svar blir rött när en klickar på det
-				divID.style.background="#37474f";
+				divID.style.background="#222";
 			}
 			else {
 				Quiz.setScore(Quiz.getScore() + 1);
