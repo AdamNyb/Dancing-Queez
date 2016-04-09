@@ -26,10 +26,12 @@
 					
 				</div>
 				<div class="row">
-					<div class="glyphicon glyphicon-volume-up">
+					<div class="column column-left">
+						<div class="glyphicon glyphicon-volume-up"></div>
 					</div>
-					<button ng-click="nextQuestionButton()" class="glyphicon glyphicon-chevron-right right-align" id="forwardButt">
-					</button>
+					<div class="column column-right">
+						<button ng-hide="hideForward" ng-click="nextQuestionButton()" class="glyphicon glyphicon-chevron-right" id="forwardButt"></button>
+				</div>
 				</div>
 				
 				<div class="icon-container row">

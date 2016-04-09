@@ -1,6 +1,6 @@
 var quizApp = angular.module('quiz', ['ngRoute', 'ngResource']);
 
-quizApp.config(['$routeProvider',
+quizApp.config(['$routeProvider', '$locationProvider',
 	function($routeProvider){
 		$routeProvider.
 			when('/home', {

@@ -1,9 +1,10 @@
 quizApp.factory('Quiz', function ($resource){
 
 	this.score = 0;
+	this.scoreboard = []; // on the form {correct: 0, questionNumber: i+1}, used by score.html to display answers
 	this.playlist;
 	this.questionList = [];
-	this.currentQuestionID = 0;
+	this.currentQuestionPosition = 0;
 
 	var client_id = 'a280b16e9b4446928ed426a402c6f67a';
 	var client_secret = '13d55b7e7b5545dbbeec042aff0c2907';
@@ -15,7 +16,7 @@ quizApp.factory('Quiz', function ($resource){
             method:"GET",
             isArray:false,
             headers:{
-            	        Authorization: "Bearer BQCCfEWEY-OjX_OzrtQQXfX5EGl4sMMxE0yOLzs-7IyX6NlI4yRRBZf70HTHoXtqjEY-X2U2Ms-H44z1RDLCjVtDKJGfRyzYH634cwdPIN0HTSyO3mQIwmd0GH9UxKD35hHQa_PREmQiElv6ry8vczCYHArzB6Ir_hYtuA"
+            	        Authorization: "Bearer BQBdc10jc7hm3l2cqa6ijIBxSlpk_Q4Pgzv4Fz_TQqeeBzqTlbNqEUMkl0-85SSUTkvkctEIDiaIIlv6MNmxoNf92GEP2TwL3k-PoqJftW-XW9XaikR6j9fvTZ2xKQtW-uW-IdygWQQqFGIbc3qYYgYuZBoX-CSFn2J0oQ"
 
             } 
         },
@@ -125,6 +126,7 @@ quizApp.factory('Quiz', function ($resource){
 					lastQuestion: false,
 					id: i+1
 				};
+				this.scoreboard.push({correct: 0, questionNumber: i+1})
 				//randomize a number between 0 and 2
 				var max = 2;
 				var min = 0;
