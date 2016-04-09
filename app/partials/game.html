@@ -1,5 +1,7 @@
 <ng-include ng-controller="GameCtrl"></ng-include>
 
+<!DOCTYPE html>
+
 <html lang="eng">
 	<head>
 		<title>GAME VIEW</title>
@@ -42,26 +44,26 @@
 				</div>
 				
 				<div class="row ">
-					<div class="answer-container" ng-click="validateAnswer(this)">
+					<div class="answer-container">
 						<div class="answer-text">
-							{{question().correctAnswer}}
+							{{question().answerAlternatives[0]}}
 						</div>
 					</div>
-					<div class="answer-container" ng-click="validateAnswer(this)">
+					<div class="answer-container">
 						<div class="answer-text">
-							{{question().wrongAnswer1}}
+							{{question().answerAlternatives[1]}}
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="answer-container" ng-click="validateAnswer(this)">
+					<div class="answer-container">
 						<div class="answer-text">
-							{{question().wrongAnswer2}}
+							{{question().answerAlternatives[2]}}
 						</div>
 					</div>
-					<div class="answer-container" ng-click="validateAnswer(this)">
+					<div class="answer-container">
 						<div class="answer-text">
-							{{question().wrongAnswer3}}
+							{{question().answerAlternatives[3]}}
 						</div>
 					</div>
 				</div>
@@ -89,7 +91,10 @@
 				</div>
 			</div>
 		</div>
-		<script>
+	</body>
+	
+	<script src="../library/d3.v3.min.js"></script>
+	<script>
 		var width="330px";
 		var height = "83px";
 
@@ -120,6 +125,7 @@
 
 		note.append("path")
 		    .attr("d", "M272,48h-32v304.594C223,342.375,200.688,336,176,336c-53,0-96,28.625-96,64s43,64,96,64s96-28.625,96-64V144c80-13,128,80,160,128C412,48,272,48,272,48z")
-		</script>
-	</body>
+
+	</script>
+
 </html>
