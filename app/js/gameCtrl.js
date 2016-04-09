@@ -15,8 +15,11 @@ quizApp.controller('GameCtrl', function ($scope, Quiz) {
 	$scope.question = function() {
 		// is called by view, creates all questions (only the first time)
 		// and returns the current question
-		$scope.createQuestions();
-		return Quiz.questionList[Quiz.currentQuestionID];
+		if (Quiz.playlist){
+			$scope.createQuestions();
+			var question = Quiz.questionList[Quiz.currentQuestionID];
+			$scope.playSong(question);
+		return question;};
 	}
 
 	$scope.nextQuestionButton = function() {
@@ -24,8 +27,18 @@ quizApp.controller('GameCtrl', function ($scope, Quiz) {
 		Quiz.currentQuestionID = Quiz.currentQuestionID + 1;
 	}
 
-	$scope.playSong = function(){
-		Quiz.playSong(Quiz.question().previewUrl);
-	}
+	$scope.playSong = function(ques){
+		if (Quiz.playing == false){ //förhindrar Angulars digest loop från att spela upp låten 1000ggr samtidigt
+			Quiz.playSong(ques.previewUrl);
+		};
+	};
+
+	$scope.pauseSong = function(ques){
+		Quiz.pauseSong();
+		Quiz.playing = false;
+
+	} ;
+
+	
 
 });

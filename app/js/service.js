@@ -4,6 +4,7 @@ quizApp.factory('Quiz', function ($resource){
 	this.playlist;
 	this.questionList = [];
 	this.currentQuestionID = 0;
+	this.playing = false;
 
 	var client_id = 'a280b16e9b4446928ed426a402c6f67a';
 	var client_secret = '13d55b7e7b5545dbbeec042aff0c2907';
@@ -126,7 +127,7 @@ quizApp.factory('Quiz', function ($resource){
 				}
 				// generates wrongs answers + question
 				question.questionStr = questionDB[num];
-				question.previewUrl = String(currentTrack.url);
+				question.previewUrl = String(currentTrack.preview_url);
 				question.wrongAnswer1 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer);
 				question.wrongAnswer2 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, question.wrongAnswer1);
 				question.wrongAnswer3 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, question.wrongAnswer1, question.wrongAnswer2);
@@ -250,16 +251,20 @@ quizApp.factory('Quiz', function ($resource){
 		}
 	}
 
-	var playSong = function(url){
-		var songAudio = new Audio(url).play();
-		console.log(url); 
+	this.playSong = function(url){
+		this.songAudio = new Audio(url).play();
+		this.playing = true; 
 	}
+
+	this.pauseSong = function(){
+		this.songAudio = Audio().pause();
+	};
 
 	this.playAnswer = function(answer){ //answer är antingen 'correctAnswer', 'wrongAnswer1', 'wrongAnswer2' eller 'wrongAnswer3'
 		var answerAudio = function(answer){
 			if (answer == 'correctAnswer'){
 				return new Audio(insertljudfilhere).play();
-			};
+			}
 			else {
 				return new Audio(insertFelLjudFilHere).play();
 			};
