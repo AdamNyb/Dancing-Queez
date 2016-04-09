@@ -44,24 +44,24 @@
 				<div class="row ">
 					<div class="answer-container" ng-click="validateAnswer(this)">
 						<div class="answer-text">
-							{{question().correctAnswer}}
+							{{question().answerAlternatives[0]}}
 						</div>
 					</div>
 					<div class="answer-container" ng-click="validateAnswer(this)">
 						<div class="answer-text">
-							{{question().wrongAnswer1}}
+							{{question().answerAlternatives[1]}}
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="answer-container" ng-click="validateAnswer(this)">
 						<div class="answer-text">
-							{{question().wrongAnswer2}}
+							{{question().answerAlternatives[2]}}
 						</div>
 					</div>
 					<div class="answer-container" ng-click="validateAnswer(this)">
 						<div class="answer-text">
-							{{question().wrongAnswer3}}
+							{{question().answerAlternatives[3]}}
 						</div>
 					</div>
 				</div>
