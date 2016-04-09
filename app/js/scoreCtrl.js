@@ -9,4 +9,9 @@ quizApp.controller('ScoreCtrl', function ($scope, Quiz) {
 			return Quiz.playlist.name;
 		}
 	};
+
+	$scope.reset = function(){
+		Quiz.resetGame();
+
+	}
 });
