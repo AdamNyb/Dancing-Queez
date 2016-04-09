@@ -1,6 +1,7 @@
 quizApp.factory('Quiz', function ($resource){
 
 	this.score = 0;
+	this.scoreboard = []; // on the form {correct: 0, questionNumber: i+1}, used by score.html to display answers
 	this.playlist;
 	this.questionList = [];
 	this.currentQuestionPosition = 0;
@@ -125,6 +126,7 @@ quizApp.factory('Quiz', function ($resource){
 					lastQuestion: false,
 					id: i+1
 				};
+				this.scoreboard.push({correct: 0, questionNumber: i+1})
 				//randomize a number between 0 and 2
 				var max = 2;
 				var min = 0;
