@@ -1,6 +1,6 @@
 quizApp.factory('Quiz', function ($resource){
 
-	this.currentScore = 0;
+	this.score = 0;
 	this.playlist;
 	this.questionList = [];
 	this.currentQuestionID = 0;
@@ -15,7 +15,7 @@ quizApp.factory('Quiz', function ($resource){
             method:"GET",
             isArray:false,
             headers:{
-            	        Authorization: "Bearer BQCsp8DJVZss1Fi9rLlpC_1MvFecrIVz44tWnwqYqcJLCcsgsUzskzRSvG36y0emWKEF7bSxQiw_GAUPUNTHO0-MUmqBEuyQV9s11Y96aLLet2E94YxCo_fjU10gOHeg3cIMz5srxrhRJmZHMVMib-aMxVsVTNc1keS-hA"
+            	        Authorization: "Bearer BQCCfEWEY-OjX_OzrtQQXfX5EGl4sMMxE0yOLzs-7IyX6NlI4yRRBZf70HTHoXtqjEY-X2U2Ms-H44z1RDLCjVtDKJGfRyzYH634cwdPIN0HTSyO3mQIwmd0GH9UxKD35hHQa_PREmQiElv6ry8vczCYHArzB6Ir_hYtuA"
 
             } 
         },
@@ -162,26 +162,6 @@ quizApp.factory('Quiz', function ($resource){
 		//return this.questionList;
 	};
 
-	this.shuffleArray = function(array) {
-		var currentIndex = array.length, temporaryValue, randomIndex;
-
-		// While there remain elements to shuffle...
-		while (0 !== currentIndex) {
-
-			// Pick a remaining element...
-			randomIndex = Math.floor(Math.random() * currentIndex);
-			currentIndex -= 1;
-
-			// And swap it with the current element.
-			temporaryValue = array[currentIndex];
-			array[currentIndex] = array[randomIndex];
-			array[randomIndex] = temporaryValue;
-	}
-
-	return array;
-	}
-
-
 	this.randomAnswer = function(tracks, maxQ, type, correctAnswer, wrongAnswer1, wrongAnswer2) {
 		//generates a random track name from the playlist
 		// not the same name as the current track
@@ -288,16 +268,14 @@ quizApp.factory('Quiz', function ($resource){
 	//this.getPlaylist('https://open.spotify.com/user/113325595/playlist/5U6ibJ4AW3keswEmMhhtNP');
 	//this.getAlbum('https://open.spotify.com/album/2eRL3OIp0Htj04g9k4FN1n');
 
-	
 
-	
+	this.getScore = function(){
+		return this.score;
+	};
 
 
-	this.setScore = function(){
-		if (chosenAnswer == question.rightAnswer){
-			this.currentScore = this.currentScore + 1;
-		}
-		return currentScore;
+	this.setScore = function(num){
+		this.score = num;
 	};
 
 	
