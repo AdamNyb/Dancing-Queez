@@ -30,9 +30,10 @@
       </div>
       <div class="icon-container row">
         <div class="question-icon">
-          <img src="../images/headphn.png"/>
+          <img src="../images/pink_headphone.png"/>
         </div>
       </div>
+      <div class="mini-header">Your score was: ...</div>
       </div>
       <div id="results">
 
@@ -97,10 +98,13 @@
     .attr("fill", function(d){
          
           if(d.correct == 0)
-            {return "red"}
+            {return "black"}
+            //return "#263238"}
+            //return "#37474f"
+              //return "red"}
 
           else{
-            return "#91DC5A"
+            return "#26A69A"
           }
 
         })

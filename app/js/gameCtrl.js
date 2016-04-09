@@ -58,7 +58,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 			if (alternative !== currentQuestion.correctAnswer) {
 				console.log("YES")
 				//fel svar blir rött när en klickar på det
-				divID.style.background="#37474f";
+				divID.style.background="#222";
 			}
 			else {
 				Quiz.setScore(Quiz.getScore() + 1);
@@ -85,6 +85,11 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 		//	div = document.getElementById(id[i]);
 		//	div.style.background="#FCE4EC";
 		//}
+	}
+
+	$scope.numberOfQuestions = function() {
+		console.log(Quiz.questionList.length);
+		return Quiz.questionList.length;
 	}
 
 
