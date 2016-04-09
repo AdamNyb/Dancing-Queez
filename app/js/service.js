@@ -46,8 +46,14 @@ quizApp.factory('Quiz', function ($resource){
 		var randomizedTracks = [];
 		var tracksLen = tracks.length -1;
 		var usedNums = [];
+		var maxQ;
+		if (tracksLen > 20 || tracksLen == 20) {
+			maxQ = 20;
+		} else if (tracksLen < 20) {
+			maxQ = tracksLen;
+		}
 
-		while (randomizedTracks.length < 20){
+		while (randomizedTracks.length < tracksLen){
 			num = this.randomizeNumber(0,tracksLen);
 			//console.log(num);
 			//console.log(tracks[num]);
