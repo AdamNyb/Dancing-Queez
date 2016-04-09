@@ -35,22 +35,18 @@
       </div>
       <div class="mini-header">Your score was: ...</div>
       </div>
-      <div id="results">
-
+      <div id="results" ng-model="results">
       </div>
         <script src="http://d3js.org/d3.v3.min.js"></script>
   <script>
-
- 
-
               
  
   var alert = function(objects) {
             if (objects.correct ==1 ){
-              swal("Question Number: "+(objects.questionNumber), "Your answer:... The correct answer...", "success")};
+              swal("Question Number: "+objects.questionID, "Your answer: "+objects.userAnswer+" The correct answer "+objects.correctAnswer, "success")};
 
             if (objects.correct ==0 ){
-               sweetAlert("Question Number: "+(objects.questionNumber), "Your answer:... The correct answer...", "error")};
+               sweetAlert("Question Number: "+(objects.questionID), "Your answer: "+objects.userAnswer+" The correct answer "+objects.correctAnswer, "error")};
 
 
          }
@@ -60,7 +56,9 @@
    
   
     // should get scoreboard from service
-    var data = [{correct:1, questionNumber:1}, {correct:0, questionNumber:1}, {correct:1, questionNumber:1}, {correct:1, questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:1,questionNumber:1}, {correct:1,questionNumber:1}]
+    var data = [{correct:1, questionNumber:1}, {correct:0, questionNumber:1}, {correct:1, questionNumber:1}, {correct:1, questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:1,questionNumber:1}, {correct:1,questionNumber:1}];
+
+    var data2 = [{correct:0, questionID:1, correctAnswer: "Test", userAnswer: "Hej"}, {correct:0, questionID:2, correctAnswer: "Test2", userAnswer: "Hej2"}, {correct:1, questionID:3, correctAnswer: "Test3", userAnswer: "Hej3"}];
 
     var svg = d3.select("#results").append("svg")
         .attr("width", width)
