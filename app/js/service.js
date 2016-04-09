@@ -16,11 +16,21 @@ quizApp.factory('Quiz', function ($resource){
             method:"GET",
             isArray:false,
             headers:{
-            	        Authorization: "Bearer BQBMyb9OpTTjy7YGH_bPIAz98HjSHVObvPPr6OrZbqwuIzeE4_7dQrU4hJkghkS2qrJh7tx3TtTkiawqCtbOeDUOQ8lvBMawJomoJkCg1vr7QvUfJL6aMte49Tc8sksF7svc2lK9rebOuF07U9r5UQdZiw-BSpVBlFuKVoFup9bLRFrpNw"
+            	        Authorization: "Bearer BQC9aNfZbw5aymbz4obIZaqAltecpMamA5AzLkieOXmVrwbuJ0EYRNPVYzw2nHigjBS39VZ0EKQApkIdXO69eScsB9EgQssgjh6Q68rrQmqMi15yUC1KNVNTw6fdjXqJ0JIzkvC8jPtg06wUwKZeMYmILWddAdEYZNumug"
 
             } 
         },
     });
+
+    this.resetGame = function() {
+    	this.score = 0;
+    	this.scoreboard = [];
+    	this.playlist = [];
+    	this.questionList = [];
+    	this.currentQuestionPosition = 0;
+    	this.artistList = [];
+		this.albumList = [];
+    }
 
 	this.savePlaylist = function (playlist_object){
 		//console.log("Playlistobject1",playlist_object.tracks.items);
