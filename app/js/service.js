@@ -126,7 +126,6 @@ quizApp.factory('Quiz', function ($resource){
 					lastQuestion: false,
 					id: i+1
 				};
-				this.scoreboard.push({correct: 0, questionNumber: i+1})
 				//randomize a number between 0 and 2
 				var max = 2;
 				var min = 0;
@@ -163,11 +162,12 @@ quizApp.factory('Quiz', function ($resource){
 				if (i == maxQ-1) {
 					question.lastQuestion = true;
 				}
+				this.scoreboard.push({correct: 0, questionNumber: i+1,correctAnswer: question.correctAnswer, userAnswer: null})
 
 				// pushes the question into the questions list
 				this.questionList.push(question);
 			}
-			console.log("These are our questions:",this.questionList);
+			console.log("Scoreboard:",this.scoreboard);
 		}
 		//return this.questionList;
 	};
