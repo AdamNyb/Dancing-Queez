@@ -61,6 +61,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 				divID.style.background="#EF5350";
 			}
 			else {
+				Quiz.setScore(Quiz.getScore() + 1);
 				//rätt svar blir grönt när en klickar på det
 				divID.style.background="#26A69A"
 			}
