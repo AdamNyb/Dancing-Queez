@@ -147,8 +147,8 @@ quizApp.factory('Quiz', function ($resource){
 				question.questionStr = questionDB[num];
 				question.previewUrl = String(currentTrack.url);
 				var wrongAnswer1 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer);
-				var wrongAnswer2 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, question.wrongAnswer1);
-				var wrongAnswer3 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, question.wrongAnswer1, question.wrongAnswer2);
+				var wrongAnswer2 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, wrongAnswer1);
+				var wrongAnswer3 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, wrongAnswer1, wrongAnswer2);
 
 				// pushes the answer alternatives to the array and then shuffles it
 				question.answerAlternatives.push(question.correctAnswer);
