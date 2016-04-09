@@ -35,6 +35,11 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, Quiz) {
 
 	$scope.validateAnswer = function(divObj) {
 		console.log("YES");
+
+		$scope.hideMe = function(){
+    		console.log('hide the button');
+    		$scope.hide();
+  		}
 		
 		//göm forward
 		//rätt svaret ska lysa grönt direkt
