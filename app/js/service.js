@@ -162,7 +162,7 @@ quizApp.factory('Quiz', function ($resource){
 				if (i == maxQ-1) {
 					question.lastQuestion = true;
 				}
-				this.scoreboard.push({correct: 0, questionNumber: i+1,correctAnswer: question.correctAnswer, userAnswer: null})
+				this.scoreboard.push({correct: 0, questionID: i+1,correctAnswer: question.correctAnswer, userAnswer: null})
 
 				// pushes the question into the questions list
 				this.questionList.push(question);

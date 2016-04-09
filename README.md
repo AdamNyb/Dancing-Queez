@@ -36,7 +36,7 @@ scoreboard
 {
   correct: /* 1 if the answer was correct, 0 if the answer was incorrect*/,
   correctAnswer: /* string of the correct answer */,
-  questionNumber: /*the id of the question */,
+  questionID: /*the id of the question (NOT the same as the questions's position in the questionList) */,
   userAnswer: /* string of user's answer */ 
 }
 ```
