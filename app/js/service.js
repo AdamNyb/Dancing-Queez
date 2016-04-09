@@ -1,6 +1,6 @@
 quizApp.factory('Quiz', function ($resource){
 
-	this.currentScore = 0;
+	this.score = 0;
 	this.playlist;
 	this.questionList = [];
 	this.currentQuestionID = 0;
@@ -15,7 +15,7 @@ quizApp.factory('Quiz', function ($resource){
             method:"GET",
             isArray:false,
             headers:{
-            	        Authorization: "Bearer BQCsp8DJVZss1Fi9rLlpC_1MvFecrIVz44tWnwqYqcJLCcsgsUzskzRSvG36y0emWKEF7bSxQiw_GAUPUNTHO0-MUmqBEuyQV9s11Y96aLLet2E94YxCo_fjU10gOHeg3cIMz5srxrhRJmZHMVMib-aMxVsVTNc1keS-hA"
+            	        Authorization: "Bearer BQCCfEWEY-OjX_OzrtQQXfX5EGl4sMMxE0yOLzs-7IyX6NlI4yRRBZf70HTHoXtqjEY-X2U2Ms-H44z1RDLCjVtDKJGfRyzYH634cwdPIN0HTSyO3mQIwmd0GH9UxKD35hHQa_PREmQiElv6ry8vczCYHArzB6Ir_hYtuA"
 
             } 
         },
@@ -106,9 +106,7 @@ quizApp.factory('Quiz', function ($resource){
 			var len = tracks.length;
 			// sets our max number of questions
 			var maxQ;
-			if (len > 20) {
-				maxQ = 20;
-			} else if (len == 20) {
+			if (len > 20 || len == 20) {
 				maxQ = 20;
 			} else if (len < 20) {
 				maxQ = len;
@@ -119,16 +117,14 @@ quizApp.factory('Quiz', function ($resource){
 				var question = {
 					questionStr: null,
 					correctAnswer: null,
-					wrongAnswer1: null,
-					wrongAnswer2: null,
-					wrongAnswer3: null,
+					answerAlternatives: [],
 					answered: false,
 					chosenAnswer: null,
 					questionType: null,
 					previewUrl: null,
+					lastQuestion: false,
 					id: i+1
 				};
-				// question [correctAnswer, wrongAnswer1, wrongAnswer2, wrongAnswer3, questionStr, chosenAnswer]
 				//randomize a number between 0 and 2
 				var max = 2;
 				var min = 0;
@@ -136,28 +132,40 @@ quizApp.factory('Quiz', function ($resource){
 
 				if (num == 0) {
 					// the question is about the song name
-					question.correctAnswer = String(currentTrack.name);
 					question.questionType = 'song';
+					question.correctAnswer = String(currentTrack.name);
 				} else if (num == 1) {
 					// the question is about the artist name
-					question.correctAnswer = String(currentTrack.artists[0].name);
 					question.questionType = 'artist';
+					question.correctAnswer = String(currentTrack.artists[0].name);
 				} else if (num == 2) {
 					// the question is about the album
-					question.correctAnswer = String(currentTrack.album.name);
 					question.questionType = 'album';
+					question.correctAnswer = String(currentTrack.album.name);
 				}
 				// generates wrongs answers + question
 				question.questionStr = questionDB[num];
 				question.previewUrl = String(currentTrack.url);
-				question.wrongAnswer1 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer);
-				question.wrongAnswer2 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, question.wrongAnswer1);
-				question.wrongAnswer3 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, question.wrongAnswer1, question.wrongAnswer2);
+				var wrongAnswer1 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer);
+				var wrongAnswer2 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, wrongAnswer1);
+				var wrongAnswer3 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, wrongAnswer1, wrongAnswer2);
+
+				// pushes the answer alternatives to the array and then shuffles it
+				question.answerAlternatives.push(question.correctAnswer);
+				question.answerAlternatives.push(wrongAnswer1);
+				question.answerAlternatives.push(wrongAnswer2);
+				question.answerAlternatives.push(wrongAnswer3);
+				question.answerAlternatives = this.shuffleArray(question.answerAlternatives);
+
+				//sets the lastQuestion attribute to true for the last questions
+				if (i == maxQ-1) {
+					question.lastQuestion = true;
+				}
 
 				// pushes the question into the questions list
 				this.questionList.push(question);
 			}
-			//console.log("These are our questions:",this.questionList);
+			console.log("These are our questions:",this.questionList);
 		}
 		//return this.questionList;
 	};
@@ -180,7 +188,6 @@ quizApp.factory('Quiz', function ($resource){
 
 	return array;
 	}
-
 
 	this.randomAnswer = function(tracks, maxQ, type, correctAnswer, wrongAnswer1, wrongAnswer2) {
 		//generates a random track name from the playlist
@@ -288,16 +295,14 @@ quizApp.factory('Quiz', function ($resource){
 	//this.getPlaylist('https://open.spotify.com/user/113325595/playlist/5U6ibJ4AW3keswEmMhhtNP');
 	//this.getAlbum('https://open.spotify.com/album/2eRL3OIp0Htj04g9k4FN1n');
 
-	
 
-	
+	this.getScore = function(){
+		return this.score;
+	};
 
 
-	this.setScore = function(){
-		if (chosenAnswer == question.rightAnswer){
-			this.currentScore = this.currentScore + 1;
-		}
-		return currentScore;
+	this.setScore = function(num){
+		this.score = num;
 	};
 
 	
