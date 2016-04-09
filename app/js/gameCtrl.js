@@ -1,4 +1,4 @@
-quizApp.controller('GameCtrl', function ($scope, $routeParams, Quiz) {
+quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) {
 
 	
 
@@ -18,18 +18,24 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, Quiz) {
 		// is called by view, creates all questions (only the first time)
 		// and returns the current question
 		$scope.createQuestions();
-		return Quiz.questionList[Quiz.currentQuestionID];
+		return Quiz.questionList[Quiz.currentQuestionPosition];
 	}
 
 	$scope.nextQuestionButton = function() {
 		// should be linked to the button for next question
 		//console.log("YO")
-		Quiz.currentQuestionID = Quiz.currentQuestionID + 1;
-		//console.log(Quiz.currentQuestionID);
-		if(Quiz.currentQuestionID === 3) {
-			//hide button
-			//butt.html('');
+		if (Quiz.questionList[Quiz.currentQuestionPosition].lastQuestion == true) {
+			//last question should rediret to score
+			$location.path('score');
+		} else {
+			Quiz.currentQuestionPosition = Quiz.currentQuestionPosition + 1;
+			//console.log(Quiz.currentQuestionID);
+			if(Quiz.currentQuestionPosition === 3) {
+				//hide button
+				//butt.html('');
+			}
 		}
+
 
 	}
 
