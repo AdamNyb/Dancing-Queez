@@ -46,20 +46,25 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 	}
 
 	$scope.validateAnswer = function(alt, alternative) {
+		$scope.correctAnswer();
 		$scope.hideForward=false
+		var currentQuestion = Quiz.questionList[Quiz.currentQuestionPosition];
+		if (currentQuestion.answered === false) {
+			var altID = "alt" + alt;
+			var divID = document.getElementById(altID);
+			console.log(divID);
+			console.log("question", currentQuestion.correctAnswer);
 
-		var altID = "alt" + alt;
-		var divID = document.getElementById(altID);
-		console.log("question", $scope.question().correctAnswer);
-
-		if (alternative !== $scope.question().correctAnswer) {
-			console.log("YES")
-			//fel svar blir rött när en klickar på det
-			divID.style.background="#EF5350";
-		}
-		else {
-			//rätt svar blir grönt när en klickar på det
-			divID.style.background="#26A69A"
+			if (alternative !== currentQuestion.correctAnswer) {
+				console.log("YES")
+				//fel svar blir rött när en klickar på det
+				divID.style.background="#EF5350";
+			}
+			else {
+				//rätt svar blir grönt när en klickar på det
+				divID.style.background="#26A69A"
+			}
+			currentQuestion.answered = true;
 		}
 
 		//göm forward
@@ -67,11 +72,18 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 		//om rätta svaret är klickat, do nothing, 
 		//om fel svar sätt div till röd färg
 		//sätt divar till unclickable
+
+		//om svar är rätt lägg till i score + scoreboard
 	}
 	
 
 	$scope.correctAnswer = function() {
 
+		//var id = ["alt1", "alt2", "alt3", "alt4"];
+		//for (i in id) {
+		//	div = document.getElementById(id[i]);
+		//	div.style.background="#FCE4EC";
+		//}
 	}
 
 
