@@ -23,7 +23,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, Quiz) {
 
 	$scope.nextQuestionButton = function() {
 		// should be linked to the button for next question
-		console.log("YO")
+		//console.log("YO")
 		Quiz.currentQuestionID = Quiz.currentQuestionID + 1;
 		//console.log(Quiz.currentQuestionID);
 		if(Quiz.currentQuestionID === 3) {
@@ -31,6 +31,17 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, Quiz) {
 			//butt.html('');
 		}
 
+	}
+
+
+	$scope.validateAnswer = function(divObj) {
+		//console.log("YES");
+		//göm forward
+		//rätt svaret ska lysa grönt direkt
+		//om rätta svaret är klickat, do nothing, 
+		//om fel svar sätt div till röd färg
+		//sätt divar till unclickable
+		//divObj.style.background="#EF5350";
 	}
 
 
