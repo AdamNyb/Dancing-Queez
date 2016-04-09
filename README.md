@@ -18,14 +18,14 @@ Structure
   questionType: /*either 'track', 'album' or 'artist' (type string)*/,
   questionStr: /*randomly generated and asks for the right track/album/artist (type string)*/,
   correctAnswer: /*generated using questionstype and the current index's track (type string)*/,
-  wrongAnswer1: /*generated using questiontype and another index's track (type string)*/,
-  wrongAnswer2: /*same as wrongAnswer1*/,
-  wrongAnswer3: /*same as wrongAnswer1*/,
+  answerAlternatives: /* an array with all the answer alternatives in random order */,
   answered: /* boolean (true/false) if the questions has been answered or not*/,
-  chosenAnswer: /*'' until one is clicked,then between says either 'rightAnswer' or 'wrongAnswer1/2/3' (type string)*/;
+  chosenAnswer: /*'' until one is clicked,then between says either 'rightAnswer' or 'wrongAnswer1/2/3' (type string)*/,
+  lastQuestion: /* boolean (true/false). true for the last question in the list /*,
   id: /*from 1-20 (type number)*/;
 
 }
 ```
   * a question is reached from the view with ' {{question()}} '
   * a question's attributes are reached from the view with ' {{question().questionStr}} '
+  * a question's answer alternatives are reached from the view with ' {{question().answerAlternatives[0]}} '
