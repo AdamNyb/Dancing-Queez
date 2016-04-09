@@ -22,14 +22,13 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 	}
 
 	$scope.nextQuestionButton = function() {
-		// should be linked to the button for next question
-		//console.log("YO")
+		// linked to the button for next question
 		if (Quiz.questionList[Quiz.currentQuestionPosition].lastQuestion == true) {
-			//last question should rediret to score
+			//last question redirects to score
 			$location.path('score');
 		} else {
 			Quiz.currentQuestionPosition = Quiz.currentQuestionPosition + 1;
-			//console.log(Quiz.currentQuestionID);
+
 			
 		}
 		
@@ -38,7 +37,8 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 	}
 
 	$scope.updateDivColor = function() {
-		var id = ["alt1", "alt2", "alt3", "alt4"];
+		//updates answer divs with standard color before next question
+		var id = ["alt1", "alt2", "alt3", "alt4"]; //available div id's
 		for (i in id) {
 			div = document.getElementById(id[i]);
 			div.style.background="#D81B60";
@@ -46,49 +46,42 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 	}
 
 	$scope.validateAnswer = function(alt, alternative) {
-		$scope.correctAnswer();
-		$scope.hideForward=false
+		//validates answer wrong/right plus color change to clicked div
+		//sends data to scoreboard, stops user from answering more than once.
+		//$scope.correctAnswer();
+		$scope.hideForward=false //hides forward button
 		var currentQuestion = Quiz.questionList[Quiz.currentQuestionPosition];
+			var currentQuestionID = currentQuestion.id;
+		
 		if (currentQuestion.answered === false) {
 			var altID = "alt" + alt;
 			var divID = document.getElementById(altID);
-			console.log(divID);
-			console.log("question", currentQuestion.correctAnswer);
-
+			
 			if (alternative !== currentQuestion.correctAnswer) {
-				console.log("YES")
-				//fel svar blir rött när en klickar på det
+				//wrong answer turns black
 				divID.style.background="#222";
+				Quiz.scoreboard[Quiz.currentQuestionPosition].correct = 0; //update scoreboard
+
 			}
 			else {
 				Quiz.setScore(Quiz.getScore() + 1);
-				//rätt svar blir grönt när en klickar på det
+				//right answer turns greenish
 				divID.style.background="#26A69A"
+				Quiz.scoreboard[Quiz.currentQuestionPosition].correct = 1; //update scoreboard
 			}
-			currentQuestion.answered = true;
+			currentQuestion.answered = true; //to stop user to answer same question twice
+			Quiz.scoreboard[Quiz.currentQuestionPosition].userAnswer = alternative;
 		}
-
-		//göm forward
-		//rätt svar ska lysa grönt direkt (?)
-		//om rätta svaret är klickat, do nothing, 
-		//om fel svar sätt div till röd färg
-		//sätt divar till unclickable
-
-		//om svar är rätt lägg till i score + scoreboard
 	}
 	
 
 	$scope.correctAnswer = function() {
-
-		//var id = ["alt1", "alt2", "alt3", "alt4"];
-		//for (i in id) {
-		//	div = document.getElementById(id[i]);
-		//	div.style.background="#FCE4EC";
-		//}
+		//om vi vill att det rätta svaret ska bli grönt oavsett
+		//vad som klickats på
 	}
 
 	$scope.numberOfQuestions = function() {
-		console.log(Quiz.questionList.length);
+		//returns number of total questions to be asked
 		return Quiz.questionList.length;
 	}
 
