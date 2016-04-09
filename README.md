@@ -29,3 +29,14 @@ Structure
   * a question is reached from the view with ' {{question()}} '
   * a question's attributes are reached from the view with ' {{question().questionStr}} '
   * a question's answer alternatives are reached from the view with ' {{question().answerAlternatives[0]}} '
+  
+
+scoreboard
+```javascript
+{
+  correct: /* 1 if the answer was correct, 0 if the answer was incorrect*/,
+  correctAnswer: /* string of the correct answer */,
+  questionNumber: /*the id of the question */,
+  userAnswer: /* string of user's answer */ 
+}
+```
