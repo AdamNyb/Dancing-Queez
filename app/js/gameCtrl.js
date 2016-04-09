@@ -35,6 +35,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, Quiz) {
 
 	$scope.validateAnswer = function(divObj) {
 		console.log("YES");
+		
 		//göm forward
 		//rätt svaret ska lysa grönt direkt
 		//om rätta svaret är klickat, do nothing, 
