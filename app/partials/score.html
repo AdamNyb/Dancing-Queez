@@ -21,27 +21,38 @@
   
 <body>
 <div class="container-fluid wrapper game-container">
-  <div class="row header">
-    <h4>DANCING QUEEZ</h4>
-  </div>
-  <div class="col-md-12" align="center">
-    <div class="mini-header">
-      Playlist: {{playlistName()}}
-    </div>
-    <div class="icon-container row">
-      <div class="question-icon">
-        <img src="../images/pink_headphone.png"/>
+          <div class="row header">
+            <h4>DANCING QUEEZ</h4>
+        </div>
+        <div class="col-md-12" align="center">
+        <div class="mini-header">
+        Playlist: {{playlistName()}}
       </div>
-    </div>
-    <div class="mini-header">Your score was: {{getScore()}}</div>
-  </div>
-  <div id="results" ng-model="results">
-  </div>
-  <script src="http://d3js.org/d3.v3.min.js"></script>
+      <div class="icon-container row">
+        <div class="question-icon">
+          <img src="../images/pink_headphone.png"/>
+        </div>
+      </div>
+      <div class="mini-header">Your score was: {{getScore()}}</div>
+      </div>
+      <div id="results" ng-model="results">
+      </div>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script>
+            
+         
 
-</div>
-<a ng-href="/#/game" type="button" ng-click="resetScore()" class="btn goAgainButton">Try Again!</a>
-<a ng-href="/#/home" type="button" ng-click="resetGame()" class="btn goAgainButton">New Game!</a>
+  </script>
+
+       
+
+          <script>
+ 
+          
+          </script>
+        </svg>
+      </div>
+<a ng-href="/#/home" type="button" ng-click="reset()" class="btn goAgainButton">Play Again!</a>
 
 
       

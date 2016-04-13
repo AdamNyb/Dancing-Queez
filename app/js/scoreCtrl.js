@@ -16,12 +16,9 @@ quizApp.controller('ScoreCtrl', function ($scope, Quiz) {
 		}
 	};
 
-	$scope.resetGame = function(){
+	$scope.reset = function(){
 		Quiz.resetGame();
-	}
 
-	$scope.resetScore = function(){
-		Quiz.resetScore();
 	}
 
 

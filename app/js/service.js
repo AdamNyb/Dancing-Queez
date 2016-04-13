@@ -18,13 +18,15 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
             method:"GET",
             isArray:false,
             headers:{
-            	    Authorization: "Bearer BQBhEfhmH7SV--w7R3-aANyx5QZ_7IiHrXMcZ-xGjtcYF_95qUBKPHh91E_bUnOErIA8naaYAhxk_t-jK3a6QmiVU94vLY2FnrVznhMgMYBqADjxeMMpSItCEXw79_Azh5RGsW4SntlgznRTgpLI_4fFisvsKpBRzuF8D_z2xkw20kRQ3Ac"
+			
+			Authorization: "Bearer BQAW69HlERGQEIGBuIC9qapOre3HAq7uZt0EgpKyk_xQ8dw9CP8mzH0QF2ZtMKEi35FE9QuSsf1rnAHPsVZ1PH1Poay8eQFHllfBgUcrLHXlWhKg4NMtQrsOWcklU_6WZAbagbn1ohVDM44PIHPiSPNVx3oR0w4Mpyhnfg"
+
+
             } 
         },
     });
 
     this.resetGame = function() {
-    	// resets score and playlist
     	this.score = 0;
     	this.scoreboard = [];
     	this.playlist = undefined;
@@ -53,14 +55,17 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
     	}
     }
 
+
 	this.savePlaylist = function (playlist_object){
 		console.log("playlist object", playlist_object);
 		console.log("playlist tracks", playlist_object.tracks);
+		//console.log("Playlistobject1",playlist_object.tracks.items);
 		playlist_object.tracks.items = this.randomizeSongs(playlist_object.tracks.items);
+		//console.log("Playlistobject2",playlist_object.tracks.items);
 		this.playlist = [];
 		this.playlist = playlist_object;
 		return this.playlist;
-	};
+	}
 
 	this.randomizeSongs = function(tracks){
 		//om fler än 20 låtar --> randomize vilka som används
@@ -88,6 +93,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 		return randomizedTracks;
 	};
 
+
 	//fallback if the given playlist has a lot of artists/albums with the same name
 	this.artistList = [];
 	this.albumList = [];
@@ -95,7 +101,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 	this.isInArray = function(value, array) {
 		//checks if value is in array
 		return array.indexOf(value) > -1;
-	};
+	}
 
 	this.createArtistList = function(tracks) {
 		for (var i = 0; i < tracks.length; i++){
@@ -131,7 +137,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 		//console.log("HEJ tracks",tracks);
 
 		// these should probably not be here...
-		//console.log(tracks);
+		//console.log("TRACKS",tracks);
 		if (this.questionList.length == 0) {
 			this.createArtistList(tracks);
 			this.createAlbumList(tracks);
@@ -209,10 +215,6 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 		//return this.questionList;
 	};
 
-	this.randomizeSongs = function(){
-		//om fler än 20 låtar --> randomize vilka som används
-	};
-
 	this.shuffleArray = function(array) {
 		var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -235,7 +237,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 	this.randomAnswer = function(tracks, maxQ, type, correctAnswer, wrongAnswer1, wrongAnswer2) {
 		//generates a random track name from the playlist
 		// not the same name as the current track
-		var max = maxQ;
+		var max = maxQ-1;
 		var min = 0;
 		var num;
 		var randomAnswer;
@@ -252,7 +254,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 				randomAnswer = this.albumList[num];
 			}
 			// if the random answer is not the same as the other answers, stop the loop
-			if (randomAnswer != correctAnswer && randomAnswer != wrongAnswer1 && randomAnswer != wrongAnswer2) {
+			if (randomAnswer != correctAnswer && randomAnswer != wrongAnswer1 && randomAnswer != wrongAnswer2 && randomAnswer != undefined) {
 				continueLoop = false;
 			}
 		} 
@@ -332,14 +334,13 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 		var audioElement = document.getElementById('currentSong');
 		audioElement.pause();
 		this.paused = true;
-	};
+	}
 
 	this.playAnswer = function(answer){ //answer är antingen 'correctAnswer', 'wrongAnswer1', 'wrongAnswer2' eller 'wrongAnswer3'
 		var answerAudio = function(answer){
 			if (answer == 'correctAnswer'){
 				return new Audio(insertljudfilhere).play();
-			}
-			else {
+			} else {
 				return new Audio(insertFelLjudFilHere).play();
 			};
 		};

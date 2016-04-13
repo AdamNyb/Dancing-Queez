@@ -2,6 +2,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 
 	
 	$scope.hideForward=true
+	$scope.hideVolumeOff=true
 	$scope.playlistName = function(){ //playlistens namn
 		if(Quiz.playlist){
 			return Quiz.playlist.name;
@@ -18,7 +19,6 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		// is called by view, creates all questions (only the first time)
 		// and returns the current question
 		$scope.createQuestions();
-		//$scope.playSong(Quiz.questionList[Quiz.currentQuestionPosition]);
 		return Quiz.questionList[Quiz.currentQuestionPosition];
 	}
 
@@ -150,4 +150,10 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		    .attr("d", "M272,48h-32v304.594C223,342.375,200.688,336,176,336c-53,0-96,28.625-96,64s43,64,96,64s96-28.625,96-64V144c80-13,128,80,160,128C412,48,272,48,272,48z")
 	}
 
+
+
+	
+
+	
+		
 });
