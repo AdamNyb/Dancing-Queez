@@ -19,7 +19,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
             isArray:false,
             headers:{
 			
-			Authorization: "Bearer BQAW69HlERGQEIGBuIC9qapOre3HAq7uZt0EgpKyk_xQ8dw9CP8mzH0QF2ZtMKEi35FE9QuSsf1rnAHPsVZ1PH1Poay8eQFHllfBgUcrLHXlWhKg4NMtQrsOWcklU_6WZAbagbn1ohVDM44PIHPiSPNVx3oR0w4Mpyhnfg"
+			Authorization: "Bearer BQAwJ-rwzAGTeEeEVeoVx6aq7oIQVZjoqruk2LOUNp7q54uPXQKv3kg4_8Bg6-u7e4gaNot8DgSCyNB4fc8tZSFAPdHsVH9fU7WTYX-R5bv_XXBDmudQfm7tUjpGH_q4d9gPYneS0okKNbyEjR3UrL5rma_987rAv6pBvA"
 
 
             } 
@@ -57,35 +57,51 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 
 
 	this.savePlaylist = function (playlist_object){
-		console.log("playlist object", playlist_object);
-		console.log("playlist tracks", playlist_object.tracks);
+		//console.log("playlist object", playlist_object);
+		//console.log("playlist tracks", playlist_object.tracks);
 		//console.log("Playlistobject1",playlist_object.tracks.items);
+		playlist_object.tracks.items = this.removeSongsWithoutPreviewUrl(playlist_object.tracks.items);
 		playlist_object.tracks.items = this.randomizeSongs(playlist_object.tracks.items);
-		//console.log("Playlistobject2",playlist_object.tracks.items);
 		this.playlist = [];
 		this.playlist = playlist_object;
 		return this.playlist;
 	}
 
+	this.removeSongsWithoutPreviewUrl = function(tracks) {
+		//console.log("lets remove songs without preview url", tracks);
+		var usableSongs = [];
+		for (var i = 0; i < tracks.length; i ++) {
+			if (tracks[i].track.preview_url != null) {
+				usableSongs.push(tracks[i]);
+			}
+		}
+		//console.log("return these songs", usableSongs);
+		//console.log("number of songs",usableSongs.length);
+		return usableSongs
+	}
+
 	this.randomizeSongs = function(tracks){
 		//om fler än 20 låtar --> randomize vilka som används
+		//console.log("let's randomize songs!");
 		var randomizedTracks = [];
-		var tracksLen = tracks.length -1;
+		var tracksLen = tracks.length;
 		var usedNums = [];
 		var maxQ;
-		//String(currentTrack.preview_url)
+
 		if (tracksLen > 20 || tracksLen == 20) {
 			maxQ = 20;
 		} else if (tracksLen < 20) {
 			maxQ = tracksLen;
 		}
 
-		while (randomizedTracks.length < tracksLen){
-			num = this.randomizeNumber(0,tracksLen);
+		while (randomizedTracks.length < maxQ){
+			num = this.randomizeNumber(1,maxQ) - 1; // -1 because index starts with 0
 			//console.log(num);
-			//console.log(tracks[num]);
+			//console.log(tracks[num].track.preview_url);
 
 			if (this.isInArray(num, usedNums) == false) {
+				usedNums.push(num);
+				//console.log(tracks[num].track.name," has not been chosen, let's put it in our list");
 				randomizedTracks.push(tracks[num]);
 			}
 		}
@@ -100,6 +116,9 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 
 	this.isInArray = function(value, array) {
 		//checks if value is in array
+		//console.log("Is ",value," in our arrray?");
+		//console.log("this is our array", array);
+		//console.log("ANSWER",array.indexOf(value) > -1);
 		return array.indexOf(value) > -1;
 	}
 
