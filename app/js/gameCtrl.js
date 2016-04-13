@@ -82,27 +82,33 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 	}
 
 	$scope.currentSong = function(){
+		// this is the current song that should be playing
 		if (Quiz.firstPlay == false && Quiz.questionList.length > 0){
 
 			return $sce.trustAsResourceUrl(Quiz.questionList[Quiz.currentQuestionPosition].previewUrl);
 		}
+		// end
 	}
 
 	$scope.playSong = function(){
+		// plays the song
 		if (Quiz.firstPlay == false && Quiz.questionList.length > 0){ //förhindrar Angulars digest loop från att spela upp låten 1000ggr samtidigt
 			//firstPlay är att låten spelades när man startar frågan
 
 			Quiz.playSong();
 		};
+		// end
 	};
 
 	$scope.pauseSong = function(){
+		// pauses the sound
 		if(Quiz.paused == false){ 
 			Quiz.pauseSong();
 		}
 		else if (Quiz.paused == true){
 			Quiz.playSong();
 		};
+		//end
 	};
 
 	$scope.numberOfQuestions = function() {

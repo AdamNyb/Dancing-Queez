@@ -32,13 +32,16 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
     	this.currentQuestionPosition = 0;
     	this.artistList = [];
 		this.albumList = [];
+		this.firstPlay = false;
+		this.paused = false;
     };
 
     this.resetScore = function() {
     	// resets the score
     	this.score = 0;
-    	//this.scoreboard = [];
     	this.currentQuestionPosition = 0;
+    	this.firstPlay = false;
+    	this.paused = false;
     	for (var i = 0; i < this.questionList.length; i++) {
     		this.questionList[i].answered = false;
     	}
@@ -51,6 +54,9 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
     }
 
 	this.savePlaylist = function (playlist_object){
+		console.log("playlist object", playlist_object);
+		console.log("playlist tracks", playlist_object.tracks);
+		playlist_object.tracks.items = this.randomizeSongs(playlist_object.tracks.items);
 		this.playlist = [];
 		this.playlist = playlist_object;
 		return this.playlist;
@@ -62,6 +68,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 		var tracksLen = tracks.length -1;
 		var usedNums = [];
 		var maxQ;
+		//String(currentTrack.preview_url)
 		if (tracksLen > 20 || tracksLen == 20) {
 			maxQ = 20;
 		} else if (tracksLen < 20) {
