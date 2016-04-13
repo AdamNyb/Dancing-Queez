@@ -1,7 +1,9 @@
 quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, $sce) {
 
-	
+	$scope.scoreboard = Quiz.scoreboard;
+	//console.log("SCOOOOORE", $scope.scoreboard);
 	$scope.hideForward=true
+
 	$scope.hideVolumeOff=true
 	$scope.playlistName = function(){ //playlistens namn
 		if(Quiz.playlist){
@@ -101,11 +103,16 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 	};
 
 	$scope.pauseSong = function(){
+		console.log('pause')
 		// pauses the sound
 		if(Quiz.paused == false){ 
+			$scope.hideVolumeUp=true
+			$scope.hideVolumeOff=false
 			Quiz.pauseSong();
 		}
 		else if (Quiz.paused == true){
+			$scope.hideVolumeUp=false
+			$scope.hideVolumeOff=true
 			Quiz.playSong();
 		};
 		//end
@@ -117,40 +124,59 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 	}
 
 	// NOTES
-	$scope.getNotes = function() {
+
 		var width="330px";
 		var height = "83px";
 
-		var noteWidth = "30px";
-		var noteHeight = "30px";
+		//var noteWidth = "30px";
+		//var noteHeight = "30px";
 
-		var data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+		var data = [{correct:1, questionID:1, correctAnswer: "Test", userAnswer: "Hej"}];
+		//$scope.scoreboard;
+		//console.log("DATA;", data);
 		//[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
 
-		var svg = d3.select("#here").append("svg")
-    		.attr("width", width)
-    		.attr("height", height)
-    		.attr("class", "note");
-
-    		data[0]
-
+		var svg = d3.select("#note").append("svg")
+			.attr("width", width)
+			.attr("height", height)
+			.attr("class", "note");
 
 		var note = svg.selectAll(".note")
-		      	.data(data)
+		      	.data(Quiz.scoreboard)
 		    .enter().append("svg")
-		    	.attr("width", noteWidth)
-    			.attr("height", noteHeight)
+		    	.attr("width", "30px")
+				.attr("height", "30px")
 		      	.attr("class", "note")
-		      	.attr("x", function(d,i) { return  i*30; }) 
+		      	.attr("x", function(d,i) { return  i*20; }) 
 		      	.attr("y", function(d,i) { return  i*2; })
 		      	.attr("viewBox", "0 0 512 512")
-		      	.attr("enable-background", "new 0 0 512 512");
+		      	//.attr("enable-background", "new 0 0 512 512")
 
-		note.append("path")
+		.attr("fill", function(d) {
+			  if (d.correct == 0) {
+				return "#F44336" // incorrect => red
+			} else {
+				return "#8BC34A"
+			}
+		})
+
+		  .append("path")
 		    .attr("d", "M272,48h-32v304.594C223,342.375,200.688,336,176,336c-53,0-96,28.625-96,64s43,64,96,64s96-28.625,96-64V144c80-13,128,80,160,128C412,48,272,48,272,48z")
-	}
 
+	$scope.changeVolumeUp = function(){
 
+			
+			$scope.hideVolumeUp=true
+			$scope.hideVolumeOff=false
+		}
+
+	
+
+	$scope.changeVolumeOff = function(){
+			console.log('a')
+			$scope.hideVolumeUp=false
+			$scope.hideVolumeOff=true
+		};
 
 	
 
