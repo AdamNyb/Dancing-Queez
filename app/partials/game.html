@@ -29,14 +29,10 @@
 					<div class="row column-left">
 						<div class="glyphicon glyphicon-volume-up" ng-hide="hideVolumeUp" id="audio" ng-click="pauseSong()">
 							<audio id="currentSong" data-ng-src="{{currentSong()}}" >
-								{{playSong()}}
+								{{playSong()}}<!--kör låten när ny fråga startar-->
 							</audio>
 						</div>
-						<div class="glyphicon glyphicon-volume-off" ng-hide="hideVolumeOff" id="audio" ng-click="pauseSong()">
-							<audio id="currentSong" data-ng-src="{{currentSong()}}" >
-								{{playSong()}}
-							</audio>
-						</div>
+						<div class="glyphicon glyphicon-volume-off" ng-hide="hideVolumeOff" ng-click="pauseSong()"></div>
 					</div>
 
 				</div>
