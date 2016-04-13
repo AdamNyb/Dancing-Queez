@@ -251,13 +251,14 @@ quizApp.factory('Quiz', function ($resource){
 		}
 	}
 
-	this.playSong = function(url){
-		this.songAudio = new Audio(url).play();
-		this.playing = true; 
+	this.playSong = function(currentSong){
+		currentSong.play();// = new Audio(url).play();
+		this.playing = true;
+		console.log()
 	}
 
-	this.pauseSong = function(){
-		this.songAudio = Audio().pause();
+	this.pauseSong = function(currentSong){
+		songAudio.pause();
 	};
 
 	this.playAnswer = function(answer){ //answer är antingen 'correctAnswer', 'wrongAnswer1', 'wrongAnswer2' eller 'wrongAnswer3'

@@ -18,13 +18,13 @@ quizApp.controller('GameCtrl', function ($scope, Quiz) {
 		if (Quiz.playlist){
 			$scope.createQuestions();
 			var question = Quiz.questionList[Quiz.currentQuestionID];
-			$scope.playSong(question);
 		return question;};
 	}
 
 	$scope.nextQuestionButton = function() {
 		// should be linked to the button for next question
 		console.log("YO")
+		$scope.pauseSong();
 		Quiz.currentQuestionID = Quiz.currentQuestionID + 1;
 		//console.log(Quiz.currentQuestionID);
 		if(Quiz.currentQuestionID === 20) {
@@ -33,22 +33,25 @@ quizApp.controller('GameCtrl', function ($scope, Quiz) {
 
 	}
 
-<<<<<<< HEAD
-	$scope.playSong = function(ques){
+	$scope.currentSong = function(ques){
+		if (Quiz.playlist){
+			$scope.song = document.getElementById("currentSong");
+			$scope.playSong();
+			return ques.previewUrl;
+		}
+	}
+
+	$scope.playSong = function(){
 		if (Quiz.playing == false){ //förhindrar Angulars digest loop från att spela upp låten 1000ggr samtidigt
-			Quiz.playSong(ques.previewUrl);
+			Quiz.playSong($scope.song);
 		};
 	};
 
-	$scope.pauseSong = function(ques){
-		Quiz.pauseSong();
+	$scope.pauseSong = function(){
+		Quiz.pauseSong($scope.song);
 		Quiz.playing = false;
 
 	} ;
 
-	
-=======
-
->>>>>>> refs/remotes/origin/master
 
 });
