@@ -41,7 +41,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 		var id = ["alt1", "alt2", "alt3", "alt4"]; //available div id's
 		for (i in id) {
 			div = document.getElementById(id[i]);
-			div.style.background="#D81B60";
+			div.style.background="#00BCD4";
 		}
 	}
 
@@ -59,7 +59,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 			
 			if (alternative !== currentQuestion.correctAnswer) {
 				//wrong answer turns black
-				divID.style.background="#222";
+				divID.style.background="#F44336";
 				Quiz.scoreboard[Quiz.currentQuestionPosition].correct = 0; //update scoreboard
 
 			}
