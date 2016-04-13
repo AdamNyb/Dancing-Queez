@@ -66,7 +66,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 			else {
 				Quiz.setScore(Quiz.getScore() + 1);
 				//right answer turns greenish
-				divID.style.background="#26A69A"
+				divID.style.background="#8BC34A" /*#26A69A*/
 				Quiz.scoreboard[Quiz.currentQuestionPosition].correct = 1; //update scoreboard
 			}
 			currentQuestion.answered = true; //to stop user to answer same question twice
