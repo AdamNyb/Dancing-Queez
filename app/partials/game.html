@@ -25,12 +25,13 @@
 					Playlist: {{playlistName()}}
 					
 				</div>
-				<audio id="currentSong">
-					<source ng-src="currentSong(question())" type="audio/mp3">
-				</audio>
 				<div class="row">
 					<div class="column column-left">
-						<div class="glyphicon glyphicon-volume-up"></div>
+						<div class="glyphicon glyphicon-volume-up" id="audio" ng-click="pauseSong">
+							<audio id="currentSong" data-ng-src="{{currentSong()}}">
+								{{playSong()}}
+							</audio>
+						</div>
 					</div>
 					<div class="column column-right">
 						<button ng-hide="hideForward" ng-click="nextQuestionButton()" class="glyphicon glyphicon-chevron-right" id="forwardButt"></button>

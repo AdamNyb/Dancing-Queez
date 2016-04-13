@@ -1,4 +1,4 @@
-quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) {
+quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, $sce) {
 
 	
 	$scope.hideForward=true
@@ -17,23 +17,8 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 	$scope.question = function() {
 		// is called by view, creates all questions (only the first time)
 		// and returns the current question
-<<<<<<< HEAD
-		if (Quiz.playlist){
-			$scope.createQuestions();
-			var question = Quiz.questionList[Quiz.currentQuestionID];
-		return question;};
-	}
-
-	$scope.nextQuestionButton = function() {
-		// should be linked to the button for next question
-		console.log("YO")
-		$scope.pauseSong();
-		Quiz.currentQuestionID = Quiz.currentQuestionID + 1;
-		//console.log(Quiz.currentQuestionID);
-		if(Quiz.currentQuestionID === 20) {
-			//Open score page
-=======
 		$scope.createQuestions();
+		//$scope.playSong(Quiz.questionList[Quiz.currentQuestionPosition]);
 		return Quiz.questionList[Quiz.currentQuestionPosition];
 	}
 
@@ -87,7 +72,6 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 			}
 			currentQuestion.answered = true; //to stop user to answer same question twice
 			Quiz.scoreboard[Quiz.currentQuestionPosition].userAnswer = alternative;
->>>>>>> refs/remotes/origin/master
 		}
 	}
 	
@@ -97,34 +81,32 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 		//vad som klickats på
 	}
 
-<<<<<<< HEAD
-	$scope.currentSong = function(ques){
-		if (Quiz.playlist){
-			$scope.song = document.getElementById("currentSong");
-			$scope.playSong();
-			return ques.previewUrl;
+	$scope.currentSong = function(){
+		if (Quiz.playing == false && Quiz.questionList.length > 0){
+			//$scope.song = document.getElementById("currentSong");
+			//$scope.playSong();
+			//return $sce.trustAsResourceUrl('your url')
+			return $sce.trustAsResourceUrl(Quiz.questionList[Quiz.currentQuestionPosition].previewUrl);
 		}
 	}
 
 	$scope.playSong = function(){
-		if (Quiz.playing == false){ //förhindrar Angulars digest loop från att spela upp låten 1000ggr samtidigt
-			Quiz.playSong($scope.song);
+		if (Quiz.playing == false && Quiz.questionList.length > 0){ //förhindrar Angulars digest loop från att spela upp låten 1000ggr samtidigt
+			//var previewUrl = $scope.currentSong();	
+			Quiz.playSong();
 		};
 	};
 
 	$scope.pauseSong = function(){
-		Quiz.pauseSong($scope.song);
-		Quiz.playing = false;
+		console.log('KEEP IT DOWN!')
+		Quiz.pauseSong();
+	};
 
-	} ;
-=======
 	$scope.numberOfQuestions = function() {
 		//returns number of total questions to be asked
 		return Quiz.questionList.length;
 	}
 
-
->>>>>>> refs/remotes/origin/master
 
 
 });

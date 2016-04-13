@@ -1,15 +1,11 @@
-quizApp.factory('Quiz', function ($resource){
+quizApp.factory('Quiz', function ($resource, $document, $sce){
 
 	this.score = 0;
 	this.scoreboard = []; // on the form {correct: 0, questionNumber: i+1}, used by score.html to display answers
 	this.playlist;
 	this.questionList = [];
-<<<<<<< HEAD
-	this.currentQuestionID = 0;
 	this.playing = false;
-=======
 	this.currentQuestionPosition = 0;
->>>>>>> refs/remotes/origin/master
 
 	var client_id = 'a280b16e9b4446928ed426a402c6f67a';
 	var client_secret = '13d55b7e7b5545dbbeec042aff0c2907';
@@ -21,14 +17,7 @@ quizApp.factory('Quiz', function ($resource){
             method:"GET",
             isArray:false,
             headers:{
-<<<<<<< HEAD
-            	        Authorization: "Bearer BQDbbFoHETgjZ4ONmK22YVjTCQWr2MK9KCH4-hufN1Fdj261rs3Zk48GzAiV4UJZRywHqIE6TRHqcY6feN_WwHLJO-mhBMVqiFMC8xGlbjaOwzX4HfyBucE-znnqKxUQumifc4httkTVrYSxQpaiPrqWy3dTI91MMEo2PaI7el9iMxwcGZI"
-=======
-			
-			Authorization: "Bearer BQC9aNfZbw5aymbz4obIZaqAltecpMamA5AzLkieOXmVrwbuJ0EYRNPVYzw2nHigjBS39VZ0EKQApkIdXO69eScsB9EgQssgjh6Q68rrQmqMi15yUC1KNVNTw6fdjXqJ0JIzkvC8jPtg06wUwKZeMYmILWddAdEYZNumug"
-
->>>>>>> refs/remotes/origin/master
-
+            	    Authorization: "Bearer BQD4YrQzxGSe-fE2YtfTJhx-9tsq-MhBNZJ_f2GFTmywTnv7jv9bNeVTJ-dbtFPt8NKA4unMdMxeChX5Ek2GWR5BCAgEOiH_Rm9AB8FdvBLRp8BEzUVId5pm1Sbnu0rJtpriboFLC814EuMNI9cyu1YbvNoIIv4iPjSVec4LbQ29pA2UaLc"
             } 
         },
     });
@@ -41,16 +30,14 @@ quizApp.factory('Quiz', function ($resource){
     	this.currentQuestionPosition = 0;
     	this.artistList = [];
 		this.albumList = [];
-    }
+    };
 
 	this.savePlaylist = function (playlist_object){
 		this.playlist = [];
 		this.playlist = playlist_object;
 		return this.playlist;
-	}
+	};
 
-<<<<<<< HEAD
-=======
 	this.randomizeSongs = function(tracks){
 		//om fler än 20 låtar --> randomize vilka som används
 		var randomizedTracks = [];
@@ -76,8 +63,6 @@ quizApp.factory('Quiz', function ($resource){
 		return randomizedTracks;
 	};
 
-
->>>>>>> refs/remotes/origin/master
 	//fallback if the given playlist has a lot of artists/albums with the same name
 	this.artistList = [];
 	this.albumList = [];
@@ -85,7 +70,7 @@ quizApp.factory('Quiz', function ($resource){
 	this.isInArray = function(value, array) {
 		//checks if value is in array
 		return array.indexOf(value) > -1;
-	}
+	};
 
 	this.createArtistList = function(tracks) {
 		for (var i = 0; i < tracks.length; i++){
@@ -150,12 +135,8 @@ quizApp.factory('Quiz', function ($resource){
 					chosenAnswer: null,
 					questionType: null,
 					previewUrl: null,
-<<<<<<< HEAD
-					id: i
-=======
 					lastQuestion: false,
 					id: i+1
->>>>>>> refs/remotes/origin/master
 				};
 				//randomize a number between 0 and 2
 				var max = 2;
@@ -177,13 +158,7 @@ quizApp.factory('Quiz', function ($resource){
 				}
 				// generates wrongs answers + question
 				question.questionStr = questionDB[num];
-<<<<<<< HEAD
 				question.previewUrl = String(currentTrack.preview_url);
-				question.wrongAnswer1 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer);
-				question.wrongAnswer2 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, question.wrongAnswer1);
-				question.wrongAnswer3 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, question.wrongAnswer1, question.wrongAnswer2);
-=======
-				question.previewUrl = String(currentTrack.url);
 				var wrongAnswer1 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer);
 				var wrongAnswer2 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, wrongAnswer1);
 				var wrongAnswer3 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, wrongAnswer1, wrongAnswer2);
@@ -200,7 +175,6 @@ quizApp.factory('Quiz', function ($resource){
 					question.lastQuestion = true;
 				}
 				this.scoreboard.push({correct: 0, questionID: i+1,correctAnswer: question.correctAnswer, userAnswer: null})
->>>>>>> refs/remotes/origin/master
 
 				// pushes the question into the questions list
 				this.questionList.push(question);
@@ -320,14 +294,16 @@ quizApp.factory('Quiz', function ($resource){
 		}
 	}
 
-	this.playSong = function(currentSong){
-		currentSong.play();// = new Audio(url).play();
+	this.playSong = function(){
+		var audioElement = document.getElementById('currentSong');
+		audioElement.play();
 		this.playing = true;
-		console.log()
-	}
+	};
 
 	this.pauseSong = function(currentSong){
-		songAudio.pause();
+		var audioElement = document.getElementById('currentSong');
+		console.log(audioElement);
+		//audioElement.pause();
 	};
 
 	this.playAnswer = function(answer){ //answer är antingen 'correctAnswer', 'wrongAnswer1', 'wrongAnswer2' eller 'wrongAnswer3'
