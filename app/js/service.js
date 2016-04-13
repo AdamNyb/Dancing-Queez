@@ -4,7 +4,8 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 	this.scoreboard = []; // on the form {correct: 0, questionNumber: i+1}, used by score.html to display answers
 	this.playlist;
 	this.questionList = [];
-	this.playing = false;
+	this.firstPlay = false;
+	this.paused = false;
 	this.currentQuestionPosition = 0;
 
 	var client_id = 'a280b16e9b4446928ed426a402c6f67a';
@@ -17,14 +18,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
             method:"GET",
             isArray:false,
             headers:{
-<<<<<<< HEAD
-            	    Authorization: "Bearer BQD4YrQzxGSe-fE2YtfTJhx-9tsq-MhBNZJ_f2GFTmywTnv7jv9bNeVTJ-dbtFPt8NKA4unMdMxeChX5Ek2GWR5BCAgEOiH_Rm9AB8FdvBLRp8BEzUVId5pm1Sbnu0rJtpriboFLC814EuMNI9cyu1YbvNoIIv4iPjSVec4LbQ29pA2UaLc"
-=======
-			
-			Authorization: "Bearer BQBQXrzQDTgp8Gym1BpMjr4pVLEprbZdvKQrcewVbJEijdMfirW2F11UT03MHkLGVVjgCwOJsXvBmsbaVvQhBqnJyMz5w6pPlqwkguH5lklPbEUVYr3MOdVFKDivT4_rCv35-8Gz0gGoNiVdsljznJPfczBI6FWuayE23Pfwcp-Wob9NhA"
-
-
->>>>>>> refs/remotes/origin/master
+            	    Authorization: "Bearer BQBhEfhmH7SV--w7R3-aANyx5QZ_7IiHrXMcZ-xGjtcYF_95qUBKPHh91E_bUnOErIA8naaYAhxk_t-jK3a6QmiVU94vLY2FnrVznhMgMYBqADjxeMMpSItCEXw79_Azh5RGsW4SntlgznRTgpLI_4fFisvsKpBRzuF8D_z2xkw20kRQ3Ac"
             } 
         },
     });
@@ -302,15 +296,18 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 	}
 
 	this.playSong = function(){
+		console.log('PLAYING');
 		var audioElement = document.getElementById('currentSong');
 		audioElement.play();
-		this.playing = true;
+		this.firstPlay = true;
+		this.paused = false;
 	};
 
 	this.pauseSong = function(currentSong){
+		console.log('PAUSING');
 		var audioElement = document.getElementById('currentSong');
-		console.log(audioElement);
-		//audioElement.pause();
+		audioElement.pause();
+		this.paused = true;
 	};
 
 	this.playAnswer = function(answer){ //answer är antingen 'correctAnswer', 'wrongAnswer1', 'wrongAnswer2' eller 'wrongAnswer3'

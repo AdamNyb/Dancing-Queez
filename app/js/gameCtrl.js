@@ -32,7 +32,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 
 			
 		}
-		
+		Quiz.firstPlay = false;
 		$scope.updateDivColor();
 		$scope.hideForward=true
 	}
@@ -82,24 +82,27 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 	}
 
 	$scope.currentSong = function(){
-		if (Quiz.playing == false && Quiz.questionList.length > 0){
-			//$scope.song = document.getElementById("currentSong");
-			//$scope.playSong();
-			//return $sce.trustAsResourceUrl('your url')
+		if (Quiz.firstPlay == false && Quiz.questionList.length > 0){
+
 			return $sce.trustAsResourceUrl(Quiz.questionList[Quiz.currentQuestionPosition].previewUrl);
 		}
 	}
 
 	$scope.playSong = function(){
-		if (Quiz.playing == false && Quiz.questionList.length > 0){ //förhindrar Angulars digest loop från att spela upp låten 1000ggr samtidigt
-			//var previewUrl = $scope.currentSong();	
+		if (Quiz.firstPlay == false && Quiz.questionList.length > 0){ //förhindrar Angulars digest loop från att spela upp låten 1000ggr samtidigt
+			//firstPlay är att låten spelades när man startar frågan
+
 			Quiz.playSong();
 		};
 	};
 
 	$scope.pauseSong = function(){
-		console.log('KEEP IT DOWN!')
-		Quiz.pauseSong();
+		if(Quiz.paused == false){ 
+			Quiz.pauseSong();
+		}
+		else if (Quiz.paused == true){
+			Quiz.playSong();
+		};
 	};
 
 	$scope.numberOfQuestions = function() {
