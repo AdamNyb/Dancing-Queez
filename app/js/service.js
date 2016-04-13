@@ -25,13 +25,30 @@ quizApp.factory('Quiz', function ($resource){
     });
 
     this.resetGame = function() {
+    	// resets score and playlist
     	this.score = 0;
     	this.scoreboard = [];
-    	this.playlist;
+    	this.playlist = undefined;
     	this.questionList = [];
     	this.currentQuestionPosition = 0;
     	this.artistList = [];
 		this.albumList = [];
+    }
+
+    this.resetScore = function() {
+    	// resets the score
+    	this.score = 0;
+    	//this.scoreboard = [];
+    	this.currentQuestionPosition = 0;
+    	for (var i = 0; i < this.questionList.length; i++) {
+    		this.questionList[i].answered = false;
+    	}
+    	for (var j = 0; j < this.scoreboard.length; j++) {
+    		//this.questionList[j].answered = false;
+    		//this.scoreboard.push({correct: 0, questionID: i+1,correctAnswer: question.correctAnswer, userAnswer: null, questionStr: question.questionStr})
+    		this.scoreboard[j].correct = 0;
+    		this.scoreboard[j].userAnswer = null
+    	}
     }
 
 	this.savePlaylist = function (playlist_object){
