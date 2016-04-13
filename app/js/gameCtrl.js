@@ -2,6 +2,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 
 	
 	$scope.hideForward=true
+	$scope.hideVolumeOff=true
 	$scope.playlistName = function(){ //playlistens namn
 		if(Quiz.playlist){
 			return Quiz.playlist.name;
@@ -120,4 +121,23 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 	}
 
 
+	$scope.changeVolumeUp = function(){
+
+		
+			$scope.hideVolumeUp=true
+			$scope.hideVolumeOff=false
+		}
+
+	
+
+	$scope.changeVolumeOff = function(){
+		
+			$scope.hideVolumeUp=false
+			$scope.hideVolumeOff=true
+		};
+
+	
+
+	
+		
 });
