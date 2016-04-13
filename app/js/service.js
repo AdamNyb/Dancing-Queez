@@ -27,7 +27,7 @@ quizApp.factory('Quiz', function ($resource){
     this.resetGame = function() {
     	this.score = 0;
     	this.scoreboard = [];
-    	this.playlist = [];
+    	this.playlist;
     	this.questionList = [];
     	this.currentQuestionPosition = 0;
     	this.artistList = [];
