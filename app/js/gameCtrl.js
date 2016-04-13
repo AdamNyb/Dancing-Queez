@@ -1,4 +1,4 @@
-quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) {
+quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, $sce) {
 
 	
 	$scope.hideForward=true
@@ -18,6 +18,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 		// is called by view, creates all questions (only the first time)
 		// and returns the current question
 		$scope.createQuestions();
+		//$scope.playSong(Quiz.questionList[Quiz.currentQuestionPosition]);
 		return Quiz.questionList[Quiz.currentQuestionPosition];
 	}
 
@@ -31,7 +32,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 
 			
 		}
-		
+		Quiz.firstPlay = false;
 		$scope.updateDivColor();
 		$scope.hideForward=true
 	}
@@ -80,6 +81,30 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 		//vad som klickats på
 	}
 
+	$scope.currentSong = function(){
+		if (Quiz.firstPlay == false && Quiz.questionList.length > 0){
+
+			return $sce.trustAsResourceUrl(Quiz.questionList[Quiz.currentQuestionPosition].previewUrl);
+		}
+	}
+
+	$scope.playSong = function(){
+		if (Quiz.firstPlay == false && Quiz.questionList.length > 0){ //förhindrar Angulars digest loop från att spela upp låten 1000ggr samtidigt
+			//firstPlay är att låten spelades när man startar frågan
+
+			Quiz.playSong();
+		};
+	};
+
+	$scope.pauseSong = function(){
+		if(Quiz.paused == false){ 
+			Quiz.pauseSong();
+		}
+		else if (Quiz.paused == true){
+			Quiz.playSong();
+		};
+	};
+
 	$scope.numberOfQuestions = function() {
 		//returns number of total questions to be asked
 		return Quiz.questionList.length;
@@ -118,6 +143,5 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 		note.append("path")
 		    .attr("d", "M272,48h-32v304.594C223,342.375,200.688,336,176,336c-53,0-96,28.625-96,64s43,64,96,64s96-28.625,96-64V144c80-13,128,80,160,128C412,48,272,48,272,48z")
 	}
-
 
 });

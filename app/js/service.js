@@ -1,9 +1,11 @@
-quizApp.factory('Quiz', function ($resource){
+quizApp.factory('Quiz', function ($resource, $document, $sce){
 
 	this.score = 0;
 	this.scoreboard = []; // on the form {correct: 0, questionNumber: i+1}, used by score.html to display answers
 	this.playlist;
 	this.questionList = [];
+	this.firstPlay = false;
+	this.paused = false;
 	this.currentQuestionPosition = 0;
 
 	var client_id = 'a280b16e9b4446928ed426a402c6f67a';
@@ -16,10 +18,7 @@ quizApp.factory('Quiz', function ($resource){
             method:"GET",
             isArray:false,
             headers:{
-			
-			Authorization: "Bearer BQBQXrzQDTgp8Gym1BpMjr4pVLEprbZdvKQrcewVbJEijdMfirW2F11UT03MHkLGVVjgCwOJsXvBmsbaVvQhBqnJyMz5w6pPlqwkguH5lklPbEUVYr3MOdVFKDivT4_rCv35-8Gz0gGoNiVdsljznJPfczBI6FWuayE23Pfwcp-Wob9NhA"
-
-
+            	    Authorization: "Bearer BQBhEfhmH7SV--w7R3-aANyx5QZ_7IiHrXMcZ-xGjtcYF_95qUBKPHh91E_bUnOErIA8naaYAhxk_t-jK3a6QmiVU94vLY2FnrVznhMgMYBqADjxeMMpSItCEXw79_Azh5RGsW4SntlgznRTgpLI_4fFisvsKpBRzuF8D_z2xkw20kRQ3Ac"
             } 
         },
     });
@@ -33,7 +32,7 @@ quizApp.factory('Quiz', function ($resource){
     	this.currentQuestionPosition = 0;
     	this.artistList = [];
 		this.albumList = [];
-    }
+    };
 
     this.resetScore = function() {
     	// resets the score
@@ -52,13 +51,10 @@ quizApp.factory('Quiz', function ($resource){
     }
 
 	this.savePlaylist = function (playlist_object){
-		//console.log("Playlistobject1",playlist_object.tracks.items);
-		playlist_object.tracks.items = this.randomizeSongs(playlist_object.tracks.items);
-		//console.log("Playlistobject2",playlist_object.tracks.items);
 		this.playlist = [];
 		this.playlist = playlist_object;
 		return this.playlist;
-	}
+	};
 
 	this.randomizeSongs = function(tracks){
 		//om fler än 20 låtar --> randomize vilka som används
@@ -85,7 +81,6 @@ quizApp.factory('Quiz', function ($resource){
 		return randomizedTracks;
 	};
 
-
 	//fallback if the given playlist has a lot of artists/albums with the same name
 	this.artistList = [];
 	this.albumList = [];
@@ -93,7 +88,7 @@ quizApp.factory('Quiz', function ($resource){
 	this.isInArray = function(value, array) {
 		//checks if value is in array
 		return array.indexOf(value) > -1;
-	}
+	};
 
 	this.createArtistList = function(tracks) {
 		for (var i = 0; i < tracks.length; i++){
@@ -129,7 +124,7 @@ quizApp.factory('Quiz', function ($resource){
 		//console.log("HEJ tracks",tracks);
 
 		// these should probably not be here...
-		//console.log("TRACKS",tracks);
+		//console.log(tracks);
 		if (this.questionList.length == 0) {
 			this.createArtistList(tracks);
 			this.createAlbumList(tracks);
@@ -181,7 +176,7 @@ quizApp.factory('Quiz', function ($resource){
 				}
 				// generates wrongs answers + question
 				question.questionStr = questionDB[num];
-				question.previewUrl = String(currentTrack.url);
+				question.previewUrl = String(currentTrack.preview_url);
 				var wrongAnswer1 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer);
 				var wrongAnswer2 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, wrongAnswer1);
 				var wrongAnswer3 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, wrongAnswer1, wrongAnswer2);
@@ -207,6 +202,10 @@ quizApp.factory('Quiz', function ($resource){
 		//return this.questionList;
 	};
 
+	this.randomizeSongs = function(){
+		//om fler än 20 låtar --> randomize vilka som används
+	};
+
 	this.shuffleArray = function(array) {
 		var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -229,7 +228,7 @@ quizApp.factory('Quiz', function ($resource){
 	this.randomAnswer = function(tracks, maxQ, type, correctAnswer, wrongAnswer1, wrongAnswer2) {
 		//generates a random track name from the playlist
 		// not the same name as the current track
-		var max = maxQ-1;
+		var max = maxQ;
 		var min = 0;
 		var num;
 		var randomAnswer;
@@ -246,7 +245,7 @@ quizApp.factory('Quiz', function ($resource){
 				randomAnswer = this.albumList[num];
 			}
 			// if the random answer is not the same as the other answers, stop the loop
-			if (randomAnswer != correctAnswer && randomAnswer != wrongAnswer1 && randomAnswer != wrongAnswer2 && randomAnswer != undefined) {
+			if (randomAnswer != correctAnswer && randomAnswer != wrongAnswer1 && randomAnswer != wrongAnswer2) {
 				continueLoop = false;
 			}
 		} 
@@ -313,16 +312,27 @@ quizApp.factory('Quiz', function ($resource){
 		}
 	}
 
-	var playSong = function(url){
-		var songAudio = new Audio(url).play();
-		console.log(url); 
-	}
+	this.playSong = function(){
+		console.log('PLAYING');
+		var audioElement = document.getElementById('currentSong');
+		audioElement.play();
+		this.firstPlay = true;
+		this.paused = false;
+	};
+
+	this.pauseSong = function(currentSong){
+		console.log('PAUSING');
+		var audioElement = document.getElementById('currentSong');
+		audioElement.pause();
+		this.paused = true;
+	};
 
 	this.playAnswer = function(answer){ //answer är antingen 'correctAnswer', 'wrongAnswer1', 'wrongAnswer2' eller 'wrongAnswer3'
 		var answerAudio = function(answer){
 			if (answer == 'correctAnswer'){
 				return new Audio(insertljudfilhere).play();
-			} else {
+			}
+			else {
 				return new Audio(insertFelLjudFilHere).play();
 			};
 		};

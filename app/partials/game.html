@@ -25,8 +25,14 @@
 					Playlist: {{playlistName()}}
 					
 				</div>
-				<div class="row column-left">
-					<div class="glyphicon glyphicon-volume-up"></div>	
+				<div class="row">
+					<div class="column column-left">
+						<div class="glyphicon glyphicon-volume-up" id="audio" ng-click="pauseSong()">
+							<audio id="currentSong" data-ng-src="{{currentSong()}}" >
+								{{playSong()}}
+							</audio>
+						</div>
+					</div>
 				</div>
 				<div class="row icon-container question-icon">
 					<img src="../images/pink_headphone.png"/>
