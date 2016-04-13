@@ -24,11 +24,11 @@ quizApp.controller('ScoreCtrl', function ($scope, Quiz) {
 
   var alert = function(objects) {
             if (objects.correct ==1 ){
-              swal("Question "+objects.questionID, "Your answer: "+objects.userAnswer+"\nCorrect answer: "+objects.correctAnswer, "success")
+              swal(objects.questionID + ". " + objects.questionStr, "\nCorrect answer: "+objects.correctAnswer, "success")
           	};
 
             if (objects.correct ==0 ){
-               sweetAlert("Question "+(objects.questionID), "Your answer: "+objects.userAnswer+"\nCorrect answer "+objects.correctAnswer, "error")
+               sweetAlert(objects.questionID + ". " + objects.questionStr, "Your answer: "+objects.userAnswer+"\nCorrect answer: "+objects.correctAnswer, "error")
            	};
 
 

@@ -21,10 +21,11 @@
 	    	</div>
 			<div class="col-md-12" align="center" id="gameView">
 
-				<div class="mini-header">
+				<div class="mini-header" style="color: #263238">
 					Playlist: {{playlistName()}}
 					
 				</div>
+<<<<<<< HEAD
 				<div class="row">
 					<div class="column column-left">
 						<div class="glyphicon glyphicon-volume-up" id="audio" ng-click="pauseSong()">
@@ -34,19 +35,19 @@
 						</div>
 					</div>
 					
+=======
+				<div class="row column-left">
+					<div class="glyphicon glyphicon-volume-up"></div>	
+>>>>>>> refs/remotes/origin/master
 				</div>
-				
-				<div class="icon-container row">
-					<div class="question-icon">
-						<img src="../images/pink_headphone.png"/>
-					</div>
+				<div class="row icon-container question-icon">
+					<img src="../images/pink_headphone.png"/>
 				</div>
 				<div class="row">
 					<div class="text-container">
 						{{question().questionStr}}
 					</div>
 				</div>
-				
 				<div class="row ">
 					<div class="answer-container" id="alt1" ng-click="validateAnswer(1, question().answerAlternatives[0])" >
 						<div class="answer-text" ng-model="answer1">
@@ -71,14 +72,8 @@
 						</div>
 					</div>
 				</div>
-			
-				<div class="row text-container">
-					<div class="row">
-						Question {{question().id}}/{{numberOfQuestions()}}
-					</div>
-				</div>
-				<div class="column">
-						<button ng-hide="hideForward" ng-click="nextQuestionButton()" class="btn" id="forwardButt">Next Question > </button>
+				<div class="row text-container answer-text">
+						<button ng-hide="hideForward" ng-click="nextQuestionButton()" class="btn next-color" id="forwardButt">Next Question ></button>
 				</div>
 				<div class="row notes">
 					<div class="hr" id="here">
