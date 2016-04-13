@@ -24,11 +24,11 @@ quizApp.controller('ScoreCtrl', function ($scope, Quiz) {
 
   var alert = function(objects) {
             if (objects.correct ==1 ){
-              swal("Question "+objects.questionID, "Your answer: "+objects.userAnswer+" The correct answer "+objects.correctAnswer, "success")
+              swal("Question "+objects.questionID, "Your answer: "+objects.userAnswer+"\nCorrect answer: "+objects.correctAnswer, "success")
           	};
 
             if (objects.correct ==0 ){
-               sweetAlert("Question "+(objects.questionID), "Your answer: "+objects.userAnswer+" The correct answer "+objects.correctAnswer, "error")
+               sweetAlert("Question "+(objects.questionID), "Your answer: "+objects.userAnswer+"\nCorrect answer "+objects.correctAnswer, "error")
            	};
 
 
@@ -39,9 +39,7 @@ quizApp.controller('ScoreCtrl', function ($scope, Quiz) {
    
   
     // should get scoreboard from service
-    var data = [{correct:1, questionNumber:1}, {correct:0, questionNumber:1}, {correct:1, questionNumber:1}, {correct:1, questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:0,questionNumber:1}, {correct:1,questionNumber:1}, {correct:1,questionNumber:1}, {correct:1,questionNumber:1}];
-
-    var data2 = [{correct:0, questionID:1, correctAnswer: "Test", userAnswer: "Hej"}, {correct:0, questionID:2, correctAnswer: "Test2", userAnswer: "Hej2"}, {correct:1, questionID:3, correctAnswer: "Test3", userAnswer: "Hej3"}];
+    var data = [{correct:0, questionID:1, correctAnswer: "Test", userAnswer: "Hej"}, {correct:0, questionID:2, correctAnswer: "Test2", userAnswer: "Hej2"}, {correct:1, questionID:3, correctAnswer: "Test3", userAnswer: "Hej3"}];
 
     var svg = d3.select("#results").append("svg")
         .attr("width", width)
@@ -52,6 +50,7 @@ quizApp.controller('ScoreCtrl', function ($scope, Quiz) {
 
     var mark = svg.selectAll(".mark")
             .data($scope.scoreboard)
+            //.data(data) //hard coded for testing purposes
         .enter().append("svg")
         
             .attr("class", "marks")
