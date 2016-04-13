@@ -176,6 +176,12 @@ h5 {
 	margin-left: 20px;
 	text-align: left;
 }
+.glyphicon.glyphicon-volume-off {
+	font-size: 40px;
+	color: black;
+	margin-left: 20px;
+	text-align: left;
+}
 
 .glyphicon.glyphicon-chevron-right {
 	font-size: 35px;

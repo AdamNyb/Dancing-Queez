@@ -1,9 +1,11 @@
-quizApp.factory('Quiz', function ($resource){
+quizApp.factory('Quiz', function ($resource, $document, $sce){
 
 	this.score = 0;
 	this.scoreboard = []; // on the form {correct: 0, questionNumber: i+1}, used by score.html to display answers
 	this.playlist;
 	this.questionList = [];
+	this.firstPlay = false;
+	this.paused = false;
 	this.currentQuestionPosition = 0;
 
 	var client_id = 'a280b16e9b4446928ed426a402c6f67a';
@@ -17,7 +19,7 @@ quizApp.factory('Quiz', function ($resource){
             isArray:false,
             headers:{
 			
-			Authorization: "Bearer BQBQXrzQDTgp8Gym1BpMjr4pVLEprbZdvKQrcewVbJEijdMfirW2F11UT03MHkLGVVjgCwOJsXvBmsbaVvQhBqnJyMz5w6pPlqwkguH5lklPbEUVYr3MOdVFKDivT4_rCv35-8Gz0gGoNiVdsljznJPfczBI6FWuayE23Pfwcp-Wob9NhA"
+			Authorization: "Bearer BQAW69HlERGQEIGBuIC9qapOre3HAq7uZt0EgpKyk_xQ8dw9CP8mzH0QF2ZtMKEi35FE9QuSsf1rnAHPsVZ1PH1Poay8eQFHllfBgUcrLHXlWhKg4NMtQrsOWcklU_6WZAbagbn1ohVDM44PIHPiSPNVx3oR0w4Mpyhnfg"
 
 
             } 
@@ -27,14 +29,36 @@ quizApp.factory('Quiz', function ($resource){
     this.resetGame = function() {
     	this.score = 0;
     	this.scoreboard = [];
-    	this.playlist;
+    	this.playlist = undefined;
     	this.questionList = [];
     	this.currentQuestionPosition = 0;
     	this.artistList = [];
 		this.albumList = [];
+		this.firstPlay = false;
+		this.paused = false;
+    };
+
+    this.resetScore = function() {
+    	// resets the score
+    	this.score = 0;
+    	this.currentQuestionPosition = 0;
+    	this.firstPlay = false;
+    	this.paused = false;
+    	for (var i = 0; i < this.questionList.length; i++) {
+    		this.questionList[i].answered = false;
+    	}
+    	for (var j = 0; j < this.scoreboard.length; j++) {
+    		//this.questionList[j].answered = false;
+    		//this.scoreboard.push({correct: 0, questionID: i+1,correctAnswer: question.correctAnswer, userAnswer: null, questionStr: question.questionStr})
+    		this.scoreboard[j].correct = 0;
+    		this.scoreboard[j].userAnswer = null
+    	}
     }
 
+
 	this.savePlaylist = function (playlist_object){
+		console.log("playlist object", playlist_object);
+		console.log("playlist tracks", playlist_object.tracks);
 		//console.log("Playlistobject1",playlist_object.tracks.items);
 		playlist_object.tracks.items = this.randomizeSongs(playlist_object.tracks.items);
 		//console.log("Playlistobject2",playlist_object.tracks.items);
@@ -49,6 +73,7 @@ quizApp.factory('Quiz', function ($resource){
 		var tracksLen = tracks.length -1;
 		var usedNums = [];
 		var maxQ;
+		//String(currentTrack.preview_url)
 		if (tracksLen > 20 || tracksLen == 20) {
 			maxQ = 20;
 		} else if (tracksLen < 20) {
@@ -164,7 +189,7 @@ quizApp.factory('Quiz', function ($resource){
 				}
 				// generates wrongs answers + question
 				question.questionStr = questionDB[num];
-				question.previewUrl = String(currentTrack.url);
+				question.previewUrl = String(currentTrack.preview_url);
 				var wrongAnswer1 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer);
 				var wrongAnswer2 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, wrongAnswer1);
 				var wrongAnswer3 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, wrongAnswer1, wrongAnswer2);
@@ -180,7 +205,7 @@ quizApp.factory('Quiz', function ($resource){
 				if (i == maxQ-1) {
 					question.lastQuestion = true;
 				}
-				this.scoreboard.push({correct: 0, questionID: i+1,correctAnswer: question.correctAnswer, userAnswer: null})
+				this.scoreboard.push({correct: 0, questionID: i+1,correctAnswer: question.correctAnswer, userAnswer: null, questionStr: question.questionStr})
 
 				// pushes the question into the questions list
 				this.questionList.push(question);
@@ -296,9 +321,19 @@ quizApp.factory('Quiz', function ($resource){
 		}
 	}
 
-	var playSong = function(url){
-		var songAudio = new Audio(url).play();
-		console.log(url); 
+	this.playSong = function(){
+		console.log('PLAYING');
+		var audioElement = document.getElementById('currentSong');
+		audioElement.play();
+		this.firstPlay = true;
+		this.paused = false;
+	};
+
+	this.pauseSong = function(currentSong){
+		console.log('PAUSING');
+		var audioElement = document.getElementById('currentSong');
+		audioElement.pause();
+		this.paused = true;
 	}
 
 	this.playAnswer = function(answer){ //answer är antingen 'correctAnswer', 'wrongAnswer1', 'wrongAnswer2' eller 'wrongAnswer3'

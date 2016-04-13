@@ -1,9 +1,10 @@
-quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) {
+quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, $sce) {
 
 	$scope.scoreboard = Quiz.scoreboard;
 	//console.log("SCOOOOORE", $scope.scoreboard);
 	$scope.hideForward=true
 
+	$scope.hideVolumeOff=true
 	$scope.playlistName = function(){ //playlistens namn
 		if(Quiz.playlist){
 			return Quiz.playlist.name;
@@ -33,7 +34,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 
 			
 		}
-		
+		Quiz.firstPlay = false;
 		$scope.updateDivColor();
 		$scope.hideForward=true
 	}
@@ -82,6 +83,36 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 		//vad som klickats på
 	}
 
+	$scope.currentSong = function(){
+		// this is the current song that should be playing
+		if (Quiz.firstPlay == false && Quiz.questionList.length > 0){
+
+			return $sce.trustAsResourceUrl(Quiz.questionList[Quiz.currentQuestionPosition].previewUrl);
+		}
+		// end
+	}
+
+	$scope.playSong = function(){
+		// plays the song
+		if (Quiz.firstPlay == false && Quiz.questionList.length > 0){ //förhindrar Angulars digest loop från att spela upp låten 1000ggr samtidigt
+			//firstPlay är att låten spelades när man startar frågan
+
+			Quiz.playSong();
+		};
+		// end
+	};
+
+	$scope.pauseSong = function(){
+		// pauses the sound
+		if(Quiz.paused == false){ 
+			Quiz.pauseSong();
+		}
+		else if (Quiz.paused == true){
+			Quiz.playSong();
+		};
+		//end
+	};
+
 	$scope.numberOfQuestions = function() {
 		//returns number of total questions to be asked
 		return Quiz.questionList.length;
@@ -127,4 +158,9 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 		  .append("path")
 		    .attr("d", "M272,48h-32v304.594C223,342.375,200.688,336,176,336c-53,0-96,28.625-96,64s43,64,96,64s96-28.625,96-64V144c80-13,128,80,160,128C412,48,272,48,272,48z")
 
+
+	
+
+	
+		
 });
