@@ -1,6 +1,7 @@
 html { width: 100%; height: 100%;}
 body { 
-	background: linear-gradient(#D81B60, #F48FB1);
+	/*background: linear-gradient(#D81B60, #F48FB1);*/
+	background:#EEE;
 	width: 100%;
 	height: 100%;
 	
@@ -18,17 +19,14 @@ body {
 
 .banner{
 	padding-top: 12%;
-	background: linear-gradient(#D81B60, #F48FB1); /* Standard syntax */
+	/*background: linear-gradient(#D81B60, #F48FB1); /* Standard syntax */
 	/*background-color: #F50057;*/
 	text-align: center;
 	padding: 5px 10px;*/ 
 	font-size: 130%;
 }
 
-#header small {
-	font-style: italic;
-	font-size: 40%;
-}
+
 
 
 
@@ -123,7 +121,8 @@ h5 {
 .header {
 	color: white;
 	text-align: center;
-	font-size: 200%
+	font-size: 200%;
+	background-color:#D81B60;
 }
 
 .mini-header {
@@ -151,7 +150,7 @@ h5 {
 }
 
 .answer-container {
-	background-color: #FCE4EC;
+	background-color: #D81B60;
 	border: 2px #880E4F;
 	border-radius: 5px;
 	margin: 10px 5px 5px;
@@ -164,6 +163,7 @@ h5 {
 }
 
 .answer-text {
+	color:white;
 	vertical-align: center center;
 	width: 90%;
 	padding: 5px 0;
@@ -173,21 +173,26 @@ h5 {
 .glyphicon.glyphicon-volume-up {
 	font-size: 40px;
 	color: black;
-	margin-left: 10px;
+	margin-left: 20px;
 	text-align: left;
 }
 
 .glyphicon.glyphicon-chevron-right {
 	font-size: 35px;
 	color: black;
-	margin-right: 10px;
+	margin-right: 20px;
 	margin-top: 0;
 	text-align: right;
 }
 
-.right-align {
-	margin-left: 60%
+.column {
+	width: 49%;
+	margin: 0 !important;
+	padding: 0;
+	display: inline-block;
 }
+.column-left { text-align: left}
+.column-right { text-align: right}
 
 .hr {
 	margin-top: 15px;
@@ -224,4 +229,16 @@ h5 {
 	text-align: center;
 	padding-left:10%;
 	padding-right:20px;
+}
+.goAgainButton{
+	margin-left: 19%;
+	width: 60%;
+	height: 3%;
+	margin-top: 5%;
+	
+	border-radius: 30px;
+	background-color: #F50057;
+	
+	color: white;
+	font-size: 30px;
 }

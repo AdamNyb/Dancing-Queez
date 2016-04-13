@@ -29,15 +29,17 @@
 					<source ng-src="currentSong(question())" type="audio/mp3">
 				</audio>
 				<div class="row">
-					<div class="glyphicon glyphicon-volume-up">
+					<div class="column column-left">
+						<div class="glyphicon glyphicon-volume-up"></div>
 					</div>
-					<button ng-click="nextQuestionButton()" class="glyphicon glyphicon-chevron-right right-align" id="forwardButt">
-					</button>
+					<div class="column column-right">
+						<button ng-hide="hideForward" ng-click="nextQuestionButton()" class="glyphicon glyphicon-chevron-right" id="forwardButt"></button>
+				</div>
 				</div>
 				
 				<div class="icon-container row">
 					<div class="question-icon">
-						<img src="../images/headphn.png"/>
+						<img src="../images/pink_headphone.png"/>
 					</div>
 				</div>
 				<div class="row">
@@ -47,33 +49,33 @@
 				</div>
 				
 				<div class="row ">
-					<div class="answer-container">
-						<div class="answer-text">
-							{{question().correctAnswer}}
+					<div class="answer-container" id="alt1" ng-click="validateAnswer(1, question().answerAlternatives[0])" >
+						<div class="answer-text" ng-model="answer1">
+							{{question().answerAlternatives[0]}}
 						</div>
 					</div>
-					<div class="answer-container">
+					<div class="answer-container" id="alt2" ng-click="validateAnswer(2, question().answerAlternatives[1])">
 						<div class="answer-text">
-							{{question().wrongAnswer1}}
+							{{question().answerAlternatives[1]}}
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="answer-container">
+					<div class="answer-container" id="alt3" ng-click="validateAnswer(3, question().answerAlternatives[2])">
 						<div class="answer-text">
-							{{question().wrongAnswer2}}
+							{{question().answerAlternatives[2]}}
 						</div>
 					</div>
-					<div class="answer-container">
+					<div class="answer-container" id="alt4" ng-click="validateAnswer(4, question().answerAlternatives[3])">
 						<div class="answer-text">
-							{{question().wrongAnswer3}}
+							{{question().answerAlternatives[3]}}
 						</div>
 					</div>
 				</div>
 			
 				<div class="row text-container">
 					<div class="row">
-						Question {{question().id}}/20
+						Question {{question().id}}/{{numberOfQuestions()}}
 					</div>
 				</div>
 				<div class="row notes">
