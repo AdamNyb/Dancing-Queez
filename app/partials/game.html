@@ -26,8 +26,13 @@
 					
 				</div>
 				<div class="row">
-					<div class="column column-left">
-						<div class="glyphicon glyphicon-volume-up" id="audio" ng-click="pauseSong()">
+					<div class="row column-left">
+						<div class="glyphicon glyphicon-volume-up" ng-hide="hideVolumeUp" id="audio" ng-click="pauseSong()">
+							<audio id="currentSong" data-ng-src="{{currentSong()}}" >
+								{{playSong()}}
+							</audio>
+						</div>
+						<div class="glyphicon glyphicon-volume-off" ng-hide="hideVolumeOff" id="audio" ng-click="pauseSong()">
 							<audio id="currentSong" data-ng-src="{{currentSong()}}" >
 								{{playSong()}}
 							</audio>

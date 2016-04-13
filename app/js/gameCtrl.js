@@ -101,11 +101,16 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 	};
 
 	$scope.pauseSong = function(){
+		console.log('pause')
 		// pauses the sound
 		if(Quiz.paused == false){ 
+			$scope.hideVolumeUp=true
+			$scope.hideVolumeOff=false
 			Quiz.pauseSong();
 		}
 		else if (Quiz.paused == true){
+			$scope.hideVolumeUp=false
+			$scope.hideVolumeOff=true
 			Quiz.playSong();
 		};
 		//end
@@ -151,6 +156,20 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 	}
 
 
+	$scope.changeVolumeUp = function(){
+
+			
+			$scope.hideVolumeUp=true
+			$scope.hideVolumeOff=false
+		}
+
+	
+
+	$scope.changeVolumeOff = function(){
+			console.log('a')
+			$scope.hideVolumeUp=false
+			$scope.hideVolumeOff=true
+		};
 
 	
 
