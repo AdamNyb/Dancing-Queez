@@ -17,7 +17,14 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
             method:"GET",
             isArray:false,
             headers:{
+<<<<<<< HEAD
             	    Authorization: "Bearer BQD4YrQzxGSe-fE2YtfTJhx-9tsq-MhBNZJ_f2GFTmywTnv7jv9bNeVTJ-dbtFPt8NKA4unMdMxeChX5Ek2GWR5BCAgEOiH_Rm9AB8FdvBLRp8BEzUVId5pm1Sbnu0rJtpriboFLC814EuMNI9cyu1YbvNoIIv4iPjSVec4LbQ29pA2UaLc"
+=======
+			
+			Authorization: "Bearer BQBQXrzQDTgp8Gym1BpMjr4pVLEprbZdvKQrcewVbJEijdMfirW2F11UT03MHkLGVVjgCwOJsXvBmsbaVvQhBqnJyMz5w6pPlqwkguH5lklPbEUVYr3MOdVFKDivT4_rCv35-8Gz0gGoNiVdsljznJPfczBI6FWuayE23Pfwcp-Wob9NhA"
+
+
+>>>>>>> refs/remotes/origin/master
             } 
         },
     });
@@ -25,7 +32,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
     this.resetGame = function() {
     	this.score = 0;
     	this.scoreboard = [];
-    	this.playlist = [];
+    	this.playlist;
     	this.questionList = [];
     	this.currentQuestionPosition = 0;
     	this.artistList = [];
