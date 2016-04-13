@@ -121,20 +121,6 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz) 
 	}
 
 
-	$scope.changeVolumeUp = function(){
-
-		
-			$scope.hideVolumeUp=true
-			$scope.hideVolumeOff=false
-		}
-
-	
-
-	$scope.changeVolumeOff = function(){
-		
-			$scope.hideVolumeUp=false
-			$scope.hideVolumeOff=true
-		};
 
 	
 
