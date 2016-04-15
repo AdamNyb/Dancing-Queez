@@ -19,7 +19,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
             isArray:false,
             headers:{
 			
-			Authorization: "Bearer BQAwJ-rwzAGTeEeEVeoVx6aq7oIQVZjoqruk2LOUNp7q54uPXQKv3kg4_8Bg6-u7e4gaNot8DgSCyNB4fc8tZSFAPdHsVH9fU7WTYX-R5bv_XXBDmudQfm7tUjpGH_q4d9gPYneS0okKNbyEjR3UrL5rma_987rAv6pBvA"
+			Authorization: "Bearer BQCTCn_4FyWSnP_aJZEgn6n6dVkT7W8a3I76-hDrl_jqry39aVwFCdLqf2oZGhJLIZ0ekjgE_tDuqLCdg_I60b35a9X01oiFKocdyrgArdcdgKVQGIrdKY07TM0AmhXXiObeXXiwYWsHqy9pGofPb5-ff8Gcz1EmbCYHoR6-mIsYBKMi6HiUJ7vd0eYReYhdsp1mmlvUZrx1VV0"
 
 
             } 
@@ -230,6 +230,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 				this.questionList.push(question);
 			}
 			console.log("Scoreboard:",this.scoreboard);
+			this.setScoreboard(this.scoreboard);
 		}
 		//return this.questionList;
 	};
@@ -378,6 +379,14 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 	this.setScore = function(num){
 		this.score = num;
 	};
+
+	this.setScoreboard = function(newScoreboard) {
+		this.createdScoreboard = newScoreboard;
+	};
+
+	this.getScoreboard = function() {
+		return this.createdScoreboard;
+	}
 
 	
 
