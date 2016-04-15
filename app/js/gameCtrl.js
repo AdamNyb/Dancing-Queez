@@ -87,6 +87,8 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		//Only runs when wrong answer in game is clicked. Compares the
 		//text in the divs with the correct answer. If there is a match
 		//the container turns green. 
+	setTimeout(function timeDelay() {
+
 
 		for (var i=1; i < 5;i++){
 			var answerDiv = "answer" + i;
@@ -96,13 +98,23 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 				var altID = "alt" + i;
 				var divID = document.getElementById(altID);
 				divID.style.background="#8BC34A"
+
+				setTimeout(function blink()
+				{
+					divID.style.background="#00BCD4"
+					setTimeout(function blink()
+					{
+						divID.style.background="#8BC34A"
+					},300);
+
+				},200);
 		}		
 			}
 		
 
 		//om vi vill att det rätta svaret ska bli grönt oavsett
 		//vad som klickats på
-
+	},500);
 	}
 
 	$scope.currentSong = function(){
