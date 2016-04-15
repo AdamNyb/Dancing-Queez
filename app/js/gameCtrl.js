@@ -37,6 +37,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		Quiz.firstPlay = false;
 		$scope.updateDivColor();
 		$scope.hideForward=true
+		$scope.questionProg = false
 	}
 
 	$scope.updateDivColor = function() {
@@ -53,6 +54,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		//sends data to scoreboard, stops user from answering more than once.
 		//$scope.correctAnswer();
 		$scope.hideForward=false //hides forward button
+		$scope.questionProg=true //hides question text
 		
 		var currentQuestion = Quiz.questionList[Quiz.currentQuestionPosition];
 			var currentQuestionID = currentQuestion.id;
@@ -78,8 +80,9 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 			}
 			currentQuestion.answered = true; //to stop user to answer same question twice
 			Quiz.scoreboard[Quiz.currentQuestionPosition].userAnswer = alternative;
+			$scope.setNotes(Quiz.currentQuestionPosition);
 		}
-		$scope.setNotes(Quiz.currentQuestionPosition);
+		
 	}
 	
 

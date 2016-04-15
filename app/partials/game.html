@@ -44,8 +44,8 @@
 						{{question().questionStr}}
 					</div>
 				</div>
-				<div class="row ">
-					<div class="answer-container" id="alt1" ng-click="validateAnswer(1, question().answerAlternatives[0])" >
+				<div class="row">
+					<div class="answer-container" id="alt1" ng-click="validateAnswer(1, question().answerAlternatives[0])">
 						<div id="answer1" class="answer-text" ng-model="answer1">
 							{{question().answerAlternatives[0]}}
 						</div>
@@ -70,7 +70,9 @@
 				</div>
 				<div class="row text-container answer-text">
 						<button ng-hide="hideForward" ng-click="nextQuestionButton()" class="btn next-color" id="forwardButt">Next Question ></button>
+						<div ng-hide="questionProg" style="color: black;">
 						Question {{question().id}}/{{numberOfQuestions()}}
+						</div>
 				</div>
 				<div class="row notes">
 					<div class="hr" id="noteProgress" ng-model="note">

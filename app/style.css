@@ -157,17 +157,18 @@ h5 {
 	position: relative;
 	width: 300px;
 	display: inline-table;
-	vertical-align: center center;
+	/*vertical-align: center center;*/
 	height: 14vh;
 	width: 24vh;
 }
 
 .answer-text {
-	color:white;
-	vertical-align: center center;
+	color: white;
+	vertical-align: middle;
+	display: table-cell;
 	width: 90%;
-	padding: 5px 0;
-	margin-bottom: 5px;
+	padding: 5px 5px 5px;
+
 }
 
 .glyphicon.glyphicon-volume-up {
