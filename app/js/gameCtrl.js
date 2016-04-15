@@ -53,9 +53,11 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		//validates answer wrong/right plus color change to clicked div
 		//sends data to scoreboard, stops user from answering more than once.
 		//$scope.correctAnswer();
+
 		$scope.hideForward=false //hides forward button
 		$scope.questionProg=true //hides question text
 		
+		$scope.hideForward=false //show forward button
 		var currentQuestion = Quiz.questionList[Quiz.currentQuestionPosition];
 			var currentQuestionID = currentQuestion.id;
 		
@@ -90,6 +92,8 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		//Only runs when wrong answer in game is clicked. Compares the
 		//text in the divs with the correct answer. If there is a match
 		//the container turns green. 
+	setTimeout(function timeDelay() { //turn green after 500ms
+
 
 		for (var i=1; i < 5;i++){
 			var answerDiv = "answer" + i;
@@ -99,13 +103,22 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 				var altID = "alt" + i;
 				var divID = document.getElementById(altID);
 				divID.style.background="#8BC34A"
-		}		
-			}
+
+				setTimeout(function blink(){	//turn blue after 300ms
+					divID.style.background="#00BCD4"
+
+					setTimeout(function blink(){	//turn green after 300ms
+						divID.style.background="#8BC34A"	
+					},100);
+
+				},150);
+			}		
+				}
 		
 
 		//om vi vill att det rätta svaret ska bli grönt oavsett
 		//vad som klickats på
-
+	},200);
 	}
 
 	$scope.currentSong = function(){

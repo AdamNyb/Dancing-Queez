@@ -19,7 +19,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
             isArray:false,
             headers:{
 			
-			Authorization: "Bearer BQADnMdLMpnRlySFU8Po5CKQ3w1mRuUDNsxYGHw7OOgjK_zs4nFqnasiLc6XtsRO-5LfkhsUO7pE-uQPgZvuQeOgLSAvutL8ij3cGmKMonRbiVtUPTyJUuY4AaqNwuk4IHV0zriqOfOYOcOc5QDirQeEtgncEzRaSk9hsnywPIQb5laAyF5uYdforYe2HMkt4k7behRqAXC1SKE"
+			Authorization: "Bearer BQBoxXiphC-lETkWGfcFVAmhkuh2lUQLnjtIWbDaQK52CnJn0CWI2z4TWVjxGIRloLkcVe43uAEQOF9hMAuvgCK3ieZHxn1tNZ02hxri_81WYxGvyLp7SrD_OUZnXFvh4la_EtfMIpgfA0znO4oaxmW-OTrC94fC4qn1PfV8mtAM9sqaNg"
 
 
             } 
