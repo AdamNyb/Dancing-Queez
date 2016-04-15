@@ -153,13 +153,13 @@ h5 {
 	background-color: #00BCD4; /* #D81B60;*/
 	border: 2px #880E4F;
 	border-radius: 5px;
-	margin: 10px 5px 5px;
+	margin: 5px 5px 5px;
 	position: relative;
-	width: 140px;
+	width: 300px;
 	display: inline-table;
 	vertical-align: center center;
-	height: 10vh;
-	width: 20vh;
+	height: 14vh;
+	width: 24vh;
 }
 
 .answer-text {
@@ -215,9 +215,9 @@ h5 {
 	margin-top: 0px;
 }
 
-.note {
+/*.note {
 	fill: black;
-}
+}*/
 
 .next-color {
 	background-color: #0097A7;

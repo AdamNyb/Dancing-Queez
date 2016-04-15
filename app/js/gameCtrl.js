@@ -53,7 +53,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		//sends data to scoreboard, stops user from answering more than once.
 		//$scope.correctAnswer();
 		$scope.hideForward=false //hides forward button
-		$scope.setNotes(Quiz.currentQuestionPosition);
+		
 		var currentQuestion = Quiz.questionList[Quiz.currentQuestionPosition];
 			var currentQuestionID = currentQuestion.id;
 		
@@ -79,6 +79,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 			currentQuestion.answered = true; //to stop user to answer same question twice
 			Quiz.scoreboard[Quiz.currentQuestionPosition].userAnswer = alternative;
 		}
+		$scope.setNotes(Quiz.currentQuestionPosition);
 	}
 	
 
@@ -165,19 +166,19 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		// den tar in vilket nummer det är, gör om noterna
 		//och skriver ut det nya antalet noter
 		//console.log("YO", questionNumber);
-		var width = "330px";
-		var height = "83px";
+		var width = "30px";
+		var height = "30px";
 
 		var position = questionNumber;
 		var scoreBoard = Quiz.getScoreboard();
 		//console.log(data);
-		var data = [];
-		for (var i = 0; i <= position; i++) {
-			tempData = scoreBoard[i];
-			data.push(tempData);
+		var data = [scoreBoard[position]];
+		//for (var i = 0; i <= position; i++) {
+		//	tempData = scoreBoard[i];
+		//	data.push(tempData);
 			//console.log("i", i);
 			//console.log("temp: ", tempData);
-		}
+		//}
 
 		var svg = d3.select("#noteProgress").append("svg")
 			.attr("width", width)
@@ -187,19 +188,28 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		var note = svg.selectAll(".note")
 				.data(data)
 			.enter().append("svg")
-				.attr("width", "30px")
-				.attr("height", "30px")
+				.attr("width", "25px")
+				.attr("height", "25px")
 				.attr("class", "note")
-				.attr("x", function(d, i) {return i*20; })
-				.attr("y", function(d, i) {return i%2; })
+				.attr("x", function(d, i) {return i; })
+				.attr("y", function(d, i) {
+					if(i%2 !== 0) {
+						return i; 
+					} else {
+						return i*3;
+					}
+				})
+				
+
+
+
 				.attr("viewBox", "0 0 512 512")
 				//.attr("enable-background", "new 0 0 512 512")
-
 				.attr("fill", function(d) {
 					if (d.correct == 0) {
-						return "#F44336"
+						return "#F44336";
 					} else {
-						return "#8BC34A"
+						return "#8BC34A";
 					}
 				})
 				.append("path")
