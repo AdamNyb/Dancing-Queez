@@ -53,6 +53,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		//sends data to scoreboard, stops user from answering more than once.
 		//$scope.correctAnswer();
 		$scope.hideForward=false //hides forward button
+		$scope.setNotes(Quiz.currentQuestionPosition);
 		var currentQuestion = Quiz.questionList[Quiz.currentQuestionPosition];
 			var currentQuestionID = currentQuestion.id;
 		
@@ -123,46 +124,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		return Quiz.questionList.length;
 	}
 
-	// NOTES
-
-		var width="330px";
-		var height = "83px";
-
-		//var noteWidth = "30px";
-		//var noteHeight = "30px";
-
-		var data = [{correct:1, questionID:1, correctAnswer: "Test", userAnswer: "Hej"}];
-		//$scope.scoreboard;
-		//console.log("DATA;", data);
-		//[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
-
-		var svg = d3.select("#note").append("svg")
-			.attr("width", width)
-			.attr("height", height)
-			.attr("class", "note");
-
-		var note = svg.selectAll(".note")
-		      	.data(Quiz.scoreboard)
-		    .enter().append("svg")
-		    	.attr("width", "30px")
-				.attr("height", "30px")
-		      	.attr("class", "note")
-		      	.attr("x", function(d,i) { return  i*20; }) 
-		      	.attr("y", function(d,i) { return  i*2; })
-		      	.attr("viewBox", "0 0 512 512")
-		      	//.attr("enable-background", "new 0 0 512 512")
-
-		.attr("fill", function(d) {
-			  if (d.correct == 0) {
-				return "#F44336" // incorrect => red
-			} else {
-				return "#8BC34A"
-			}
-		})
-
-		  .append("path")
-		    .attr("d", "M272,48h-32v304.594C223,342.375,200.688,336,176,336c-53,0-96,28.625-96,64s43,64,96,64s96-28.625,96-64V144c80-13,128,80,160,128C412,48,272,48,272,48z")
-
+	
 	$scope.changeVolumeUp = function(){
 
 			
@@ -178,6 +140,52 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 			$scope.hideVolumeOff=true
 		};
 
+	
+	$scope.setNotes = function(questionNumber) {
+		// den tar in vilket nummer det är, gör om noterna
+		//och skriver ut det nya antalet noter
+		//console.log("YO", questionNumber);
+		var width = "330px";
+		var height = "83px";
+
+		var position = questionNumber;
+		var scoreBoard = Quiz.getScoreboard();
+		//console.log(data);
+		var data = [];
+		for (var i = 0; i <= position; i++) {
+			tempData = scoreBoard[i];
+			data.push(tempData);
+			//console.log("i", i);
+			//console.log("temp: ", tempData);
+		}
+
+		var svg = d3.select("#noteProgress").append("svg")
+			.attr("width", width)
+			.attr("height", height)
+			.attr("class", "note");
+
+		var note = svg.selectAll(".note")
+				.data(data)
+			.enter().append("svg")
+				.attr("width", "30px")
+				.attr("height", "30px")
+				.attr("class", "note")
+				.attr("x", function(d, i) {return i*20; })
+				.attr("y", function(d, i) {return i%2; })
+				.attr("viewBox", "0 0 512 512")
+				//.attr("enable-background", "new 0 0 512 512")
+
+				.attr("fill", function(d) {
+					if (d.correct == 0) {
+						return "#F44336"
+					} else {
+						return "#8BC34A"
+					}
+				})
+				.append("path")
+					.attr("d", "M272,48h-32v304.594C223,342.375,200.688,336,176,336c-53,0-96,28.625-96,64s43,64,96,64s96-28.625,96-64V144c80-13,128,80,160,128C412,48,272,48,272,48z")
+		//console.log("DATA:", data);
+	}
 	
 
 	
