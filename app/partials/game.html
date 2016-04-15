@@ -46,24 +46,24 @@
 				</div>
 				<div class="row ">
 					<div class="answer-container" id="alt1" ng-click="validateAnswer(1, question().answerAlternatives[0])" >
-						<div class="answer-text" ng-model="answer1">
+						<div id="answer1" class="answer-text" ng-model="answer1">
 							{{question().answerAlternatives[0]}}
 						</div>
 					</div>
 					<div class="answer-container" id="alt2" ng-click="validateAnswer(2, question().answerAlternatives[1])">
-						<div class="answer-text">
+						<div id="answer2" class="answer-text">
 							{{question().answerAlternatives[1]}}
 						</div>
 					</div>
 				</div>
 				<div class="row">
 					<div class="answer-container" id="alt3" ng-click="validateAnswer(3, question().answerAlternatives[2])">
-						<div class="answer-text">
+						<div id="answer3" class="answer-text">
 							{{question().answerAlternatives[2]}}
 						</div>
 					</div>
 					<div class="answer-container" id="alt4" ng-click="validateAnswer(4, question().answerAlternatives[3])">
-						<div class="answer-text">
+						<div id="answer4" class="answer-text">
 							{{question().answerAlternatives[3]}}
 						</div>
 					</div>

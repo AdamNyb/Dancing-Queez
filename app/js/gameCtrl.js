@@ -61,7 +61,10 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 			var altID = "alt" + alt;
 			var divID = document.getElementById(altID);
 			
+
+
 			if (alternative !== currentQuestion.correctAnswer) {
+				correctAnswer(currentQuestion.correctAnswer)
 				//wrong answer turns black
 				divID.style.background="#F44336";
 				Quiz.scoreboard[Quiz.currentQuestionPosition].correct = 0; //update scoreboard
@@ -79,9 +82,26 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 	}
 	
 
-	$scope.correctAnswer = function() {
+	var correctAnswer = function(correctAnswer) {
+		//Only runs when wrong answer in game is clicked. Compares the
+		//text in the divs with the correct answer. If there is a match
+		//the container turns green. 
+
+		for (var i=1; i < 5;i++){
+			var answerDiv = "answer" + i;
+			var answer = document.getElementById(answerDiv).innerText; //get the text in the answer-divs
+			
+			if (answer === correctAnswer){
+				var altID = "alt" + i;
+				var divID = document.getElementById(altID);
+				divID.style.background="#8BC34A"
+		}		
+			}
+		
+
 		//om vi vill att det rätta svaret ska bli grönt oavsett
 		//vad som klickats på
+
 	}
 
 	$scope.currentSong = function(){
