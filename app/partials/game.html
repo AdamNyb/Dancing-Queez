@@ -13,6 +13,12 @@
 	    <!--<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">-->
 	    <!-- Our stylesheet -->
     	<link rel="stylesheet" href="../style.css">
+    	<audio id="correctSoundEffect">
+			<source src="../images/correct.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="wrongSoundEffect">
+			<source src="../images/wrong.mp3" type="audio/mpeg">
+		</audio>
 	</head>
 	<body>
 		<div class="container-fluid wrapper game-container">
@@ -36,6 +42,7 @@
 					</div>
 
 				</div>
+				
 				<div class="row icon-container question-icon">
 					<img src="../images/pink_headphone.png"/>
 				</div>
@@ -45,7 +52,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="answer-container" id="alt1" ng-click="validateAnswer(1, question().answerAlternatives[0])">
+					<div class="answer-container" id="alt1" ng-click="validateAnswer(1, question().answerAlternatives[0]);playSoundEffect()">
 						<div id="answer1" class="answer-text" ng-model="answer1">
 							{{question().answerAlternatives[0]}}
 						</div>

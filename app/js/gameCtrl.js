@@ -69,16 +69,21 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 
 			if (alternative !== currentQuestion.correctAnswer) {
 				correctAnswer(currentQuestion.correctAnswer)
-				//wrong answer turns black
+				//wrong answer turns red
 				divID.style.background="#F44336";
 				Quiz.scoreboard[Quiz.currentQuestionPosition].correct = 0; //update scoreboard
+				var audio = document.getElementById("wrongSoundEffect"); 
+       			audio.play(); //play soundeffect
 
 			}
 			else {
+				
 				Quiz.setScore(Quiz.getScore() + 1);
 				//right answer turns greenish
 				divID.style.background="#8BC34A" /*#26A69A*/
 				Quiz.scoreboard[Quiz.currentQuestionPosition].correct = 1; //update scoreboard
+				var audio = document.getElementById("correctSoundEffect"); 
+       			audio.play(); //play soundeffect
 			}
 			currentQuestion.answered = true; //to stop user to answer same question twice
 			Quiz.scoreboard[Quiz.currentQuestionPosition].userAnswer = alternative;
@@ -92,7 +97,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		//Only runs when wrong answer in game is clicked. Compares the
 		//text in the divs with the correct answer. If there is a match
 		//the container turns green. 
-	setTimeout(function timeDelay() { //turn green after 500ms
+	setTimeout(function timeDelay() { //turn green after 200ms
 
 
 		for (var i=1; i < 5;i++){
@@ -104,10 +109,10 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 				var divID = document.getElementById(altID);
 				divID.style.background="#8BC34A"
 
-				setTimeout(function blink(){	//turn blue after 300ms
+				setTimeout(function blink(){	//turn blue after 100ms
 					divID.style.background="#00BCD4"
 
-					setTimeout(function blink(){	//turn green after 300ms
+					setTimeout(function blink(){	//turn green after 150ms
 						divID.style.background="#8BC34A"	
 					},100);
 
