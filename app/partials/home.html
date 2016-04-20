@@ -26,15 +26,22 @@
   <div class="col-md-8" id="welcome">
   	
   	<div id="input">
-  		<div class="startText"><center>Welcome!<br> Type in your Spotify-playlist</center></div>
+  		<div class="startText"><center>Welcome!<br> Type in your Spotify username or playlist URL</center>
+  		</div>
+  		<div class="row">
+  			<button class="btn optionButton" ng-hide="hideOptionButtons" ng-click="usernameButton()" id="usernameButt">Username
+  			</button>
+  			<button class="btn optionButton" ng-hide="hideOptionButtons" ng-click="playlistButton()" id="playlistButt">Playlist
+  			</button>
   		<div>
-  			<input type="text" class="playlistInput" ng-model="playlistInput" placeholder="playlist">
+  			<input type="text" ng-hide="playlistInputHide" class="playlistInput" ng-model="userInput" placeholder="playlist">
   		</div>
   		<div>
-  			<input type="text" class="playlistInput" ng-model="userInput" placeholder="username">
+  			<input type="text" ng-hide="usernameInputHide" class="playlistInput" ng-model="userInput" placeholder="username">
   		</div>
-  		<a type="button" ng-click="getPlaylist(playlistInput)" class="btn goButton">GO!</a>
-  	</div>
+  		<button type="button" ng-hide="goPlaylistHide" ng-click="getPlaylist(userInput)" class="btn goButton">GO!</button>
+  		<button type="button" ng-hide="goUsernameHide" ng-click="getUserPlaylists(userInput)" class="btn goButton">GO!</button>
+  		</div>
   
  	
 	</div>
