@@ -29,6 +29,10 @@ quizApp.controller('HomeCtrl', function ($scope, Quiz) {
 	//	});
 	//}
 
+	//$scope.savePlaylist = function(data){
+		//Quiz.savePlaylist(data);
+	//}
+
 
 	$scope.listPlaylists = function(data){
 		//console.log("DATA", data.items);
