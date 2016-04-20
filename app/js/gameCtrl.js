@@ -1,8 +1,9 @@
-quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, $sce) {
+quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, $sce, $timeout) {
 
 	$scope.scoreboard = Quiz.scoreboard;
 	//console.log("SCOOOOORE", $scope.scoreboard);
 	$scope.hideForward=true
+	$scope.hideResults=true
 
 	$scope.hideVolumeOff=true
 	$scope.playlistName = function(){ //playlistens namn
@@ -28,6 +29,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		// linked to the button for next question
 		if (Quiz.questionList[Quiz.currentQuestionPosition].lastQuestion == true) {
 			//last question redirects to score
+			$scope.hideForward=false
 			$location.path('score');
 		} else {
 			Quiz.currentQuestionPosition = Quiz.currentQuestionPosition + 1;
@@ -53,17 +55,38 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		//validates answer wrong/right plus color change to clicked div
 		//sends data to scoreboard, stops user from answering more than once.
 		//$scope.correctAnswer();
-
-		$scope.hideForward=false //hides forward button
-		$scope.questionProg=true //hides question text
 		
-		$scope.hideForward=false //show forward button
+		
+		
 		var currentQuestion = Quiz.questionList[Quiz.currentQuestionPosition];
-			var currentQuestionID = currentQuestion.id;
+		var currentQuestionID = currentQuestion.id;
 		
 		if (currentQuestion.answered === false) {
 			var altID = "alt" + alt;
 			var divID = document.getElementById(altID);
+
+
+		var nextQuestion = Quiz.questionList[Quiz.currentQuestionPosition+1];
+		var indexOfNextQuestion = Quiz.questionList.indexOf(nextQuestion);
+
+		if (indexOfNextQuestion == -1){ //if final question 
+			$scope.questionProg=true //hides question text
+			$scope.hideForward=true //hides forward button
+			$scope.hideResults=false //show see results button
+			
+		}
+
+		else {
+
+			$timeout(function delayForwardButton() { //time delay that shows forward button 0.8s after answer
+				$scope.hideForward=false //shows forward button
+				$scope.questionProg=true //hides question text
+			},800);
+
+		}
+
+
+			
 			
 
 
@@ -73,7 +96,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 				divID.style.background="#F44336";
 				Quiz.scoreboard[Quiz.currentQuestionPosition].correct = 0; //update scoreboard
 				var audio = document.getElementById("wrongSoundEffect"); 
-       			audio.play(); //play soundeffect
+       			audio.play(); //play "wrong" soundeffect
 
 			}
 			else {
@@ -83,12 +106,13 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 				divID.style.background="#8BC34A" /*#26A69A*/
 				Quiz.scoreboard[Quiz.currentQuestionPosition].correct = 1; //update scoreboard
 				var audio = document.getElementById("correctSoundEffect"); 
-       			audio.play(); //play soundeffect
+       			audio.play(); //play "correct" soundeffect
 			}
 			currentQuestion.answered = true; //to stop user to answer same question twice
 			Quiz.scoreboard[Quiz.currentQuestionPosition].userAnswer = alternative;
 			$scope.setNotes(Quiz.currentQuestionPosition);
 		}
+		
 		
 	}
 	
@@ -97,7 +121,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		//Only runs when wrong answer in game is clicked. Compares the
 		//text in the divs with the correct answer. If there is a match
 		//the container turns green. 
-	setTimeout(function timeDelay() { //turn green after 200ms
+	setTimeout(function turnGreen() { //turn green after 400ms
 
 
 		for (var i=1; i < 5;i++){
@@ -109,21 +133,21 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 				var divID = document.getElementById(altID);
 				divID.style.background="#8BC34A"
 
-				setTimeout(function blink(){	//turn blue after 100ms
+				setTimeout(function blinkBlue(){	//turn blue after 200ms
 					divID.style.background="#00BCD4"
 
-					setTimeout(function blink(){	//turn green after 150ms
+					setTimeout(function blinkGreen(){	//turn green after 200ms
 						divID.style.background="#8BC34A"	
-					},100);
+					},200);
 
-				},150);
+				},200);
 			}		
 				}
 		
 
 		//om vi vill att det rätta svaret ska bli grönt oavsett
 		//vad som klickats på
-	},200);
+	},400);
 	}
 
 	$scope.currentSong = function(){
@@ -137,11 +161,13 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 
 	$scope.playSong = function(){
 		// plays the song
+		if($scope.hideVolumeOff==true){ //checks if volumeOff button is hidden
 		if (Quiz.firstPlay == false && Quiz.questionList.length > 0){ //förhindrar Angulars digest loop från att spela upp låten 1000ggr samtidigt
-			//firstPlay är att låten spelades när man startar frågan
+				//firstPlay är att låten spelades när man startar frågan
 
-			Quiz.playSong();
-		};
+				Quiz.playSong();
+			};
+		}
 		// end
 	};
 
@@ -153,7 +179,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 			$scope.hideVolumeOff=false
 			Quiz.pauseSong();
 		}
-		else if (Quiz.paused == true){
+		else{
 			$scope.hideVolumeUp=false
 			$scope.hideVolumeOff=true
 			Quiz.playSong();
@@ -168,8 +194,6 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 
 	
 	$scope.changeVolumeUp = function(){
-
-			
 			$scope.hideVolumeUp=true
 			$scope.hideVolumeOff=false
 		}
@@ -177,7 +201,6 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 	
 
 	$scope.changeVolumeOff = function(){
-			console.log('a')
 			$scope.hideVolumeUp=false
 			$scope.hideVolumeOff=true
 		};
