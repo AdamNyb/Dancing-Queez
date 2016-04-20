@@ -8,7 +8,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 	this.paused = false;
 	this.currentQuestionPosition = 0;
 	this.userPlaylists = [];
-	this.authorizationKey = "Bearer BQCsBpj4KPDwPKLkT7JsjsE9lzc1Mn31w3dY2ZPH3UQrY_CmgrTNOOQ0dP6hP3S32D_12JAXuz7b71v5FTAWBWkxsAa-sOs6w5useCiCe_N7YyThiOOBf2xj0Nqxeqqvscbiiw6vyP4gUfjkCG5de35dFOXrF4owveEQ92i3ibrlp2bubLLFbrjXIgy6LOHlu6r10pnoB68eYto9o06BBGSLf616A_Y5eLqvRc_LXn6Nz1FR2YFjG8YS_ozAz9GU2ecCmcyUdVeKOSs";
+	this.authorizationKey = "Bearer BQAaqWRbmzzEv9CZB15QrtCR5Y9lm65ZjYhxgKjeEMQhqVqIqoUi0yIMVZ7eevXPilNt_QcaPOnPs9Q-sxq7pVjSoGn1uxEpwL0Ob8v5AvtIiWdqR7jNiqii0ba6qVSOVhrJkGuDBpt5v9Ma1BrFdeoZ6Mx0AzpGcs-v1rYKfBHvZzkBb330v2byQedzcEIK9CdwAnstbcN4aK5-X8odnDuZlFmDPykep1Nm2HMCMsExqf4xjxtE6zgPrm_NDN7eL4iku6UTAhcvpTA";
 
 	var client_id = 'a280b16e9b4446928ed426a402c6f67a';
 	var client_secret = '13d55b7e7b5545dbbeec042aff0c2907';
@@ -423,7 +423,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 		}, function(error){
 			//if error
 			if (error.status == 429){
-				alert(error.message);
+				sweetAlert(error.message);
 			}
 			
 		});
