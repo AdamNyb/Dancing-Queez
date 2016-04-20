@@ -108,7 +108,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 		}
 
 		while (randomizedTracks.length < maxQ){
-			num = this.randomizeNumber(1,maxQ) - 1; // -1 because index starts with 0
+			num = this.randomizeNumber(1,tracksLen) - 1; // -1 because index starts with 0
 			//console.log(num);
 			//console.log(tracks[num].track.preview_url);
 
@@ -176,7 +176,10 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 
 
 			// questions database
-			var questionDB = ['What is the name of this song?', 'Who made this song?', 'On what album is this song featured?'];
+			var songQuestions = ['What is the name of this song?','Name this track!', "What's the title of this track?", 'What is this song called?'];
+			var artistQuestions = ['Who made this song?','What is the name of this artist?', 'Who is the creator of this track?'];
+			var albumQuestions = ['On what album is this song featured?','Name the album?', 'What is the name of this album?'];
+			var questionDB = [songQuestions, artistQuestions, albumQuestions];
 			// list of complete questions
 			//var questionList = [];
 			var len = tracks.length;
@@ -220,7 +223,8 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 					question.correctAnswer = String(currentTrack.album.name);
 				}
 				// generates wrongs answers + question
-				question.questionStr = questionDB[num];
+				var randomQuestionNum = this.randomizeNumber(0,questionDB[num].length-1);
+				question.questionStr = questionDB[num][randomQuestionNum];
 				question.previewUrl = String(currentTrack.preview_url);
 				var wrongAnswer1 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer);
 				var wrongAnswer2 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, wrongAnswer1);
