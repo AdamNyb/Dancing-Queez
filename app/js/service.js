@@ -164,6 +164,9 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 
 			// questions database
 			var questionDB = ['What is the name of this song?', 'Who made this song?', 'On what album is this song featured?'];
+			//'Name this track!', 'What's the title of this track?'
+			//'What is the name of this artist?',
+			//'On what album is this song featured?'
 			// list of complete questions
 			//var questionList = [];
 			var len = tracks.length;
