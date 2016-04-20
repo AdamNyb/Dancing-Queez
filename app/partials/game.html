@@ -86,9 +86,9 @@
 					</div>
 				</div>
 				<div class="row text-container answer-text">
-						<button ng-hide="hideForward" ng-click="nextQuestionButton()" class="btn next-color" id="forwardButt">Next Question ></button>
+						<button ng-hide="hideForward" ng-click="nextQuestionButton()" class="nextButt btn next-color" id="forwardButt">Next Question</button>
 						<button ng-hide="hideResults" ng-click="nextQuestionButton()" class="btn next-color" id="resultsButt">See Results ></button>
-						<div ng-hide="questionProg" style="color: black;">
+						<div ng-hide="questionProg" class="question-header" style="color: black;">
 						Question {{question().id}}/{{numberOfQuestions()}}
 						</div>
 				</div>

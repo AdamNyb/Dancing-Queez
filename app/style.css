@@ -133,6 +133,13 @@ h5 {
 	font-style: italic;
 }
 
+.question-header {
+	font-weight: bold;
+	font-family: helvetica;
+	margin: 5px;
+	
+}
+
 .icon-container {
 	position: center;
 	margin: 0px 10px 0px;
@@ -144,7 +151,9 @@ h5 {
 
 .text-container {
 	font-family: helvetica;
+	font-size: 16px;
 	margin: 10px 20px;
+	font-weight: bold;
 }
 
 .answer-container {
@@ -163,8 +172,10 @@ h5 {
 	color: white;
 	/*vertical-align: middle;
 	display: table-cell;*/
+	text-align: center;
 	width: 90%;
 	padding: 5px 5px 5px;
+
 
 }
 
@@ -223,8 +234,12 @@ h5 {
 }*/
 
 .next-color {
-	background-color: #0097A7;
+	background-color: #00BCD4;
+	width: 250px;
+	font-weight: bold;
 	}
+
+
 
 
 /*
