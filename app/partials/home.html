@@ -11,6 +11,8 @@
 	    <!--<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">-->
 	    <!-- Our stylesheet -->
     	<link rel="stylesheet" href="../style.css">
+    	<script src="../library/sweetalert.min.js"></script> 
+      	<link rel="stylesheet" type="text/css" href="../library/sweetalert.css">
 	</head>
   
 <body>
@@ -28,7 +30,10 @@
   		<div>
   			<input type="text" class="playlistInput" ng-model="playlistInput" placeholder="playlist">
   		</div>
-  		<a ng-href="/#/game" type="button" ng-click="getPlaylist(playlistInput)" class="btn goButton">GO!</a>
+  		<div>
+  			<input type="text" class="playlistInput" ng-model="userInput" placeholder="username">
+  		</div>
+  		<a type="button" ng-click="getPlaylist(playlistInput)" class="btn goButton">GO!</a>
   	</div>
   
  	

@@ -19,7 +19,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
             isArray:false,
             headers:{
 			
-			Authorization: "Bearer BQCx_b7Shr0g2PTMvrjAQ3B3X3g8UUcc70kxFoQfT5ZZrwlcj9YeR6yLXwvJOVJPEm5LZH1gkGKBJJ8w16IByVsLYHXkol4aX9_si6tNMlWhbqfoY-t5hnGs8NoDo4n7mZ0TP6BskwNnajxtBxFaU2hiqJenBLRoUvFJkUDH6d3ZXFfIkA"
+			Authorization: "Bearer BQCNl80lt3E74oAazEL3FCnkMZptBWsSRX-8Ksprv8NHwaB-WoDfZBLMiDSFBRXizZi-RmgP1lnSzoXJWXN1EYuYqNCa7Vn4z_dlLiOZyb2wixcyW6ghXIj9HHZtzZy00yKQGxzh8qjDFKcXIDUmNHnJFF6T4LRnEtAo79h2f9K2pNFGpA"
 
 
             } 
@@ -305,7 +305,13 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 		}, function(error){
 			//if error
 			if (error.status == 429){
-				alert(error.message);
+				sweetAlert(error.message);
+			}
+			if (error.status == 404){
+				sweetAlert('Invalid Playlist URL :(');
+			}
+			if (error.status == 401){
+				sweetAlert('Token :(');
 			}
 			
 		});
