@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
 
 	this.$storage = $localStorage.$default({
