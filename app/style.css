@@ -129,7 +129,7 @@ h5 {
 .mini-header {
 	font-weight: bold;
 	font-family: helvetica;
-	margin-top: 5px;
+	margin: 5px;
 	font-style: italic;
 }
 
@@ -164,8 +164,8 @@ h5 {
 
 .answer-text {
 	color: white;
-	vertical-align: middle;
-	display: table-cell;
+	/*vertical-align: middle;
+	display: table-cell;*/
 	width: 90%;
 	padding: 5px 5px 5px;
 
