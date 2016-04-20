@@ -27,6 +27,7 @@
 		</div>
 
 		<div class="playlistContainer col-md-12">
+			<div ng-repeat="playlist in userPlaylists()" class="row playlist" ng-click="clickUserPlaylist(playlist.href)">{{playlist.name}}</div>
 			<div class="row playlist">
 				Soft Rock
 			</div>

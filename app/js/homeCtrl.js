@@ -41,6 +41,18 @@ quizApp.controller('HomeCtrl', function ($scope, Quiz, $location, $localStorage)
 		}
 		});
 	}
+
+	$scope.userPlaylists = function(){
+		console.log(Quiz.userPlaylists);
+		if(Quiz.userPlaylists){
+			return Quiz.userPlaylists;
+		}
+	};
+
+	$scope.clickUserPlaylist = function(link){
+		$scope.getPlaylist(link);
+	}
+
 	/*$scope.test = function() {
 		console.log('test');
 	};*/
