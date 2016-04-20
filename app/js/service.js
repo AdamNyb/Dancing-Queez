@@ -95,7 +95,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 		}
 
 		while (randomizedTracks.length < maxQ){
-			num = this.randomizeNumber(1,maxQ) - 1; // -1 because index starts with 0
+			num = this.randomizeNumber(1,tracksLen) - 1; // -1 because index starts with 0
 			//console.log(num);
 			//console.log(tracks[num].track.preview_url);
 
