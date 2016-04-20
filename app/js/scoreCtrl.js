@@ -1,4 +1,4 @@
-quizApp.controller('ScoreCtrl', function ($scope, Quiz) {
+quizApp.controller('ScoreCtrl', function ($scope, Quiz, $localStorage) {
 	
 	$scope.scoreboard = Quiz.scoreboard;
 	console.log($scope.scoreboard);

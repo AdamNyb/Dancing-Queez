@@ -1,4 +1,4 @@
-quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, $sce, $timeout) {
+quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, $sce, $timeout, $localStorage) {
 
 	$scope.scoreboard = Quiz.scoreboard;
 	//console.log("SCOOOOORE", $scope.scoreboard);
@@ -6,6 +6,24 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 	$scope.hideResults=true
 
 	$scope.hideVolumeOff=true
+
+	/*$scope.$storage = $localStorage.$default({
+		score: 0,
+		scoreboard: [],
+		playlist: null,
+		//question: null,
+		questionList: [],
+		currentQuestionPosition: 0
+	});*/
+
+	$scope.updateStorage = function(){
+			Quiz.$storage.score = Quiz.score;
+			Quiz.$storage.scoreboard = Quiz.scoreboard;
+			Quiz.$storage.playlist = Quiz.playlist;
+			Quiz.$storage.questionList = Quiz.questionList;
+			Quiz.$storage.currentQuestionPosition = Quiz.currentQuestionPosition;
+	};
+
 	$scope.playlistName = function(){ //playlistens namn
 		if(Quiz.playlist){
 			return Quiz.playlist.name;
@@ -14,6 +32,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 
 	$scope.createQuestions = function() {
 		if (Quiz.playlist){
+			//Quiz.createQuestions(Quiz.playlist.tracks.items);
 			return Quiz.createQuestions(Quiz.playlist.tracks.items);//tracks
 		}
 	}
@@ -23,7 +42,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 		// and returns the current question
 		$scope.createQuestions();
 		return Quiz.questionList[Quiz.currentQuestionPosition];
-	}
+	};
 
 	$scope.nextQuestionButton = function() {
 		// linked to the button for next question
@@ -33,6 +52,7 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 			$location.path('score');
 		} else {
 			Quiz.currentQuestionPosition = Quiz.currentQuestionPosition + 1;
+			Quiz.$storage.currentQuestionPosition = Quiz.currentQuestionPosition;
 
 			
 		}
@@ -215,7 +235,6 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 
 		var position = questionNumber;
 		var scoreBoard = Quiz.getScoreboard();
-		//console.log(data);
 		var data = [scoreBoard[position]];
 		//for (var i = 0; i <= position; i++) {
 		//	tempData = scoreBoard[i];
@@ -258,9 +277,17 @@ quizApp.controller('GameCtrl', function ($scope, $routeParams, $location, Quiz, 
 				})
 				.append("path")
 					.attr("d", "M272,48h-32v304.594C223,342.375,200.688,336,176,336c-53,0-96,28.625-96,64s43,64,96,64s96-28.625,96-64V144c80-13,128,80,160,128C412,48,272,48,272,48z")
-		//console.log("DATA:", data);
+		
 	}
-	
+
+	if(Quiz.$storage.scoreboard){
+		if (typeof Quiz.count == "undefined"){
+			for(var i=1; i<Quiz.currentQuestionPosition+1; i++){
+				$scope.setNotes(i);
+			};
+		};
+		Quiz.count = 1;
+	};
 
 	
 		

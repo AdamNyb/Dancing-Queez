@@ -1,11 +1,11 @@
-quizApp.controller('HomeCtrl', function ($scope, Quiz) {
+quizApp.controller('HomeCtrl', function ($scope, Quiz, $localStorage) {
 	
-	/*$scope.test = function() {
-		console.log('test');
-	};*/
 
-	//$scope.test();
 	$scope.playlistInput = null;
+
+	$scope.resetStorage = function(){
+		Quiz.$storage.$reset();
+	};
 
 	$scope.getPlaylist = function(link) {
 		// gets the playlist
@@ -17,9 +17,22 @@ quizApp.controller('HomeCtrl', function ($scope, Quiz) {
 		});
 	}
 
-
+/*	$scope.$storage = $localStorage.$default({
+		score: 0,
+		scoreboard: [],
+		playlist: null,
+		//question: null,
+		questionList: [],
+		currentQuestionPosition: 0
+	});
+*/
 	$scope.savePlaylist = function(data){
 		Quiz.savePlaylist(data);
+		//Quiz.updateCookie();
+		//$scope.$storage.playlist = Quiz.savePlaylist(data);
 	}
+
+
+
 
 });
