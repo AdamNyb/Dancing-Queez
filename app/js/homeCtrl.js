@@ -1,4 +1,13 @@
-quizApp.controller('HomeCtrl', function ($scope, Quiz, $location) {
+
+quizApp.controller('HomeCtrl', function ($scope, Quiz, $location, $localStorage) {
+
+	$scope.playlistInput = null;
+
+	$scope.resetStorage = function(){
+		Quiz.$storage.$reset();
+	};
+
+	$scope.getPlaylist = function(link) {
 	
 	$scope.userInput = null;
 	$scope.playlists = [];
@@ -42,6 +51,10 @@ quizApp.controller('HomeCtrl', function ($scope, Quiz, $location) {
 		Quiz.savePlaylist(data);
 	}
 
+
+	$scope.savePlaylist = function(data){
+		Quiz.savePlaylist(data);
+	}
 
 	$scope.listPlaylists = function(data){
 		//console.log("DATA", data.items);

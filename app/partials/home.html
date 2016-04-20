@@ -27,7 +27,7 @@
   	
   	<div id="input">
   		<div class="startText"><center>Welcome!<br> Type in your Spotify-playlist</center></div>
-  		<div>
+  		<div ng-init="resetStorage()">
   			<input type="text" class="playlistInput" ng-model="playlistInput" placeholder="playlist">
   		</div>
   		<div>

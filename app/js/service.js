@@ -1,12 +1,33 @@
-quizApp.factory('Quiz', function ($resource, $document, $sce){
+<<<<<<< HEAD
+quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
 
-	this.score = 0;
-	this.scoreboard = []; // on the form {correct: 0, questionNumber: i+1}, used by score.html to display answers
-	this.playlist;
-	this.questionList = [];
-	this.firstPlay = false;
-	this.paused = false;
-	this.currentQuestionPosition = 0;
+	this.$storage = $localStorage.$default({
+		score: 0,
+		scoreboard: [],
+		playlist: undefined,
+		//question: null,
+		questionList: [],
+		currentQuestionPosition: 0
+	});
+
+	if(this.$storage.playlist){
+		this.score = this.$storage.score;
+		this.scoreboard = this.$storage.scoreboard; // on the form {correct: 0, questionNumber: i+1}, used by score.html to display answers
+		this.playlist = this.$storage.playlist;
+		this.questionList = this.$storage.questionList;
+		this.currentQuestionPosition = this.$storage.currentQuestionPosition;
+	}
+	else{
+		this.score = 0;
+		this.scoreboard = []; // on the form {correct: 0, questionNumber: i+1}, used by score.html to display answers
+		this.playlist;
+		this.questionList = [];
+		this.firstPlay = false;
+		this.paused = false;
+		this.currentQuestionPosition = 0;
+	};
+
+	this.count;
 	this.userPlaylists = [];
 	this.authorizationKey = "Bearer BQCsBpj4KPDwPKLkT7JsjsE9lzc1Mn31w3dY2ZPH3UQrY_CmgrTNOOQ0dP6hP3S32D_12JAXuz7b71v5FTAWBWkxsAa-sOs6w5useCiCe_N7YyThiOOBf2xj0Nqxeqqvscbiiw6vyP4gUfjkCG5de35dFOXrF4owveEQ92i3ibrlp2bubLLFbrjXIgy6LOHlu6r10pnoB68eYto9o06BBGSLf616A_Y5eLqvRc_LXn6Nz1FR2YFjG8YS_ozAz9GU2ecCmcyUdVeKOSs";
 
@@ -20,6 +41,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
             method:"GET",
             isArray:false,
             headers:{
+
 				Authorization: this.authorizationKey//"Bearer BQCXnXDXdDjiO2tBCoERZ8BuHW3QAHASCrZIKkp-6C6R_IdCKzK-2LOiLBmH1WIHvnULJkNa5ri__6YcenoyI8yb_sfQI1pVk8R6Vn67zemoW-EvagG3wYitPo6kqidXY2jzTuz0CaUMiYfNTqo8ubSA9se-GS4502oEoEn2eDvqymjO_InA3qqZyLc1KDgvTtDlxGIyS-mdmVA5HoA"
 
 
@@ -66,6 +88,11 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
     		this.scoreboard[j].correct = 0;
     		this.scoreboard[j].userAnswer = null
     	}
+
+    	/////cookie
+    	this.$storage.score = this.score;
+    	this.$storage.currentQuestionPosition = this.currentQuestionPosition;
+    	this.$storage.scoreboard = this.scoreboard;
     }
 
 
@@ -77,6 +104,8 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 		playlist_object.tracks.items = this.randomizeSongs(playlist_object.tracks.items);
 		this.playlist = [];
 		this.playlist = playlist_object;
+		//////////////////cookie
+		this.$storage.playlist = this.playlist;
 		return this.playlist;
 	}
 
@@ -248,6 +277,8 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 			}
 			console.log("Scoreboard:",this.scoreboard);
 			this.setScoreboard(this.scoreboard);
+			///////////cookie
+			this.$storage.questionList = this.questionList;
 		}
 		//return this.questionList;
 	};
@@ -401,14 +432,18 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 
 	this.setScore = function(num){
 		this.score = num;
+		///////////cookie
+		this.$storage.score = this.score;
 	};
 
 	this.setScoreboard = function(newScoreboard) {
-		this.createdScoreboard = newScoreboard;
+		this.scoreboard = newScoreboard;
+		///////////cookie
+		this.$storage.scoreboard = this.scoreboard;
 	};
 
 	this.getScoreboard = function() {
-		return this.createdScoreboard;
+		return this.scoreboard;
 	}
 
 	this.getUserPlaylists = function(username, cb) {

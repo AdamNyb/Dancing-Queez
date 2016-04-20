@@ -1,4 +1,4 @@
-var quizApp = angular.module('quiz', ['ngRoute', 'ngResource']);
+var quizApp = angular.module('quiz', ['ngRoute', 'ngResource', 'ngStorage']);
 
 quizApp.config(['$routeProvider', '$locationProvider',
 	function($routeProvider){
