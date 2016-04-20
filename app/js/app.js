@@ -7,6 +7,10 @@ quizApp.config(['$routeProvider', '$locationProvider',
 				templateUrl: 'partials/home.html',
 				controller: "HomeCtrl"
 			}).
+			when('/user', {
+				templateUrl: 'partials/user.html',
+				controller: "HomeCtrl"
+			}).
 			when('/game', {
 				templateUrl: 'partials/game.html',
 				controller: "GameCtrl"
