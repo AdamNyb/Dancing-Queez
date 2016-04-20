@@ -273,3 +273,21 @@ h5 {
 	color: white;
 	font-size: 30px;
 }
+
+/*
+*	user specific ===========================
+*/
+
+.playlistContainer{
+	padding-top: 20px;
+	height: 100%;
+
+}
+
+.playlist{
+	background-color: #00BCD4;
+	border-style:solid;
+	padding: 20px 20px 20px;
+	height:20%;
+	border-radius: 15px;
+}

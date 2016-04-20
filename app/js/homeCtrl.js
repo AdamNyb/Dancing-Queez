@@ -19,7 +19,7 @@ quizApp.controller('HomeCtrl', function ($scope, Quiz, $location) {
 	//$scope.test();
 	//$scope.playlistInput = null;
 
-	//$scope.getPlaylist = function(link) {
+	$scope.getPlaylist = function(link) {
 		// gets the playlist
 		// bad playlist https://open.spotify.com/user/113325595/playlist/5U6ibJ4AW3keswEmMhhtNP
 		// good playlist 'https://open.spotify.com/user/hhawthorn/playlist/1Hue9EGWG1xl9UPcgji9vX'
@@ -38,9 +38,9 @@ quizApp.controller('HomeCtrl', function ($scope, Quiz, $location) {
 	//	});
 	//}
 
-	//$scope.savePlaylist = function(data){
-		//Quiz.savePlaylist(data);
-	//}
+	$scope.savePlaylist = function(data){
+		Quiz.savePlaylist(data);
+	}
 
 
 	$scope.listPlaylists = function(data){
