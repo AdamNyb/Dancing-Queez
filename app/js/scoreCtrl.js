@@ -40,12 +40,13 @@ quizApp.controller('ScoreCtrl', function ($scope, Quiz) {
 
          }
 
-    var width="270px";
+    var width="41vh";
     var height = "320px";
    
   
     // should get scoreboard from service
-    var data = [{correct:0, questionID:1, correctAnswer: "Test", userAnswer: "Hej"}, {correct:0, questionID:2, correctAnswer: "Test2", userAnswer: "Hej2"}, {correct:1, questionID:3, correctAnswer: "Test3", userAnswer: "Hej3"}];
+    var data = [{correct:0, questionID:1, correctAnswer: "Test", userAnswer: "Hej"}, {correct:0, questionID:2, correctAnswer: "Test2", userAnswer: "Hej2"}, {correct:1, questionID:3, correctAnswer: "Test3", userAnswer: "Hej3"},{correct:0, questionID:1, correctAnswer: "Test", userAnswer: "Hej"}, {correct:0, questionID:2, correctAnswer: "Test2", userAnswer: "Hej2"}, {correct:1, questionID:3, correctAnswer: "Test3", userAnswer: "Hej3"},{correct:0, questionID:1, correctAnswer: "Test", userAnswer: "Hej"}, {correct:0, questionID:2, correctAnswer: "Test2", userAnswer: "Hej2"}, {correct:1, questionID:3, correctAnswer: "Test3", userAnswer: "Hej3"},
+    {correct:0, questionID:1, correctAnswer: "Test", userAnswer: "Hej"}, {correct:0, questionID:2, correctAnswer: "Test2", userAnswer: "Hej2"}, {correct:1, questionID:3, correctAnswer: "Test3", userAnswer: "Hej3"},{correct:0, questionID:1, correctAnswer: "Test", userAnswer: "Hej"}, {correct:0, questionID:2, correctAnswer: "Test2", userAnswer: "Hej2"}, {correct:1, questionID:3, correctAnswer: "Test3", userAnswer: "Hej3"},{correct:0, questionID:1, correctAnswer: "Test", userAnswer: "Hej"}, {correct:0, questionID:2, correctAnswer: "Test2", userAnswer: "Hej2"}, {correct:1, questionID:3, correctAnswer: "Test3", userAnswer: "Hej3"}];
 
     var svg = d3.select("#results").append("svg")
         .attr("width", width)
