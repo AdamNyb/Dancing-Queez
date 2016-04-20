@@ -4,7 +4,7 @@ body {
 	background:#EEE;
 	width: 100%;
 	height: 100%;
-	
+	text-align: center;
 	}
 
 .wrapper, html, body {
@@ -65,10 +65,10 @@ h5 {
 /*START SCREEN*/
 
 .goButton{
-	margin-left: 19%;
-	width: 60%;
+	/*margin-left: 19%;*/
+	width: 50vh;
 	height: 3%;
-	margin-top: 20%;
+	margin-top: 20px;
 	
 	border-radius: 30px;
 	background-color: #00BCD4; /*#F50057;*/
@@ -78,18 +78,17 @@ h5 {
 }
 
 .playlistInput{
-	width: 65%;
+	width: 50vh;
 	height: 25px;
-	margin-left: 16%;
 	margin-top: 10px;
 	
 }
 
 .startIcon{
-	margin-top:10%;
-	margin-left:22%;
-
-
+	margin-top: 30px;
+}
+.startIcon img {
+	width: 200px;
 }
 .startText {
 	font-size: 20px;
@@ -98,8 +97,9 @@ h5 {
 
 #welcome {
 	background-color: none;
-	
-	padding-top: 8%;
+	text-align: center;
+	padding-top: 30px;
+	width: 100%;
 
 }
 
@@ -129,24 +129,31 @@ h5 {
 .mini-header {
 	font-weight: bold;
 	font-family: helvetica;
-	margin-top: 5px;
+	margin: 5px;
 	font-style: italic;
+}
+
+.question-header {
+	font-weight: bold;
+	font-family: helvetica;
+	margin: 5px;
+	
 }
 
 .icon-container {
 	position: center;
-	margin: 0px 20px 0px;
+	margin: 0px 10px 0px;
 }
 
 .question-icon img {
-	max-width: 30%;
-	max-height: 30%;
-	margin: 10px;
+	width: 120px;
 }
 
 .text-container {
 	font-family: helvetica;
+	font-size: 16px;
 	margin: 10px 20px;
+	font-weight: bold;
 }
 
 .answer-container {
@@ -155,7 +162,6 @@ h5 {
 	border-radius: 5px;
 	margin: 5px 5px 5px;
 	position: relative;
-	width: 300px;
 	display: inline-table;
 	/*vertical-align: center center;*/
 	height: 14vh;
@@ -164,24 +170,30 @@ h5 {
 
 .answer-text {
 	color: white;
-	vertical-align: middle;
-	display: table-cell;
+	/*vertical-align: middle;
+	display: table-cell;*/
+	text-align: center;
 	width: 90%;
 	padding: 5px 5px 5px;
+
 
 }
 
 .glyphicon.glyphicon-volume-up {
 	font-size: 40px;
 	color: black;
-	margin-left: 20px;
 	text-align: left;
+	position: relative;
+	left: 50%;
+	margin-left: -25vh;
 }
 .glyphicon.glyphicon-volume-off {
 	font-size: 40px;
 	color: black;
-	margin-left: 20px;
 	text-align: left;
+	position: relative;
+	left: 50%;
+	margin-left: -25vh;
 }
 
 .glyphicon.glyphicon-chevron-right {
@@ -208,12 +220,13 @@ h5 {
 .hr {
 	margin-top: 15px;
     background: black; 
-    width: 95%; 
+    width: 50vh; 
     height: 2px;
 }
 
 .notes {
 	margin-top: 0px;
+	margin-bottom: 0;
 }
 
 /*.note {
@@ -221,8 +234,12 @@ h5 {
 }*/
 
 .next-color {
-	background-color: #0097A7;
+	background-color: #00BCD4;
+	width: 250px;
+	font-weight: bold;
 	}
+
+
 
 
 /*
@@ -241,14 +258,14 @@ h5 {
 
 #results{
 	text-align: center;
-	padding-left:10%;
-	padding-right:20px;
+	display: inline-block;
+	position: relative;
+	left: 0%;
 }
 .goAgainButton{
-	margin-left: 19%;
-	width: 60%;
+	width: 50vh;
 	height: 3%;
-	margin-top: 5%;
+	margin-top: 20px;
 	
 	border-radius: 30px;
 	background-color: #00BCD4;

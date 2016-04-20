@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<ng-include ng-controller="HomeCtrl"></ng-include>
+
+<html lang="eng">
+	<head>
+		<title>GAME VIEW</title>
+		<meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, height=device-height initial-scale=1">
+	    <!-- Bootstrap CSS -->
+	    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css">
+	    <!--<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">-->
+	    <!-- Our stylesheet -->
+    	<link rel="stylesheet" href="../style.css">
+	</head>
+	<body>
+		<div class="container-fluid wrapper game-container">
+	        <div class="row header">
+	        	<h4>DANCING QUEEZ</h4>
+	    	</div>
+	    	<div class="col-md-12" align="center" id="gameView">
+	    	<div class="mini-header" style="color: #263238">
+					Playlist: {{playlistName()}}	
+			</div>
+		</div>
+	    </div>
+	</body>
+</html>

@@ -1,6 +1,5 @@
+<<<<<<< HEAD
 quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
-
-	this.count;
 
 	this.$storage = $localStorage.$default({
 		score: 0,
@@ -28,6 +27,10 @@ quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
 		this.currentQuestionPosition = 0;
 	};
 
+	this.count;
+	this.userPlaylists = [];
+	this.authorizationKey = "Bearer BQCsBpj4KPDwPKLkT7JsjsE9lzc1Mn31w3dY2ZPH3UQrY_CmgrTNOOQ0dP6hP3S32D_12JAXuz7b71v5FTAWBWkxsAa-sOs6w5useCiCe_N7YyThiOOBf2xj0Nqxeqqvscbiiw6vyP4gUfjkCG5de35dFOXrF4owveEQ92i3ibrlp2bubLLFbrjXIgy6LOHlu6r10pnoB68eYto9o06BBGSLf616A_Y5eLqvRc_LXn6Nz1FR2YFjG8YS_ozAz9GU2ecCmcyUdVeKOSs";
+
 	var client_id = 'a280b16e9b4446928ed426a402c6f67a';
 	var client_secret = '13d55b7e7b5545dbbeec042aff0c2907';
 
@@ -38,12 +41,24 @@ quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
             method:"GET",
             isArray:false,
             headers:{
-			
-			Authorization: "Bearer BQAycpsn9NO-fIw6E-zat7PW-hP-OB15wd4Qk_Uzk7VrGkiYlshx9UfdDLZ-xDex5yFVGlf3QiofXGWmTdTL0hkIBUxSeRfinLoEk8kM2V6oyiqfw2hvG8CGakkYssJ8-fUZPefRs6U80Q_NFhuu2bdmaWw7CBlOOLCjC8w8wOM00JF3XO6aHhzb2Ok"
+
+				Authorization: this.authorizationKey//"Bearer BQCXnXDXdDjiO2tBCoERZ8BuHW3QAHASCrZIKkp-6C6R_IdCKzK-2LOiLBmH1WIHvnULJkNa5ri__6YcenoyI8yb_sfQI1pVk8R6Vn67zemoW-EvagG3wYitPo6kqidXY2jzTuz0CaUMiYfNTqo8ubSA9se-GS4502oEoEn2eDvqymjO_InA3qqZyLc1KDgvTtDlxGIyS-mdmVA5HoA"
+
 
 
             } 
         },
+    });
+
+    this.User = $resource('https://api.spotify.com/v1/users/:user_id/playlists', {}, {
+    	get: {
+    		method:"GET",
+    		isArray: false,
+    		headers: {
+
+    		Authorization: this.authorizationKey //"Bearer BQDm8zKB50GL6jnJ_GF5QEomq2pcJEOKuqIYiJhzuA21P05dQQ98TQoplGi019hOCaehPqtWKRx2I5DC28k4DAN_e6lGg30vkYwvaIiilmLItuyftHm9_ivTnhh5CrUaCU6vlUUKLC33_H3IXrktZrNq62ItuHFj3t2qTZutjaOm2dTxo8Ji_aZHIxOdOCj35we2YOk1eiBo1e4IBrU"
+    		}
+    	},
     });
 
     this.resetGame = function() {
@@ -122,7 +137,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
 		}
 
 		while (randomizedTracks.length < maxQ){
-			num = this.randomizeNumber(1,maxQ) - 1; // -1 because index starts with 0
+			num = this.randomizeNumber(1,tracksLen) - 1; // -1 because index starts with 0
 			//console.log(num);
 			//console.log(tracks[num].track.preview_url);
 
@@ -190,7 +205,10 @@ quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
 
 
 			// questions database
-			var questionDB = ['What is the name of this song?', 'Who made this song?', 'On what album is this song featured?'];
+			var songQuestions = ['What is the name of this song?','Name this track!', "What's the title of this track?", 'What is this song called?'];
+			var artistQuestions = ['Who made this song?','What is the name of this artist?', 'Who is the creator of this track?'];
+			var albumQuestions = ['On what album is this song featured?','Name the album?', 'What is the name of this album?'];
+			var questionDB = [songQuestions, artistQuestions, albumQuestions];
 			// list of complete questions
 			//var questionList = [];
 			var len = tracks.length;
@@ -234,7 +252,8 @@ quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
 					question.correctAnswer = String(currentTrack.album.name);
 				}
 				// generates wrongs answers + question
-				question.questionStr = questionDB[num];
+				var randomQuestionNum = this.randomizeNumber(0,questionDB[num].length-1);
+				question.questionStr = questionDB[num][randomQuestionNum];
 				question.previewUrl = String(currentTrack.preview_url);
 				var wrongAnswer1 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer);
 				var wrongAnswer2 = this.randomAnswer(tracks, maxQ, question.questionType, question.correctAnswer, wrongAnswer1);
@@ -334,7 +353,13 @@ quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
 		}, function(error){
 			//if error
 			if (error.status == 429){
-				alert(error.message);
+				sweetAlert(error.message);
+			}
+			if (error.status == 404){
+				sweetAlert('Invalid Playlist URL :(');
+			}
+			if (error.status == 401){
+				sweetAlert('Token :(');
 			}
 			
 		});
@@ -421,8 +446,46 @@ quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
 		return this.scoreboard;
 	}
 
-	
+	this.getUserPlaylists = function(username, cb) {
+		this.User.get({user_id: username}, 
+			function(data){
+				console.log('success', data);
+				return cb(data);
+				//this.createQuestions(data.tracks.items);
+				//createGame(data.tracks.items); //needed to be able to return tracks
+				//if success, data will be a JSON object
 
+		}, function(error){
+			//if error
+			if (error.status == 429){
+				alert(error.message);
+			}
+			
+		});
+		//ta ut alla usernames playlist links
+	}
+
+	this.listPlaylists = function(data) {
+
+		//console.log("listPlaylists function; data", data.items.length);
+		for (var i = 0; i < data.items.length; i++) {
+			//console.log("data[i]",i, data.items[i]);
+			this.userPlaylists.push(data.items[i]);
+		}
+		this.setPlaylists(this.userPlaylists);
+		//console.log("in listPlaylists function; userPlaylists", this.userPlaylists);
+	}
+
+	this.setPlaylists = function(userPlaylists) {
+		//console.log("in setPlaylist function; this.userPlaylists", this.userPlaylists);
+		this.userPlaylists = userPlaylists;
+		//console.log("NAME:", this.userPlaylists.items.name);
+	};
+
+	this.getPlaylists = function() {
+
+		return this.userPlaylists;
+	}
 
 
 return this;
