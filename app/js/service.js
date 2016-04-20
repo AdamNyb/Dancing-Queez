@@ -7,6 +7,8 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 	this.firstPlay = false;
 	this.paused = false;
 	this.currentQuestionPosition = 0;
+	this.userPlaylists = [];
+	this.authorizationKey = "Bearer BQCsBpj4KPDwPKLkT7JsjsE9lzc1Mn31w3dY2ZPH3UQrY_CmgrTNOOQ0dP6hP3S32D_12JAXuz7b71v5FTAWBWkxsAa-sOs6w5useCiCe_N7YyThiOOBf2xj0Nqxeqqvscbiiw6vyP4gUfjkCG5de35dFOXrF4owveEQ92i3ibrlp2bubLLFbrjXIgy6LOHlu6r10pnoB68eYto9o06BBGSLf616A_Y5eLqvRc_LXn6Nz1FR2YFjG8YS_ozAz9GU2ecCmcyUdVeKOSs";
 
 	var client_id = 'a280b16e9b4446928ed426a402c6f67a';
 	var client_secret = '13d55b7e7b5545dbbeec042aff0c2907';
@@ -18,12 +20,23 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
             method:"GET",
             isArray:false,
             headers:{
-			
-			Authorization: "Bearer BQCNl80lt3E74oAazEL3FCnkMZptBWsSRX-8Ksprv8NHwaB-WoDfZBLMiDSFBRXizZi-RmgP1lnSzoXJWXN1EYuYqNCa7Vn4z_dlLiOZyb2wixcyW6ghXIj9HHZtzZy00yKQGxzh8qjDFKcXIDUmNHnJFF6T4LRnEtAo79h2f9K2pNFGpA"
+				Authorization: this.authorizationKey//"Bearer BQCXnXDXdDjiO2tBCoERZ8BuHW3QAHASCrZIKkp-6C6R_IdCKzK-2LOiLBmH1WIHvnULJkNa5ri__6YcenoyI8yb_sfQI1pVk8R6Vn67zemoW-EvagG3wYitPo6kqidXY2jzTuz0CaUMiYfNTqo8ubSA9se-GS4502oEoEn2eDvqymjO_InA3qqZyLc1KDgvTtDlxGIyS-mdmVA5HoA"
+
 
 
             } 
         },
+    });
+
+    this.User = $resource('https://api.spotify.com/v1/users/:user_id/playlists', {}, {
+    	get: {
+    		method:"GET",
+    		isArray: false,
+    		headers: {
+
+    		Authorization: this.authorizationKey //"Bearer BQDm8zKB50GL6jnJ_GF5QEomq2pcJEOKuqIYiJhzuA21P05dQQ98TQoplGi019hOCaehPqtWKRx2I5DC28k4DAN_e6lGg30vkYwvaIiilmLItuyftHm9_ivTnhh5CrUaCU6vlUUKLC33_H3IXrktZrNq62ItuHFj3t2qTZutjaOm2dTxo8Ji_aZHIxOdOCj35we2YOk1eiBo1e4IBrU"
+    		}
+    	},
     });
 
     this.resetGame = function() {
@@ -398,8 +411,46 @@ quizApp.factory('Quiz', function ($resource, $document, $sce){
 		return this.createdScoreboard;
 	}
 
-	
+	this.getUserPlaylists = function(username, cb) {
+		this.User.get({user_id: username}, 
+			function(data){
+				console.log('success', data);
+				return cb(data);
+				//this.createQuestions(data.tracks.items);
+				//createGame(data.tracks.items); //needed to be able to return tracks
+				//if success, data will be a JSON object
 
+		}, function(error){
+			//if error
+			if (error.status == 429){
+				alert(error.message);
+			}
+			
+		});
+		//ta ut alla usernames playlist links
+	}
+
+	this.listPlaylists = function(data) {
+
+		//console.log("listPlaylists function; data", data.items.length);
+		for (var i = 0; i < data.items.length; i++) {
+			//console.log("data[i]",i, data.items[i]);
+			this.userPlaylists.push(data.items[i]);
+		}
+		this.setPlaylists(this.userPlaylists);
+		//console.log("in listPlaylists function; userPlaylists", this.userPlaylists);
+	}
+
+	this.setPlaylists = function(userPlaylists) {
+		//console.log("in setPlaylist function; this.userPlaylists", this.userPlaylists);
+		this.userPlaylists = userPlaylists;
+		//console.log("NAME:", this.userPlaylists.items.name);
+	};
+
+	this.getPlaylists = function() {
+
+		return this.userPlaylists;
+	}
 
 
 return this;
