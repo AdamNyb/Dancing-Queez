@@ -303,3 +303,22 @@ h5 {
 	height:20%;
 	border-radius: 15px;
 }
+
+.playlistImage img{
+	width: 150px;
+	float:left;
+	
+}
+
+.playlistText{
+	color:black;
+	font-weight: bold;
+	height: 36px;
+
+
+
+}
+
+.startIcon{
+
+}

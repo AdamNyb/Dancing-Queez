@@ -28,7 +28,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
 
 	this.count;
 	this.userPlaylists = [];
-	this.authorizationKey = "Bearer BQAaqWRbmzzEv9CZB15QrtCR5Y9lm65ZjYhxgKjeEMQhqVqIqoUi0yIMVZ7eevXPilNt_QcaPOnPs9Q-sxq7pVjSoGn1uxEpwL0Ob8v5AvtIiWdqR7jNiqii0ba6qVSOVhrJkGuDBpt5v9Ma1BrFdeoZ6Mx0AzpGcs-v1rYKfBHvZzkBb330v2byQedzcEIK9CdwAnstbcN4aK5-X8odnDuZlFmDPykep1Nm2HMCMsExqf4xjxtE6zgPrm_NDN7eL4iku6UTAhcvpTA";
+	this.authorizationKey = "Bearer BQAS4RlThmvI5t25ffe80Zqvpw8KJFVX5SMjr9MLNMtdUiCLQCm3cwHqiEY51cCR2d3p4jIrGmWLwLVMNwpN6ktmqAO49qvN4QCWBaXxfKQXOkQRZikJq9Pr0aCQWPIM-W1mNAAOZ84lpynBauGL0ToGqltozMixdsAwq7WWMD0zdFs81j3tlhLg8cnZHsJ313z0ijr9OtblGsrbIt1oWLSp3G5CcG4GJtWG2v95r9F-Fg";
 
 	var client_id = 'a280b16e9b4446928ed426a402c6f67a';
 	var client_secret = '13d55b7e7b5545dbbeec042aff0c2907';
