@@ -28,7 +28,7 @@
 	</div>
 
 		<div class="playlistContainer col-xs-12">
-			<div ng-repeat="playlist in userPlaylists()" class="row col-xs-5" ng-click="clickUserPlaylist(playlist.href)">
+			<div ng-repeat="playlist in userPlaylists()" class="row col-xs-6" ng-click="clickUserPlaylist(playlist.href)">
 				<div class="playlistText">{{playlist.name}}</div>
 				<img width="120px" style="padding-bottom:40px;" class="playlistImage" ng-src="{{playlist.images[0].url}}">
 			</div>
