@@ -455,11 +455,15 @@ quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
 				//if success, data will be a JSON object
 
 		}, function(error){
-			//if error
 			if (error.status == 429){
 				sweetAlert(error.message);
 			}
-			
+			if (error.status == 404){
+				sweetAlert('Invalid Username :(');
+			}
+			if (error.status == 401){
+				sweetAlert('Token :(');
+			}
 		});
 		//ta ut alla usernames playlist links
 	}
