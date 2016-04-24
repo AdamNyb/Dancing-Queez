@@ -1,4 +1,5 @@
 quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
+	this.authorizationKey = "Bearer BQBAeNzuFDP0_PKaJ52vbWxNKKZi2a6RPPaaVN-0G5DhwwykYOy2o2czN9P1JGoSTfNmdXdXStFuag2CgsLI5r86w0eB8LZhjY13cmsvZ0ZJdIzs4OM5uQcuVBbf1w7wMsbO_yRNvonCCFdsmq3gFElY-Pk7WvNK0b9rEzShmA";
 
 	this.$storage = $localStorage.$default({
 		score: 0,
@@ -28,7 +29,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
 
 	this.count;
 	this.userPlaylists = [];
-	this.authorizationKey = "Bearer BQBAeNzuFDP0_PKaJ52vbWxNKKZi2a6RPPaaVN-0G5DhwwykYOy2o2czN9P1JGoSTfNmdXdXStFuag2CgsLI5r86w0eB8LZhjY13cmsvZ0ZJdIzs4OM5uQcuVBbf1w7wMsbO_yRNvonCCFdsmq3gFElY-Pk7WvNK0b9rEzShmA";
+	
 
 	var client_id = 'a280b16e9b4446928ed426a402c6f67a';
 	var client_secret = '13d55b7e7b5545dbbeec042aff0c2907';
@@ -358,7 +359,7 @@ quizApp.factory('Quiz', function ($resource, $document, $sce, $localStorage){
 				sweetAlert('Invalid Playlist URL :(');
 			}
 			if (error.status == 401){
-				sweetAlert('Token :(');
+				sweetAlert('Please request new OAUTH TOKEN :(');
 			}
 			
 		});
