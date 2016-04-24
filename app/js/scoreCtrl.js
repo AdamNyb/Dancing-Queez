@@ -40,7 +40,7 @@ quizApp.controller('ScoreCtrl', function ($scope, Quiz, $localStorage) {
 
          }
 
-    var width="41vh";
+    var width="67vw";
     var height = "320px";
    
   
